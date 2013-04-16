@@ -14,7 +14,11 @@
 	{
 		"success": 1,
 		"data": {
-			"user_id": ""
+			"access_token": "",		// 32位，用户检测用户是否登陆
+			"user": {
+				"id": 1,
+				// ...
+			}
 		}
 	}
 	//操作失败
@@ -43,7 +47,7 @@
 	url: account/register
 	method: POST
 	params:
-		user | true | string
+		username | true | string
 		email | true | string
 		password | true | string
 
@@ -53,7 +57,9 @@
 	{
 		"success": 1,
 		"data": {
-			"user_id": ""
+			// @link 直接参考account/login返回的数据，同理；
+			// 实际处理，先注册，注册成功后，后台自动处理登录；
+			// 所以返回的数据是和account/login是相同的。
 		}
 	}
 
@@ -69,6 +75,12 @@
 		"error": "EXIST_EMAIL",
 		"error_msg": "此邮箱已经注册"
 	}
+
+	{
+		"sucess": 0,
+		"error": "ERROR_REGISTER",
+		"error_msg": "注册异常"
+	}
 ##
 
 ###退出
@@ -78,12 +90,11 @@
 	url: account/logout
 	method: POST
 	params:
-		user_id | true | string
+		access_token | true | string
 
 ####返回
 
 	//操作成功
 	{
-		"success": 1,
-		"data": null
+		"success": 1
 	}
