@@ -8,10 +8,14 @@
 ###Restaurant
 	[GET] restaurant/list
 
+
 ###Food
 	[GET] food/list
-	[GET] food/favourite
-	[GET] food/detail
+	[GET] food/favorite
+
+###Order
+	[GET] order/create
+	[GET] order/list
 
 ##
 
@@ -24,7 +28,7 @@
 
 ###服务器错误返回
 	{
-		"success":0，
-		"error":"ERROR_SERVER"，
-		"error_msg":"服务器出现了异常"
+		"success": 0，
+		"error": "ERROR_SERVER"，
+		"error_msg": "服务器出现了异常"
 	}

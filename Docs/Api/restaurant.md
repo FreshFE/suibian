@@ -6,13 +6,16 @@
 	params:null
 
 ####返回
+	//操作成功
 	{
 		"success":1,
 		"data":{
 			"id":"",				//店铺ID
-			"logo_url":"",			//店铺logo地址
-			"name":"",				//店铺名字
-			"business_time":"",		//营业时间
+			"coverpath":"",			//店铺logo地址
+			"title":"",				//店铺名字
+			"workingline":"",		//营业时间
 			"address":""			//店铺地址
 		}
 	}
+
+	//操作失败，服务器错误，返回信息在general中  '服务器错误返回'
