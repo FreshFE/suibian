@@ -1,51 +1,59 @@
-##Food
-###获取店铺菜品
-####发送
-	url: food/list
+#Food
+##获取菜品列表，可根据店铺id查询
+###发送
+	url: food/index
 	method: GET
 	params:
-		restaurant_id | true | int
-####返回
-	//操作成功
+		restaurant_id | false | int
+		// access_token | false | string
+###返回
+	// 操作成功
 	{
 		"success": 1,
-		"data": {
-			"name": "",		//所属类别名字
-			"food_datas": [
-				{
-					"id": "",		//菜品ID
-					"coverpath": "",	//菜品logo地址
-					"title": "",		//名字
-					"price": ""		//价格
-				}
-			]
-		}
+		"datas": [
+			// @link 参考food数据库的字段
+		]
 	}
 
-	//操作失败，以服务器出现异常为准
 
-###获取用户喜欢的菜品
-####发送
-	url: food/favourite
+##获得店铺的菜品，按分类排列
+
+	url: food/shop
 	method: GET
 	params:
-		user_id | true | int
+		shop_id | false | int
 
-####返回
-	//操作成功
 	{
 		"success": 1,
-		"data": {
-			"name": "",
-			"food_datas": [
-				{
-					"id": "",
-					"coverpath": "",
-					"title": "",
-					"price": ""
-				}	
-			]
-		}
+		"datas": [
+			{
+				"cid": 1,
+				"name": "盖浇饭",
+				"food": [
+					// @link 参考food数据库字段
+				]
+			},
+
+			{
+				"cid": 2,
+				"name": "面",
+				"food": [
+					// @link 参考food数据库字段
+				]
+			}
+		]
 	}
 
-	//操作失败，以服务器出现异常为准
+##获得用户吃过的菜品
+
+	url: food/favorite
+	method: GET
+	params:
+		access_token | true | string
+
+	{
+		"success": 1,
+		"datas": [
+			// @link 参考food数据库字段
+		]
+	}
