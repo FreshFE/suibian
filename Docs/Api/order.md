@@ -1,23 +1,35 @@
-##Order
-
-###提交订单列表
-####发送
-	url: order/submit
-	method: GET
+#Order
+##提交订单列表
+###发送
+	url: order/create
+	method: POST
 	params:
-		user_id | true | int
-		str_id | true | string  //食物Id,字符串，如：xxx,xxx,xxx(可以重复)
+		access_token | true | int
+		food_id_str | true | string  // 参考如下json格式
 
-####返回
-	//操作成功
+		string:
+		food_str = [
+			{
+				"id": 1,
+				"num": 1
+			}
+		]
+
+###返回
+	// 操作成功
 	{
 		"success": 1,
-		"data": {			
-			"code": ""	// 订单编号
-		}
+		"data": [
+			{
+				// @link 参考order的字段
+				food: [
+					// @link 参考food的字段
+				]
+			}
+		]
 	}
 	
-	//操作失败
+	// 操作失败
 	{
 		"success": 0,
 		"error": "ERROR_ORDER_CREATE"，
@@ -26,41 +38,28 @@
 		
 
 
-###获取订单列表
-####发送
+##获取订单列表
+###发送
 	
-	url: order/list
+	url: order/index
 	method: GET
 	params:
-		user_id | true | int
-		status | true | int	//订单
+		access_token | true | int
+		status | true | int | 订单状态值，参考数据库status字段
 
-####返回
-	//操作成功
+###返回
+	// 操作成功
 	{
 		"success": 1,
-		"data": {
-			"id": "",			//订单编号
-			"time": "",			//交易时间
-			"status"： "",		//状态
-			"total_price": "",	//总价
-			"food_datas": [
-				{
-					"id": "",
-					"coverpath": "",
-					"title": "",
-					"price": ""
-				}
-			]
-		}
+		"datas": [
+			// 同order/create返回
+		]
 	}
 
-	//操作失败
+	// 操作失败
 	{
 		"success": 0,
 		"error": "NO_ORDER",
 		"error_msg": "您还没有订单"
 	}
-
-	//操作失败,没有登录,返回信息在general中  '未登录无权限访问统一返回'
 
