@@ -12,7 +12,7 @@
 	// 操作成功
 	{
 		"success": 1,
-		"data": {
+		"datas": [
 			// @link 参考数据库shop字段
-		}
+		]
 	}
