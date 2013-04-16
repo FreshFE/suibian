@@ -6,16 +6,17 @@
 	[POST] account/logout
 
 ###Restaurant
-	[GET] restaurant/list
+	[GET] restaurant/index
 
 
 ###Food
-	[GET] food/list
+	[GET] food/index
+	[GET] food/shop
 	[GET] food/favorite
 
 ###Order
-	[GET] order/create
-	[GET] order/list
+	[POST] order/create
+	[GET] order/index
 
 ##
 
