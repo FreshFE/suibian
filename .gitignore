@@ -1,0 +1,4 @@
+# global cache
+.sass-cache/*
+*.scssc
+*.mwb.bak
