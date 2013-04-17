@@ -70,28 +70,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `suibian`.`shop`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `suibian`.`shop` (
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `cid` INT UNSIGNED NOT NULL ,
-  `title` INT UNSIGNED NOT NULL ,
-  `content` VARCHAR(500) NOT NULL ,
-  `hidden` TINYINT UNSIGNED NOT NULL ,
-  `createline` INT UNSIGNED NOT NULL ,
-  `updateline` INT UNSIGNED NOT NULL ,
-  `coverpath` CHAR(26) NOT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_shops_category_cid_idx` (`cid` ASC) ,
-  CONSTRAINT `fk_shop_category_cid`
-    FOREIGN KEY (`cid` )
-    REFERENCES `suibian`.`category` (`cid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `suibian`.`food`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `suibian`.`food` (
@@ -107,15 +85,31 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`food` (
   `coverpath` CHAR(26) NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_goods_category_cid_idx` (`cid` ASC) ,
-  INDEX `fk_foods_shop_id_idx` (`shop_id` ASC) ,
-  CONSTRAINT `fk_food_category_cid`
+  CONSTRAINT `fk_goods_category_cid`
     FOREIGN KEY (`cid` )
     REFERENCES `suibian`.`category` (`cid` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_food_shop_id`
-    FOREIGN KEY (`shop_id` )
-    REFERENCES `suibian`.`shop` (`id` )
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `suibian`.`shop`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `suibian`.`shop` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `cid` INT UNSIGNED NOT NULL ,
+  `title` VARCHAR(45) NOT NULL ,
+  `content` VARCHAR(500) NOT NULL ,
+  `hidden` TINYINT UNSIGNED NOT NULL ,
+  `createline` INT UNSIGNED NOT NULL ,
+  `updateline` INT UNSIGNED NOT NULL ,
+  `coverpath` CHAR(26) NOT NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_shops_category_cid_idx` (`cid` ASC) ,
+  CONSTRAINT `fk_shops_category_cid`
+    FOREIGN KEY (`cid` )
+    REFERENCES `suibian`.`category` (`cid` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -158,12 +152,12 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`orders_food` (
   PRIMARY KEY (`id`) ,
   INDEX `fk_orders_goods_orders_id_idx` (`orders_id` ASC) ,
   INDEX `fk_orders_goods_goods_id_idx` (`food_id` ASC) ,
-  CONSTRAINT `fk_orders_food_orders_id`
+  CONSTRAINT `fk_orders_goods_orders_id`
     FOREIGN KEY (`orders_id` )
     REFERENCES `suibian`.`orders` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_food_food_id`
+  CONSTRAINT `fk_orders_goods_goods_id`
     FOREIGN KEY (`food_id` )
     REFERENCES `suibian`.`food` (`id` )
     ON DELETE NO ACTION
