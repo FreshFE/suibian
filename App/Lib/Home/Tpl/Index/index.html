@@ -1,18 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>项目</title>
-</head>
-<body>
+{{extends file="../Bases/layout.html"}}
 
-	<div id="header">
-		<ul>
-			<li><a href="{{U('index')}}">Home</a></li>
-			<li><a href="#">__URL__</a></li>
-		</ul>
-	</div>
+{{block 'content'}}
+                
+<div id="info">
+    <a href="account/login" data-post="email=admin&password=123456">Login</a>
+    <a href="account/logout">Logout</a>
 
-	{{dump($data)}}
+    <hr>
 
-</body>
-</html>
+    <a href="food/index">餐品列表</a>
+    <a href="food/shop" data-post="shop_id=1">获得商店的餐品</a>
+    <a href="food/favorite">吃过的餐品</a>
+
+    <hr>
+
+    <a href="resraurant/index">餐厅列表</a>
+</div>
+
+<script type="text/javascript" src="@/assets/js/jquery.js"></script>
+<script type="text/javascript">
+    
+    window.access_token = null;
+
+    function ajax(address, params) {
+
+        if(window.access_token !== null) {
+            params = params + '&access_token=' + window.access_token;
+        }
+
+        $.ajax({
+            "type": 'POST',
+            "url": '/api/' + address,
+            "data": params,
+            "dataType": 'JSON',
+            "success": function (data) {
+                console.log(data);
+
+                if(data && data.access_token !== null) {
+                    window.access_token = data.access_token;
+                }
+            }
+        });
+    }
+
+    $(document).ready(function() {
+
+        var $info = $('#info');
+        
+
+        // $(window).on('hashchange', function() {
+
+        //      var hash = window.location.hash;
+        //      ajax(hash.split('#')[1]);
+                
+        // });
+
+        $info.delegate('a', 'click', function() {
+
+            var href = $(this).attr('href');
+            var params = $(this).data('post');
+
+            ajax(href, params);
+            return false;
+        });
+    });
+
+</script>
+
+{{/block}}

@@ -4,6 +4,7 @@ use Think\Controller as Controller;
 use Think\Request as Request;
 use Think\Lang as Lang;
 use Think\Session as Session;
+use Think\Config as Config;
 use \Exception;
 
 class AccountController extends Controller
@@ -14,18 +15,36 @@ class AccountController extends Controller
 		try {
 			if(Request::is('post'))
 			{
-				$data = M('User')->select();
+				// 临时的检查session和cookie的方法，不要模仿该段，后期程序会通过Auth类自动处理掉
+				$user_id = Session::get(Config::get('AUTH_KEY'));
 
-				// 获取一个session_id
-				$access_token = session_id();
+				if(!empty($user_id)) {
+					throw new Exception("LOGIN_NOW");
+				}
 
-				// 储存session
-				Session::set($access_token, $data['id']);
+				// 临时数据和办法，将来会重构
+				$model = M('User');
+				$data = $model->create();
+				
+				// 临时方案，验证用户密码是否正确
+				if($data['email'] == 'admin' && $data['password'] == '123456')
+				{
+					// 设置输出数据，此处的1为临时方案
+					$data = $model->find(1);
+					$access_token = session_id();
 
-				$data['access_token'] = $access_token;
-				$this->assign('success', 1);
-				$this->assign('data', $data);
-				$this->json();
+					// 保存用户Session，此处的1为临时方案
+					Session::set(Config::get('AUTH_KEY'), 1);
+
+					// 输出
+					$this->assign('success', 1);
+					$this->assign('data', $data);
+					$this->assign('access_token', $access_token);
+					$this->json();
+				}
+				else {
+					throw new Exception('NO');
+				}
 			}
 			else {
 				throw new Exception("NO_POST_SUBMIT");
@@ -46,6 +65,7 @@ class AccountController extends Controller
 
 			if(Request::is('post'))
 			{
+<<<<<<< HEAD
 				$User = M('User');
 
 				$User->username   = $_POST['username'];
@@ -66,6 +86,9 @@ class AccountController extends Controller
 					$this->assign('error', $error->getMessage());
 					$this->assign('error_msg', Lang::get($error->getMessage()));
 				}
+=======
+				// TODO
+>>>>>>> abb4277fe55628d2efcfbb026e737b56e24dcd16
 			}
 			else {
 				throw new Exception("NO_POST_SUBMIT");
@@ -79,19 +102,22 @@ class AccountController extends Controller
 		}
 	}
 
+<<<<<<< HEAD
 	// 退出
 	public function logout() {
+=======
+	//退出
+	public function logout()
+	{
+>>>>>>> abb4277fe55628d2efcfbb026e737b56e24dcd16
 		try {
 
 			if(Request::is('post'))
 			{
-				$condition['access_token'] = $_POST['access_token'];
-
-				//??????处理退出
+				Session::remove(Config::get('AUTH_KEY'));
 
 				$this->assign('success', 1);
 				$this->json();
-
 			}
 			else {
 				throw new Exception("NO_POST_SUBMIT");
