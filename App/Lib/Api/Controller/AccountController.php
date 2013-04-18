@@ -8,7 +8,7 @@ use \Exception;
 
 class AccountController extends Controller
 {
-	//登陆
+	// 登陆
 	public function login()
 	{
 		try {
@@ -39,7 +39,7 @@ class AccountController extends Controller
 		}
 	}
 
-	//注册
+	// 注册
 	public function register()
 	{
 		try {
@@ -62,9 +62,9 @@ class AccountController extends Controller
 					// $this->json();
 				} 
 				else {
-					$this->assgin('success', 0);
-					$this->assgin('error', $error->getMessage());
-					$this->assgin('error_msg', Lang::get($error->getMessage()));
+					$this->assign('success', 0);
+					$this->assign('error', $error->getMessage());
+					$this->assign('error_msg', Lang::get($error->getMessage()));
 				}
 			}
 			else {
@@ -73,13 +73,13 @@ class AccountController extends Controller
 
 		}
 		catch(Exception $error) {
-			$this->assgin('success', 0);
-			$this->assgin('error', $error->getMessage());
-			$this->assgin('error_msg', Lang::get($error->getMessage()));
+			$this->assign('success', 0);
+			$this->assign('error', $error->getMessage());
+			$this->assign('error_msg', Lang::get($error->getMessage()));
 		}
 	}
 
-	//退出
+	// 退出
 	public function logout() {
 		try {
 
@@ -89,7 +89,7 @@ class AccountController extends Controller
 
 				//??????处理退出
 
-				$this->assgin('success', 1);
+				$this->assign('success', 1);
 				$this->json();
 
 			}
@@ -99,9 +99,9 @@ class AccountController extends Controller
 
 		}
 		catch(Exception $error) {
-			$this->assgin('success', 0);
-			$this->assgin('error', $error->getMessage());
-			$this->assgin('error_msg', Lang::get($error->getMessage()));
+			$this->assign('success', 0);
+			$this->assign('error', $error->getMessage());
+			$this->assign('error_msg', Lang::get($error->getMessage()));
 		}
 	}
 }

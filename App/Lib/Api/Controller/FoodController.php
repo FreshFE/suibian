@@ -2,12 +2,12 @@
 
 use Think\Controller as Controller;
 use Think\Lang as Lang;
+use Think\Session as Session;
 use \Exception;
 
 class FoodController extends Controller
 {
-
-	//获取菜品列表，可根据店铺id查询
+	// 获取菜品列表，可根据店铺id查询
 	public function index()
 	{
 
@@ -36,7 +36,7 @@ class FoodController extends Controller
 		}
 	}
 
-	//获得店铺的菜品，按分类排列,可根据店铺id查询
+	// 获得店铺的菜品，按分类排列,可根据店铺id查询
 	public function shop()
 	{
 		try {
@@ -49,13 +49,11 @@ class FoodController extends Controller
 				$tempcat[$cid] = $value['name'];
 			}
 
-			// dump($tempcat);
-
 			// Food
 			$temp = array();
 			$condition = array();
 
-			if(isset($_GET['shop_id']))
+			if(isset($_GET['shop_id'])) 
 			{
 				$condition['shop_id'] = $_GET['shop_id'];
 			}
@@ -70,7 +68,7 @@ class FoodController extends Controller
 			}
 
 			$temp = array_values($temp);
-			//dump($temp)
+			// dump($temp)
 			$this->assign('data', $temp);
 			$this->json();
 
@@ -81,29 +79,23 @@ class FoodController extends Controller
 		}
 	}
 
-	//得用户吃过的菜品
+	// 得用户吃过的菜品
 	public function favorite()
 	{
 		try{
 
 			$condition = array();
+			// 获取用户user_id
+			$condition['user_id'] = Session::get($_GET['access_token']);
 
-			$condition['access_token'] = $_GET['access_token'];
-			获取用户
-			$condition['user_id'] = Session::get('access_token');
-
-			// // 测试
-			// $condition['user_id'] = 1;
-
-			//根据用户id,获取订单id
+			// 根据用户id,获取订单id
 			$temp = M(Orders)->where($condition)->field('id')->select();
 
 			if(!empty($temp))
 			{
-
-				//根据订单id，获取餐品id
+				// 根据订单id，获取餐品id
 				$temp = M('OrdersFood')->where($temp)->field('food_id')->select();
-				//再根据餐品id,获取菜品信息
+				// 再根据餐品id,获取菜品信息
 				$data = M('Food')->where($temp)->select();
 				
 				$this->assign('success', 1);
