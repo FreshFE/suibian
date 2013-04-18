@@ -22,6 +22,8 @@ class FoodController extends Controller
 
 			$data = M('Food')->where($condition)->select();
 
+			// dump($data);
+
 			$this->assign('success', 1);
 			$this->assign('data', $data);
 			$this->json();
@@ -47,6 +49,8 @@ class FoodController extends Controller
 				$tempcat[$cid] = $value['name'];
 			}
 
+			// dump($tempcat);
+
 			// Food
 			$temp = array();
 			$condition = array();
@@ -66,13 +70,14 @@ class FoodController extends Controller
 			}
 
 			$temp = array_values($temp);
+			//dump($temp)
 			$this->assign('data', $temp);
 			$this->json();
-			// dump($temp);
+
 		} catch(Exception $error) {
-			$this->assgin('success', 0);
-			$this->assgin('error', $error->getMessage());
-			$this->assgin('error_msg', Lang::get($error->getMessage()));
+			$this->assign('success', 0);
+			$this->assign('error', $error->getMessage());
+			$this->assign('error_msg', Lang::get($error->getMessage()));
 		}
 	}
 
@@ -84,34 +89,39 @@ class FoodController extends Controller
 			$condition = array();
 
 			$condition['access_token'] = $_GET['access_token'];
-			//获取用户
+			获取用户
 			$condition['user_id'] = Session::get('access_token');
+
+			// // 测试
+			// $condition['user_id'] = 1;
+
 			//根据用户id,获取订单id
-			$temp = M(Orders)->where($condition)->getField('id');
+			$temp = M(Orders)->where($condition)->field('id')->select();
 
 			if(!empty($temp))
 			{
+
 				//根据订单id，获取餐品id
-				$temp = M('OrdersFood')->where($temp)->getField('food_id');
+				$temp = M('OrdersFood')->where($temp)->field('food_id')->select();
 				//再根据餐品id,获取菜品信息
 				$data = M('Food')->where($temp)->select();
-
-				$this->assgin('success', 1);
-				$this->assgin('data', $data);
+				
+				$this->assign('success', 1);
+				$this->assign('data', $data);
 				$this->json();
 			}
 			else {
-				$this->assgin('success', 0);
-				$this->assgin('error', 'NO_EXIST_ORDER');
-				$this->assgin('error_msg', '还没有订单');
+				$this->assign('success', 0);
+				$this->assign('error', 'NO_EXIST_ORDER');
+				$this->assign('error_msg', '还没有订单');
 				$this->json();
 			}
 
 		}
 		catch(Exception $error) {
-			$this->assgin('success', 0);
-			$this->assgin('error', $error->getMessage());
-			$this->assgin('error_msg', Lang::get($error->getMessage()));
+			$this->assign('success', 0);
+			$this->assign('error', $error->getMessage());
+			$this->assign('error_msg', Lang::get($error->getMessage()));
 			$this->json();
 		}
 	}
