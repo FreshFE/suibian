@@ -2,7 +2,7 @@
 
 return array(
 
-	'AUTH_ON' => true,
+	'AUTH_ON' => false,
 
 	'AUTH_KEY' => 'USER_AUTH_KEY',
 
