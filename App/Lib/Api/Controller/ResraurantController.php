@@ -1,7 +1,6 @@
 <?php
 
 use Think\Controller as Controller;
-use Think\Request as Request;
 use Think\Lang as Lang;
 use \Exception;
 
@@ -10,26 +9,26 @@ class ResraurantController extends Controller
 	public function index()
 	{
 		try {
-			if(Request::is('post'))
+
+			$condition = array();
+
+			if(isset($_GET['id']))
 			{
-				$condition = array();
-				if(isset($_GET['id']))
-				{
-					$condition['id'] = $_GET['id'];
-				}
-				$data = M('Shop')->where($condition)->select();
-
-
+				$condition['id'] = $_GET['id'];
 			}
-			else {
-				throw new Exception("NO_POST_SUBMIT");
-			}
+
+			$data = M('Shop')->where($condition)->select();
+
+			$this->assign('success', 1);
+			$this->assign('datas', $data);
+			// dump($data);
+			$this->json();
 
 		}
 		catch(Exception $error) {
-			$this->assgin('success', 0);
-			$this->assgin('error', $error->getMessage());
-			$this->assgin('error_msg', Lang::get($error->getMessage()));
+			$this->assign('success', 0);
+			$this->assign('error', $error->getMessage());
+			$this->assign('error_msg', Lang::get($error->getMessage()));
 		}
 	}
 }
