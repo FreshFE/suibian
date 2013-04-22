@@ -4,8 +4,9 @@ use Think\Controller as Controller;
 use Think\Lang as Lang;
 use \Exception;
 
-class ResraurantController extends Controller
+class RestaurantController extends Controller
 {
+	// 获取餐厅的列表,可根据店铺id获取
 	public function index()
 	{
 		try {
@@ -19,9 +20,9 @@ class ResraurantController extends Controller
 
 			$data = M('Shop')->where($condition)->select();
 
+			//输出
 			$this->assign('success', 1);
 			$this->assign('datas', $data);
-			// dump($data);
 			$this->json();
 
 		}

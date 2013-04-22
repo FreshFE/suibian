@@ -10,7 +10,6 @@ class FoodController extends Controller
 	// 获取菜品列表，可根据店铺id查询
 	public function index()
 	{
-
 		try {
 
 			$condition = array();
@@ -22,8 +21,7 @@ class FoodController extends Controller
 
 			$data = M('Food')->where($condition)->select();
 
-			// dump($data);
-
+			// 输出
 			$this->assign('success', 1);
 			$this->assign('data', $data);
 			$this->json();
@@ -68,7 +66,7 @@ class FoodController extends Controller
 			}
 
 			$temp = array_values($temp);
-			// dump($temp)
+			
 			$this->assign('data', $temp);
 			$this->json();
 
@@ -98,11 +96,13 @@ class FoodController extends Controller
 				// 再根据餐品id,获取菜品信息
 				$data = M('Food')->where($temp)->select();
 				
+				// 输出
 				$this->assign('success', 1);
 				$this->assign('data', $data);
 				$this->json();
 			}
 			else {
+				// 订单为空，输出
 				$this->assign('success', 0);
 				$this->assign('error', 'NO_EXIST_ORDER');
 				$this->assign('error_msg', '还没有订单');

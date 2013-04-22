@@ -65,30 +65,7 @@ class AccountController extends Controller
 
 			if(Request::is('post'))
 			{
-<<<<<<< HEAD
-				$User = M('User');
-
-				$User->username   = $_POST['username'];
-				$User->email      = $_POST['email'];
-				$User->password   = $_POST['password'];
-				$User->createline = time();
-
-				$User->add();
-
-				if($flag)
-				{
-					// $this->assign('success', 1);
-					// $this->assign('data', ？？？？);
-					// $this->json();
-				} 
-				else {
-					$this->assign('success', 0);
-					$this->assign('error', $error->getMessage());
-					$this->assign('error_msg', Lang::get($error->getMessage()));
-				}
-=======
 				// TODO
->>>>>>> abb4277fe55628d2efcfbb026e737b56e24dcd16
 			}
 			else {
 				throw new Exception("NO_POST_SUBMIT");
@@ -102,14 +79,9 @@ class AccountController extends Controller
 		}
 	}
 
-<<<<<<< HEAD
-	// 退出
-	public function logout() {
-=======
 	//退出
 	public function logout()
 	{
->>>>>>> abb4277fe55628d2efcfbb026e737b56e24dcd16
 		try {
 
 			if(Request::is('post'))
