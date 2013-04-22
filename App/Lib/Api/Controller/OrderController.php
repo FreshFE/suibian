@@ -11,6 +11,7 @@ use \Exception;
 class OrderController extends Controller
 {
 	// 创建订单
+	// http://suibian.dev:88/api/order/create?access_token=8802434a13fd1b47360a982db59b7cf3&food_id_str=[{%22id%22:5,%22num%22:1},{%22id%22:6,%22num%22:2},{%22id%22:7,%22num%22:2},{%22id%22:8,%22num%22:2}]
 	public function create()
 	{
 		try {
@@ -59,11 +60,17 @@ class OrderController extends Controller
 		// 建立订单表 orders表
 		$orders = array(
 			'user_id' => Session::get(Config::get('AUTH_KEY')),
-			'code' => time(),
-			'price' => 0
+			'shop_id' => $shop_id,
+			'code' => $shop_id . uniqid(),
+			'price' => 0,
+			// 备留信息
+			// 'school' => '',
+			// 'address' => '',
+			// 'receiver' => ''
 		);
 
-		dump($orders);
+		// 创建到数据表
+		$orders_id = M('Orders')->add($orders);
 
 		// 建立 orders_food表
 	}
