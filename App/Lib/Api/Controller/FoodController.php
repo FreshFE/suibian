@@ -67,6 +67,7 @@ class FoodController extends Controller
 
 			$temp = array_values($temp);
 			
+			$this->assign('success', 1);
 			$this->assign('data', $temp);
 			$this->json();
 
@@ -93,20 +94,24 @@ class FoodController extends Controller
 			{
 				// 根据订单id，获取餐品id
 				$temp = M('OrdersFood')->where($temp)->field('food_id')->select();
-				// 再根据餐品id,获取菜品信息
-				$data = M('Food')->where($temp)->select();
+				if(!empty($temp)) {
+					// 再根据餐品id,获取菜品信息
+					$data = M('Food')->where($temp)->select();
+					
+					// 输出
+					$this->assign('success', 1);
+					$this->assign('datas', $data);
+					$this->json();
+				}
+				else {
+					// 订单为空，输出
+					throw new Exception("NO_EXIST_ORDER");
+				}
 				
-				// 输出
-				$this->assign('success', 1);
-				$this->assign('data', $data);
-				$this->json();
 			}
 			else {
 				// 订单为空，输出
-				$this->assign('success', 0);
-				$this->assign('error', 'NO_EXIST_ORDER');
-				$this->assign('error_msg', '还没有订单');
-				$this->json();
+				throw new Exception("NO_EXIST_ORDER");
 			}
 
 		}
