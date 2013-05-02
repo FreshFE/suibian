@@ -27,7 +27,7 @@ class AccountController extends Controller
 				$data = $model->create();
 				
 				// 临时方案，验证用户密码是否正确
-				if($data['email'] == 'admin' && $data['password'] == '123456')
+				if($_POST['email'] == 'admin' && $_POST['password'] == '123456')
 				{
 					// 设置输出数据，此处的1为临时方案
 					$data = $model->find(1);
