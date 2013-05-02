@@ -1,0 +1,12 @@
+{{extends file="./layout.html"}}
+
+{{block 'sidebar'}}
+	
+	<h5>使用人详情</h5>
+	<ul class="nav nav-pills nav-stacked nav-sidebar">
+		<li{{Helper::active('detail')}}><a href="__URL__/detail/id/{{$smarty.get.id}}"><i class="icon-chevron-right"></i>基本资料</a></li>
+		<li{{Helper::active('cost')}}><a href="__URL__/cost/id/{{$smarty.get.id}}"><i class="icon-chevron-right"></i>消费记录</a></li>
+		<li{{Helper::active('convert')}}><a href="__URL__/convert/id/{{$smarty.get.id}}"><i class="icon-chevron-right"></i>兑换</a></li>
+	</ul>
+
+{{/block}}

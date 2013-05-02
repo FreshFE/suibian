@@ -1,0 +1,79 @@
+{{extends file="./layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">体质管理</a> <span class="divider">/</span></li>
+		<li class="active">列表</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>体质管理</h1>
+		<div class="bar">
+			<!-- <a href="__URL__/add" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a> -->
+		</div>
+	</div>
+
+	<div class="section">
+
+		<table class="table table-hover table-striped">
+				
+			<thead>
+				<tr>
+					<td class="span1">ID</td>
+					<td class="span1">公开？</td>
+					<td>标题</td>
+					<td>更新日期</td>
+					<td>排序权重</td>
+					<td class="span1"></td>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				{{foreach $datas as $data}}
+				<tr>
+
+					<td>#{{$data.id}}</td>
+
+					<td>
+						{{if $data.hidden == 0}}
+							<div class="btn-group">
+								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-danger btn-small"><i class="icon-remove icon-white"></i></a>
+								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-danger btn-small">未公开</a>
+							</div>
+						{{else}}
+							<div class="btn-group">
+								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-success btn-small"><i class="icon-ok icon-white"></i></a>
+								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-success btn-small">公开</a>
+							</div>
+						{{/if}}
+					</td>
+
+					<td>
+						{{$data.title}}
+					</td>
+
+					<td>{{date('Y-m-d', $data['updateline'])}}</td>
+
+					<td>{{$data.priority}}</td>
+					
+					<td>
+						<div class="btn-group">
+							<a href="__GROUP__/constitutionview/index/aid/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-picture"></i></a>
+							<a href="__URL__/edit/id/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i></a>
+							<!-- <a href="__URL__/delete/id/{{$data.id}}" class="btn btn-mini" title="Delete"><i class="icon-trash"></i></a> -->
+						</div>
+					</td>
+
+				</tr>
+				{{/foreach}}
+
+			</tbody>
+		</table>
+
+		{{include file="../Bases/page.html"}}
+	</div>
+
+{{/block}}
+
