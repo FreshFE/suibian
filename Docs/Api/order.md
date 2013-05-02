@@ -8,6 +8,7 @@
 		school | true | string
 		address | true | string
 		receviver | true | string
+		phone | true | string
 		food_id_str | true | string  // 参考如下json格式
 
 		string:
