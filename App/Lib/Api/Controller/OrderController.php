@@ -6,7 +6,7 @@ use Think\Session as Session;
 use Think\Lang as Lang;
 use Think\Auth as Auth;
 use Think\Config as Config;
-use \Exception;
+use Think\Exception as Exception;
 
 class OrderController extends Controller
 {
@@ -37,10 +37,15 @@ class OrderController extends Controller
 				// 查询商店信息
 				$shops = M('Food')->group('shop_id')->field('shop_id')->where($condition)->select();
 				
+				$foods_temp = $this->parse_foods($foods);
+
 				// 遍历商店id，确定建立的订单数量
 				foreach ($shops as $key => $shop) {
-					$this->add_order($shop['shop_id'], $foods);
+					$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
+					// sleep(1);
 				}
+
+				$this->json($orderJson);
 			}
 			else {
 				// 订单创建错误
@@ -55,24 +60,70 @@ class OrderController extends Controller
 		}
 	}
 
+	protected function parse_foods($foods)
+	{
+		// 建立 orders_food表
+		foreach ($foods as $key => $value) {
+			$temp[$value['id']] = $value['num'];
+		}
+
+		return $temp;
+	}
+
 	protected function add_order($shop_id, $foods)
 	{
+		// --------------------------------------------------
 		// 建立订单表 orders表
+		// --------------------------------------------------
 		$orders = array(
 			'user_id' => Session::get(Config::get('AUTH_KEY')),
 			'shop_id' => $shop_id,
-			'code' => $shop_id . uniqid(),
 			'price' => 0,
-			// 备留信息
-			// 'school' => '',
-			// 'address' => '',
-			// 'receiver' => ''
+			'school' => $_GET['school'],
+			'address' => $_GET['address'],
+			'receiver' => $_GET['receiver'],
+			'phone' => $_GET['phone']
 		);
 
 		// 创建到数据表
 		$orders_id = M('Orders')->add($orders);
 
-		// 建立 orders_food表
+		// --------------------------------------------------
+		// 创建orders_food表
+		// --------------------------------------------------
+
+		// 获得foods属性的key
+		$keys = array_keys($foods);
+
+		// 在符合id和shop_id内查找相关的id值
+		$condition['id'] = array('in', join($keys, ','));
+		$condition['shop_id'] = $orders['shop_id'];
+
+		// 查询并得到结果
+		$datas = M('Food')->field('id,price')->where($condition)->select();
+
+		$total_price = 0;
+		
+		foreach ($datas as $key => $value) {
+			$arr[] = array(
+				'orders_id' => $orders_id,
+				'food_id' => $value['id'],
+				'num' => $foods[$value['id']],
+				'createline' => time(),
+				'updateline' => time()
+			);
+
+			// 计算价格
+			$total_price += $value['price'];
+		}
+
+		// 添加orders和food表之间的关系
+		M('OrdersFood')->addAll($arr);
+
+		// 更新价格
+		M('Orders')->where(array('id' => $orders_id))->save(array('price' => $total_price));
+
+		return $orders_id;
 	}
 
 	// 获取订单
