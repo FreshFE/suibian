@@ -12,45 +12,37 @@ class OrderController extends Controller
 {
 	// 创建订单
 	// http://suibian.dev:88/api/order/create?access_token=8802434a13fd1b47360a982db59b7cf3&food_id_str=[{%22id%22:5,%22num%22:1},{%22id%22:6,%22num%22:2},{%22id%22:7,%22num%22:2},{%22id%22:8,%22num%22:2}]
-	public function create()
+	public function post_create()
 	{
 		try {
+			// 订单id的数组
+			$orders = array();
 
-			if(Request::is('get'))
-			{
-				// 订单id的数组
-				$orders = array();
+			// 解析字符串获得数组
+			$foods = json_decode($_POST['food_id_str'], true);
 
-				// 解析字符串获得数组
-				$foods = json_decode($_GET['food_id_str'], true);
+			// 排序
+			sort($foods);
 
-				// 排序
-				sort($foods);
-
-				foreach ($foods as $key => $food) {
-					$temp[] = $food['id'];
-				}
-
-				// 查询条件
-				$condition['id'] = array('in', implode(',', $temp));
-
-				// 查询商店信息
-				$shops = M('Food')->group('shop_id')->field('shop_id')->where($condition)->select();
-				
-				$foods_temp = $this->parse_foods($foods);
-
-				// 遍历商店id，确定建立的订单数量
-				foreach ($shops as $key => $shop) {
-					$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
-					// sleep(1);
-				}
-
-				$this->json($orderJson);
+			foreach ($foods as $key => $food) {
+				$temp[] = $food['id'];
 			}
-			else {
-				// 订单创建错误
-				throw new Exception("ERROR_ORDER_CREATE");
+
+			// 查询条件
+			$condition['id'] = array('in', implode(',', $temp));
+
+			// 查询商店信息
+			$shops = M('Food')->group('shop_id')->field('shop_id')->where($condition)->select();
+			
+			$foods_temp = $this->parse_foods($foods);
+
+			// 遍历商店id，确定建立的订单数量
+			foreach ($shops as $key => $shop) {
+				$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
+				// sleep(1);
 			}
+
+			$this->json($orderJson);
 		}
 		catch(Exception $error) {
 			$this->assign('success', 0);
@@ -79,10 +71,10 @@ class OrderController extends Controller
 			'user_id' => Session::get(Config::get('AUTH_KEY')),
 			'shop_id' => $shop_id,
 			'price' => 0,
-			'school' => $_GET['school'],
-			'address' => $_GET['address'],
-			'receiver' => $_GET['receiver'],
-			'phone' => $_GET['phone']
+			'school' => $_POST['school'],
+			'address' => $_POST['address'],
+			'receiver' => $_POST['receiver'],
+			'phone' => $_POST['phone']
 		);
 
 		// 创建到数据表

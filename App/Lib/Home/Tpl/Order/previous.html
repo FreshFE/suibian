@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>项目</title>
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$.post(
+				'/api/article/next',
+				{
+					devId: 'sadhuwfhnwifdjiwjssd',
+					userId: 2,
+					articleId: 8
+				},
+				function(data) {
+					console.log(data);
+				}
+			);
+
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
