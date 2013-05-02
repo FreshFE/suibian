@@ -122,17 +122,16 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`orders` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
   `user_id` INT UNSIGNED NOT NULL ,
   `shop_id` INT UNSIGNED NOT NULL ,
-  `code` INT UNSIGNED NOT NULL ,
   `price` DECIMAL(12,2) UNSIGNED NOT NULL ,
   `school` VARCHAR(100) NOT NULL ,
   `address` VARCHAR(200) NOT NULL ,
   `receiver` VARCHAR(50) NOT NULL ,
-  `status` TINYINT UNSIGNED NOT NULL COMMENT '订单状态。\\n0 => 订单被创建，但是未执行，\\n100 => 订单在处理中，\\n200 => 订单在配送中，\\n300 => 订单已经完成。' ,
+  `phone` VARCHAR(20) NOT NULL ,
+  `status` TINYINT UNSIGNED NOT NULL COMMENT '订单状态。\n0 => 订单被创建，但是未执行，\n100 => 订单在处理中，\n200 => 订单在配送中，\n300 => 订单已经完成。' ,
   `createline` INT UNSIGNED NOT NULL ,
   `updateline` INT UNSIGNED NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_orders_user_user_id_idx` (`user_id` ASC) ,
-  UNIQUE INDEX `code_UNIQUE` (`code` ASC) ,
   INDEX `fk_orders_shop_id_idx` (`shop_id` ASC) ,
   CONSTRAINT `fk_orders_user_id`
     FOREIGN KEY (`user_id` )
@@ -215,6 +214,7 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`image` (
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
+USE `suibian` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

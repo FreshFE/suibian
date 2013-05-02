@@ -2,13 +2,14 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-ALTER TABLE `suibian`.`orders` ADD COLUMN `shop_id` INT(10) UNSIGNED NOT NULL  AFTER `user_id` , 
-  ADD CONSTRAINT `fk_orders_shop_id`
-  FOREIGN KEY (`shop_id` )
-  REFERENCES `suibian`.`shop` (`id` )
+ALTER TABLE `suibian`.`orders` ADD COLUMN `phone` VARCHAR(20) NOT NULL  AFTER `receiver` , DROP FOREIGN KEY `fk_orders_user_id` ;
+
+ALTER TABLE `suibian`.`orders` 
+  ADD CONSTRAINT `fk_orders_user_id`
+  FOREIGN KEY (`user_id` )
+  REFERENCES `suibian`.`user` (`id` )
   ON DELETE NO ACTION
-  ON UPDATE NO ACTION
-, ADD INDEX `fk_orders_shop_id_idx` (`shop_id` ASC) ;
+  ON UPDATE NO ACTION;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
