@@ -177,7 +177,7 @@ class OrderController extends Controller
 			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
 
 			foreach ($datas as $key => &$data) {
-				$temp = D('OrdersFood')->group('food_id')->where(array('order_id' => $data['id']))->select();
+				$temp = D('OrdersFood')->group('food_id')->where(array('orders_id' => $data['id']))->select();
 
 				foreach ($temp as $key => $value) {
 					$temp2[] = $value['food_id'];
