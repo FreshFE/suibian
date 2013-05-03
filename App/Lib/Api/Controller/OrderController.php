@@ -176,19 +176,23 @@ class OrderController extends Controller
 
 			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
 
-			
-
-			foreach ($datas as $key => &$data)
+			if($datas)
 			{
-				$temp = D('OrdersFood')->group('food_id')->where(array('orders_id' => $data['id']))->select();
+				foreach ($datas as $key => &$data)
+				{
+					$temp = D('OrdersFood')->group('food_id')->where(array('orders_id' => $data['id']))->select();
 
-				$temp2 = array();
+					$temp2 = array();
 
-				foreach ($temp as $key => $value) {
-					$temp2[] = $value['food_id'];
+					foreach ($temp as $key => $value) {
+						$temp2[] = $value['food_id'];
+					}
+
+					$data['foods'] = D('Food')->where(array('id' => array('in', join($temp2, ','))))->select();
 				}
-
-				$data['foods'] = D('Food')->where(array('id' => array('in', join($temp2, ','))))->select();
+			}
+			else {
+				$datas = array();
 			}
 
 			$this->successJson($datas);
