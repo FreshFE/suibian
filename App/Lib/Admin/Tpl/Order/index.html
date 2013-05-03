@@ -1,0 +1,75 @@
+{{extends file="./layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">文章管理</a> <span class="divider">/</span></li>
+		<li class="active">列表</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>文章管理</h1>
+		<div class="bar">
+			<a href="__URL__/add" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
+		</div>
+	</div>
+
+	<div class="section">
+
+		<table class="table table-hover table-striped">
+				
+			<thead>
+				<tr>
+					<td class="span1">ID</td>
+					<td>订单状态</td>
+					<td>创建日期</td>
+					<td class="span1"></td>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				{{foreach $datas as $data}}
+				<tr>
+
+					<td>#{{$data.id}}</td>
+
+					<td>
+						{{if $data['status'] == 0}}
+							<span class="label label-important">新订单</span>
+						{{/if}}
+
+						{{if $data['status'] == 10}}
+							<span class="label label-warning">处理中</span>
+						{{/if}}
+
+						{{if $data['status'] == 20}}
+							<span class="label label-info">配送中</span>
+						{{/if}}
+
+						{{if $data['status'] == 30}}
+							<span class="label label-success">订单结束</span>
+						{{/if}}
+					</td>
+
+					<td>{{date('Y-m-d', $data['createline'])}}</td>
+					
+					<td>
+						<div class="btn-group">
+							<a href="__URL__/detail/id/{{$data.id}}" class="btn btn-mini" title="detail"><i class="icon-th"></i></a>
+							<!-- <a href="__URL__/edit/id/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i></a> -->
+							<a href="__URL__/delete/id/{{$data.id}}" class="btn btn-mini" title="Delete"><i class="icon-trash"></i></a>
+						</div>
+					</td>
+
+				</tr>
+				{{/foreach}}
+
+			</tbody>
+		</table>
+
+		{{include file="../Bases/page.html"}}
+	</div>
+
+{{/block}}
+
