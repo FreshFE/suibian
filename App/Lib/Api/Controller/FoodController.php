@@ -84,52 +84,48 @@ class FoodController extends Controller
 	{
 		try
 		{
-			$model = M('Orders');
-
 			// 获取用户user_id
 			$condition['user_id'] = Session::get(Config::get('AUTH_KEY'));
 
 			// 根据用户id,获取订单id
-			$orders = $model->where($condition)->select();
+			$orders = M('Orders')->where($condition)->select();
 
 			foreach ($orders as $key => $value) {
 				$temp[] = $value['id'];
 			}
 
-			// $this->json($temp);
-			// exit();
-
 			if($temp)
 			{
 				// 根据订单id，获取餐品id
-				$temp = M('OrdersFood')->where($temp)->field('food_id')->select();
-				
-				if(!empty($temp)) {
+				$food_id = M('OrdersFood')->group('food_id')->where(array('order_id' => array('in', join($temp, ','))))->field('food_id')->select();
+
+				foreach ($food_id as $key => $value) {
+					$food_ids[] = $value['food_id'];
+				}
+
+				if($food_ids)
+				{
 					// 再根据餐品id,获取菜品信息
-					$data = M('Food')->where($temp)->select();
+					$data = M('Food')->where(array('id' => array('in', join($food_ids, ','))))->select();
 					
 					// 输出
 					$this->assign('success', 1);
 					$this->assign('datas', $data);
 					$this->json();
 				}
+				// 订单内没有餐品
 				else {
-					// 订单为空，输出
-					throw new Exception("NO_EXIST_ORDER");
+					throw new Exception("NO_EXIST_FOOD");
 				}
-				
 			}
+			// 订单为空，输出
 			else {
-				// 订单为空，输出
-				throw new Exception("NO_EXIST_ORDER2");
+				throw new Exception("NO_EXIST_ORDER");
 			}
 
 		}
 		catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
-			$this->json();
+			$this->errorJson($error);
 		}
 	}
 }
