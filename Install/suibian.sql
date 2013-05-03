@@ -164,7 +164,7 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`orders_food` (
   CONSTRAINT `fk_orders_goods_orders_id`
     FOREIGN KEY (`orders_id` )
     REFERENCES `suibian`.`orders` (`id` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_orders_goods_goods_id`
     FOREIGN KEY (`food_id` )

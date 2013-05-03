@@ -2,7 +2,14 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-ALTER TABLE `suibian`.`shop` ADD COLUMN `businesshours` VARCHAR(30) NOT NULL COMMENT ' /* comment truncated */ /*营业时间*/'  AFTER `coverpath` , ADD COLUMN `address` VARCHAR(100) NOT NULL COMMENT ' /* comment truncated */ /*商店地址*/'  AFTER `businesshours` ;
+ALTER TABLE `suibian`.`orders_food` DROP FOREIGN KEY `fk_orders_goods_orders_id` ;
+
+ALTER TABLE `suibian`.`orders_food` 
+  ADD CONSTRAINT `fk_orders_goods_orders_id`
+  FOREIGN KEY (`orders_id` )
+  REFERENCES `suibian`.`orders` (`id` )
+  ON DELETE CASCADE
+  ON UPDATE NO ACTION;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
