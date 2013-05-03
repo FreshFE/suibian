@@ -5,19 +5,26 @@ use Think\Model as Model;
 class OrdersModel extends Model
 {
 
-	protected $_auto = array(
-		array('str_id', 'parse_str_id', 1, 'callback');
-	);
+	// protected $_auto = array(
+	// 	array('str_id', 'parse_str_id', 1, 'callback');
+	// );
 
-	public function parse_str_id($str_id)
-	{
-		// 处理$str_id的值的方法
+	// public function parse_str_id($str_id)
+	// {
+	// 	// 处理$str_id的值的方法
 
-		$foods = explode(',', $str_id);
+	// 	$foods = explode(',', $str_id);
 
-		foreach ($foods as $key => $food) {
+	// 	foreach ($foods as $key => $food) {
 			
-		}
-	}
+	// 	}
+	// }
+
+	protected $_validate = array(
+		array('school', 'require', 'NO_SCHOOL'),
+		array('address', 'require', 'NO_ADDRESS'),
+		array('receiver', 'require', 'NO_RECEIVER'),
+		array('phone', 'require', 'NO_PHONE')
+	);
 
 }
