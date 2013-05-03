@@ -6,10 +6,10 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 
-			$.post(
-				'/api/account/logout',
+			$.get(
+				'/api/food/shop',
 				{
-					"access_token": "43f6ad81e97b5dc7cf9f16b0b31f56ef",
+					shop_id: 1
 				},
 				function(data) {
 					console.log(data);

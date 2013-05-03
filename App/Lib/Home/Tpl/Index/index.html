@@ -3,7 +3,7 @@
 {{block 'content'}}
                 
 <div id="info">
-    <a href="account/login" data-post="email=admin&password=123456">Login</a>
+    <a href="account/login" data-post="email=minowu@vip.qq.com&password=123456">Login</a>
     <a href="account/logout">Logout</a>
 
     <hr>
@@ -40,9 +40,11 @@
             "success": function (data) {
                 console.log(data);
 
-                if(data && data.access_token !== null) {
+                if(data && data.access_token && data.access_token !== null && data.access_token !== '') {
                     window.access_token = data.access_token;
                 }
+
+                console.log(window.access_token);
             }
         });
     }
