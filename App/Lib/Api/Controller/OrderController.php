@@ -102,7 +102,7 @@ class OrderController extends Controller
 			// 创建到数据表
 			$orders_id = M('Orders')->add($orders);
 
-			$this->json(array('uu' => 1, 'hh' => $orders_id));
+			// $this->json(array('uu' => 1, 'hh' => $orders_id));
 
 			// 订单创建失败
 			if(!$orders_id) {
@@ -118,8 +118,7 @@ class OrderController extends Controller
 		// 创建orders_food表
 		// --------------------------------------------------
 
-		try
-		{
+		try {
 			// 获得foods属性的key
 			$keys = array_keys($foods);
 
@@ -161,8 +160,7 @@ class OrderController extends Controller
 
 	public function get_index()
 	{
-		try
-		{
+		try {
 			// 用户id
 			$condition['user_id'] = $_SESSION[Config::get('AUTH_KEY')];
 
@@ -189,49 +187,6 @@ class OrderController extends Controller
 		catch(Exception $error)
 		{
 			$this->errorJson($error);
-		}
-	}
-
-	// 获取订单
-	public function get_index2()
-	{
-		try {
-			// 根据access_token获取用户user_id
-			$condition['user_id'] = Session::get($_GET['access_token']);
-			$condition['status'] = $_GET['status'];
-
-			$data = M('Orders')->where($condition)->select();
-
-			if(!empty($data))
-			{
-				$temp = array();
-
-				foreach ($data as $key => $value) 
-				{
-					// 查询此订单的food_id
-					$ordersFood = M('OrdersFood')->where(array('orders_id'=>$data['id']))->field('food_id')->select();
-					$data[$key]['data'] = M('Food')->where($ordersFood)->select();
-					$temp = $data;
-				}
-
-				// dump($temp);
-				$this->assign('success', 1);
-				$this->assign('datas', $temp);
-				$this->json();
-			}
-			else {
-				$this->assign('success', 0);
-				$this->assign('error', 'NO_ORDER');
-				$this->assign('error_msg', '您还没有订单');
-				$this->json();
-			}
-
-		}
-		catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
-			$this->json();
 		}
 	}
 }
