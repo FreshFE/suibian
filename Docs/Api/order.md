@@ -49,7 +49,8 @@
 	method: GET
 	params:
 		access_token | true | int
-		status | true | int | 订单状态值，参考数据库status字段
+		// status | true | int | 订单状态值，参考数据库status字段
+		history | true | int | 0 => 当前订单， 1 => 历史订单
 
 ###返回
 	// 操作成功
