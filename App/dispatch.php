@@ -2,5 +2,5 @@
 
 return array(
 	'default' => 'Home',
-	'pathinfo' => 'Admin,Api'
+	'pathinfo' => 'Admin,Api,Orderadmin'
 );

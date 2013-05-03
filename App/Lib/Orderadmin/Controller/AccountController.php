@@ -14,7 +14,7 @@ class AccountController extends Controller
 
 	public function post_login()
 	{
-		if($_POST['username'] == 'admin' && $_POST['password'] == '123456')
+		if($_POST['username'] == 'orders' && $_POST['password'] == '123456')
 		{
 			$this->save_session(1);
 			Redirect::success('Welcome to back.', Url::make('index/index'));
@@ -26,12 +26,12 @@ class AccountController extends Controller
 
 	protected function save_session($admin_id)
 	{
-		Session::set('auth_admin', $admin_id);
+		Session::set('auth_admin_order', $admin_id);
 	}
 
 	protected function get_logout()
 	{
-		Session::set('auth_admin', null);
+		Session::set('auth_admin_order', null);
 		Redirect::success('成功退出管理员系统', Url::make('account/login'));
 	}
 }

@@ -6,7 +6,7 @@ class SitemapController extends Controller {
 
 	protected $model_name = 'Category';
 
-	protected $category_id = 0;
+	protected $category_id = 1;
 
 	protected $pk_name = 'cid';
 

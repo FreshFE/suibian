@@ -1,4 +1,4 @@
-<?php namespace App\Admin\Behaviors;
+<?php namespace App\Orderadmin\Behaviors;
 
 use Think\Behavior as Behavior;
 use Think\Session as Session;
@@ -9,7 +9,7 @@ class CheckAuth extends Behavior
 {
 	public function run(&$params)
 	{
-		if(Session::get('auth_admin'))
+		if(Session::get('auth_admin_order'))
 		{
 			// 已经登录，account/login返回403
 			if(strtolower(CONTROLLER_NAME . '/' . ACTION_NAME) === 'account/login')
