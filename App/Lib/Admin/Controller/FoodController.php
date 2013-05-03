@@ -15,6 +15,8 @@ class FoodController extends Controller
 
 	protected $category_id = 1;
 
+	protected $list_order = 'id DESC';
+
 	public function index()
 	{
 		if(isset($_GET['shop']))
