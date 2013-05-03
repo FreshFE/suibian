@@ -49,23 +49,73 @@ class AccountController extends Controller
 		}
 	}
 
-	// 注册
-	public function register()
+	/**
+	 * 注册功能
+	 */
+	public function post_register()
 	{
-		try {
+		try
+		{
+			$model = D('User');
+			$data = $model->create();
 
-			if(Request::is('post'))
+			if($data)
 			{
-			}
-			else {
-				throw new Exception("NO_POST_SUBMIT");
-			}
+				$user_id = $model->add($data);
 
+				if($user_id)
+				{
+					$this->json_auth_info($user_id);
+				}
+				else {
+					throw new Exception("ERROR_REGISTER");
+				}
+			}
+			// 数据不正确
+			else {
+				throw new Exception($model->getError());
+			}
 		}
 		catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
+			$this->errorJson($error);
+		}
+	}
+
+	/**
+	 * 根据$user_id来检查是否存在当前用户
+	 * 如果存在，则写入session，并返回相对应的user数据
+	 *
+	 * @param $user_id
+	 * @return void
+	 */
+	protected function json_auth_info($user_id)
+	{
+		try
+		{
+			// 用户数据
+			$data = D('User')->field('password', true)->find($user_id);
+
+			// 是否存在该用户
+			if($data)
+			{
+				// access token
+				$access_token = session_id();
+
+				// 保存用户Session
+				Session::set(Config::get('AUTH_KEY'), $user_id);
+
+				// 输出
+				$this->assign('success', 1);
+				$this->assign('data', $data);
+				$this->assign('access_token', $access_token);
+				$this->json();
+			}
+			else {
+				throw new Exception("NO_EXTIS_USER");
+			}
+		}
+		catch(Exception $error) {
+			$this->errorJson($error);
 		}
 	}
 
