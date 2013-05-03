@@ -90,7 +90,7 @@ class FoodController extends Controller
 			if($temp)
 			{
 				// 根据订单id，获取餐品id
-				$food_id = M('OrdersFood')->group('food_id')->where(array('order_id' => array('in', join($temp, ','))))->field('food_id')->select();
+				$food_id = M('OrdersFood')->group('food_id')->where(array('orders_id' => array('in', join($temp, ','))))->field('food_id')->select();
 
 				foreach ($food_id as $key => $value) {
 					$food_ids[] = $value['food_id'];
