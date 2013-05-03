@@ -105,6 +105,8 @@ CREATE  TABLE IF NOT EXISTS `suibian`.`shop` (
   `createline` INT UNSIGNED NOT NULL ,
   `updateline` INT UNSIGNED NOT NULL ,
   `coverpath` CHAR(26) NOT NULL ,
+  `businesshours` VARCHAR(30) NOT NULL COMMENT '营业时间' ,
+  `address` VARCHAR(100) NOT NULL COMMENT '商店地址' ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_shops_category_cid_idx` (`cid` ASC) ,
   CONSTRAINT `fk_shops_category_cid`
