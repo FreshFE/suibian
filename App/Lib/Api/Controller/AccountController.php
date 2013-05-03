@@ -61,6 +61,8 @@ class AccountController extends Controller
 
 			if($data)
 			{
+				$this->json($data);
+
 				$user_id = $model->add($data);
 
 				if($user_id)
