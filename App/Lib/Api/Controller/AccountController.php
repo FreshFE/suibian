@@ -9,42 +9,25 @@ use Think\Exception as Exception;
 
 class AccountController extends Controller
 {
-	// 登陆
 	public function post_login()
 	{
-		try {
-			// 临时的检查session和cookie的方法，不要模仿该段，后期程序会通过Auth类自动处理掉
-			$user_id = Session::get(Config::get('AUTH_KEY'));
+		try
+		{
+			$model = D('User');
+			$condition = array('email' => $_POST['email'], 'password' => sha1($_POST['password']));
+			$data = $model->where($condition)->find();
 
-			if(!empty($user_id)) {
-				throw new Exception("LOGIN_NOW");
-			}
-
-			// 临时数据和办法，将来会重构
-			$model = M('User');
-			$data = $model->create();
-			
-			// 临时方案，验证用户密码是否正确
-			if($_POST['email'] == 'admin' && $_POST['password'] == '123456')
+			if($data)
 			{
-				// 设置输出数据，此处的1为临时方案
-				$data = $model->find(1);
-				$access_token = session_id();
-
-				// 保存用户Session，此处的1为临时方案
-				Session::set(Config::get('AUTH_KEY'), 1);
-
-				// 输出
-				$this->assign('success', 1);
-				$this->assign('data', $data);
-				$this->assign('access_token', $access_token);
-				$this->json();
+				$this->json_auth_info($data['id']);
 			}
+			// 数据不正确
 			else {
-				throw new Exception('NO_POST');
+				throw new Exception("ERROR_LOGIN");
 			}
 		}
-		catch(Exception $error) {
+		catch(Exception $error)
+		{
 			$this->errorJson($error);
 		}
 	}
