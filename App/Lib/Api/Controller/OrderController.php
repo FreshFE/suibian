@@ -39,17 +39,13 @@ class OrderController extends Controller
 			// 遍历商店id，确定建立的订单数量
 			foreach ($shops as $key => $shop) {
 				$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
-				// sleep(1);
 			}
 
 			$this->assign('success', 1);
 			$this->json();
 		}
 		catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
-			$this->json();
+			$this->errorJson($error);
 		}
 	}
 
@@ -68,18 +64,28 @@ class OrderController extends Controller
 		// --------------------------------------------------
 		// 建立订单表 orders表
 		// --------------------------------------------------
-		$orders = array(
-			'user_id' => Session::get(Config::get('AUTH_KEY')),
-			'shop_id' => $shop_id,
-			'price' => 0,
-			'school' => $_POST['school'],
-			'address' => $_POST['address'],
-			'receiver' => $_POST['receiver'],
-			'phone' => $_POST['phone']
-		);
+		try {
+			$orders = array(
+				'user_id' => Session::get(Config::get('AUTH_KEY')),
+				'shop_id' => $shop_id,
+				'price' => 0,
+				'school' => $_POST['school'],
+				'address' => $_POST['address'],
+				'receiver' => $_POST['receiver'],
+				'phone' => $_POST['phone']
+			);
 
-		// 创建到数据表
-		$orders_id = M('Orders')->add($orders);
+			// 创建到数据表
+			$orders_id = M('Orders')->add($orders);
+
+			if(!$orders_id) {
+				throw new Exception("ERROR_ORDERS");
+			}
+		}
+		catch(Exception $error)
+		{
+			$this->errorJson($error);
+		}
 
 		// --------------------------------------------------
 		// 创建orders_food表
