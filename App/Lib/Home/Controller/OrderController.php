@@ -8,4 +8,9 @@ class OrderController extends Controller
 	{
 		$this->display();
 	}
+
+	public function index()
+	{
+		$this->display();
+	}
 }

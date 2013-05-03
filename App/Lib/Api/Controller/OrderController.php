@@ -159,8 +159,41 @@ class OrderController extends Controller
 		}
 	}
 
+	public function get_index()
+	{
+		try
+		{
+			// 用户id
+			$condition['user_id'] = $_SESSION[Config::get('AUTH_KEY')];
+
+			// 是否设置status
+			if(isset($_GET['status']))
+			{
+				$condition['status'] = $_GET['status'];
+			}
+
+			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
+
+			foreach ($datas as $key => &$data) {
+				$temp = D('OrdersFood')->group('food_id')->where(array('order_id' => $data['id']))->select();
+
+				foreach ($temp as $key => $value) {
+					$temp2[] = $value['food_id'];
+				}
+
+				$data['foods'] = D('Food')->where(array('id' => array('in', join($temp2, ','))))->select();
+			}
+
+			$this->successJson($datas);
+		}
+		catch(Exception $error)
+		{
+			$this->errorJson($error);
+		}
+	}
+
 	// 获取订单
-	public function index()
+	public function get_index2()
 	{
 		try {
 			// 根据access_token获取用户user_id
