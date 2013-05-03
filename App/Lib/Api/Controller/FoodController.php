@@ -1,9 +1,9 @@
 <?php
 
-use Think\Controller as Controller;
+use Smartadmin\Controller\Api as Controller;
 use Think\Lang as Lang;
 use Think\Session as Session;
-use \Exception;
+use Think\Exception;
 
 class FoodController extends Controller
 {
@@ -41,6 +41,8 @@ class FoodController extends Controller
 			
 			// Food Category
 			$category = M('Category')->where(array('fid' => 1))->select();
+			// $this->json($category);
+
 			$tempcat = array();
 			foreach ($category as $key => $value) {
 				$cid = $value['cid'];
@@ -72,9 +74,7 @@ class FoodController extends Controller
 			$this->json();
 
 		} catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
+			$this->errorJson($error);
 		}
 	}
 
