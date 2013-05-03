@@ -42,7 +42,8 @@ class OrderController extends Controller
 				// sleep(1);
 			}
 
-			$this->json($orderJson);
+			$this->assign('success', 1);
+			$this->json();
 		}
 		catch(Exception $error) {
 			$this->assign('success', 0);
