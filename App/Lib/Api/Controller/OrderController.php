@@ -89,6 +89,8 @@ class OrderController extends Controller
 			// 创建到数据表
 			$orders_id = M('Orders')->add($orders);
 
+			$this->json(array('uu' => 1, 'hh' => $orders_id));
+
 			// 订单创建失败
 			if(!$orders_id) {
 				throw new Exception("ERROR_ORDERS");
