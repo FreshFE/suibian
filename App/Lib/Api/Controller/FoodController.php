@@ -23,15 +23,10 @@ class FoodController extends Controller
 			$data = M('Food')->where($condition)->select();
 
 			// 输出
-			$this->assign('success', 1);
-			$this->assign('data', $data);
-			$this->json();
+			$this->successJson($data);
 		}
 		catch(Exception $error) {
-			$this->assign('success', 0);
-			$this->assign('error', $error->getMessage());
-			$this->assign('error_msg', Lang::get($error->getMessage()));
-			$this->json();
+			$this->errorJson($error);
 		}
 	}
 
@@ -69,10 +64,8 @@ class FoodController extends Controller
 			}
 
 			$temp = array_values($temp);
-			
-			$this->assign('success', 1);
-			$this->assign('data', $temp);
-			$this->json();
+
+			$this->successJson($temp);
 
 		} catch(Exception $error) {
 			$this->errorJson($error);
@@ -109,9 +102,7 @@ class FoodController extends Controller
 					$data = M('Food')->where(array('id' => array('in', join($food_ids, ','))))->select();
 					
 					// 输出
-					$this->assign('success', 1);
-					$this->assign('datas', $data);
-					$this->json();
+					$this->successJson($data, true);
 				}
 				// 订单内没有餐品
 				else {
