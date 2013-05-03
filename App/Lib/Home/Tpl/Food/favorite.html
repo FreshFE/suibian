@@ -7,9 +7,9 @@
 		$(document).ready(function() {
 
 			$.get(
-				'/api/food/shop',
+				'/api/food/favorite',
 				{
-					shop_id: 1
+					"access_token": "4afd7803df33d9761978f83632380f07"
 				},
 				function(data) {
 					console.log(data);

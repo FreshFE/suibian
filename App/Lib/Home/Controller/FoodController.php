@@ -8,4 +8,9 @@ class FoodController extends Controller
 	{
 		$this->display();
 	}
+
+	public function favorite()
+	{
+		$this->display();
+	}
 }
