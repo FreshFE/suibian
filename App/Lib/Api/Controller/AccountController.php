@@ -59,6 +59,8 @@ class AccountController extends Controller
 			$model = D('User');
 			$data = $model->create();
 
+			$this->json($_POST);
+
 			if($data)
 			{
 				$this->json($data);
