@@ -93,7 +93,7 @@ class AccountController extends Controller
 		try
 		{
 			// 用户数据
-			$data = D('User')->field('password', true)->find($user_id);
+			$data = D('User')->find($user_id);
 
 			// 是否存在该用户
 			if($data)
