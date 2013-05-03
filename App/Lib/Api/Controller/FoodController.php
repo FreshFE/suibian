@@ -3,7 +3,8 @@
 use Smartadmin\Controller\Api as Controller;
 use Think\Lang as Lang;
 use Think\Session as Session;
-use Think\Exception;
+use Think\Config as Config;
+use Think\Exception as Exception;
 
 class FoodController extends Controller
 {
@@ -81,19 +82,28 @@ class FoodController extends Controller
 	// 得用户吃过的菜品
 	public function favorite()
 	{
-		try{
+		try
+		{
+			$model = M('Orders');
 
-			$condition = array();
 			// 获取用户user_id
-			$condition['user_id'] = Session::get($_GET['access_token']);
+			$condition['user_id'] = Session::get(Config::get('AUTH_KEY'));
 
 			// 根据用户id,获取订单id
-			$temp = M(Orders)->where($condition)->field('id')->select();
+			$orders = $model->where($condition)->select();
 
-			if(!empty($temp))
+			foreach ($orders as $key => $value) {
+				$temp[] = $value['id'];
+			}
+
+			// $this->json($temp);
+			// exit();
+
+			if($temp)
 			{
 				// 根据订单id，获取餐品id
 				$temp = M('OrdersFood')->where($temp)->field('food_id')->select();
+				
 				if(!empty($temp)) {
 					// 再根据餐品id,获取菜品信息
 					$data = M('Food')->where($temp)->select();
@@ -111,7 +121,7 @@ class FoodController extends Controller
 			}
 			else {
 				// 订单为空，输出
-				throw new Exception("NO_EXIST_ORDER");
+				throw new Exception("NO_EXIST_ORDER2");
 			}
 
 		}
