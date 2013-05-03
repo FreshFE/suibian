@@ -1,14 +1,19 @@
 <?php
 
 use Smartadmin\Controller\Api as Controller;
-use Think\Request as Request;
-use Think\Lang as Lang;
 use Think\Session as Session;
 use Think\Config as Config;
 use Think\Exception as Exception;
 
 class AccountController extends Controller
 {
+	/**
+	 * 登录接口
+	 * 根据用户提交的email和password匹配账号
+	 * 登录后写入session
+	 *
+	 * @return void
+	 */
 	public function post_login()
 	{
 		try
@@ -34,6 +39,9 @@ class AccountController extends Controller
 
 	/**
 	 * 注册功能
+	 * 检查账户信息，通过后，写入数据库并设置登录信息并放回
+	 *
+	 * @return void
 	 */
 	public function post_register()
 	{
@@ -60,6 +68,27 @@ class AccountController extends Controller
 			}
 		}
 		catch(Exception $error) {
+			$this->errorJson($error);
+		}
+	}
+
+	/**
+	 * 退出账户，清除session
+	 *
+	 * @return void
+	 */
+	public function post_logout()
+	{
+		try
+		{
+			if(Session::get(Config::get('AUTH_KEY')))
+			{
+				Session::set(Config::get('AUTH_KEY'), null);
+				$this->successJson();
+			}
+		}
+		catch(Exception $error)
+		{
 			$this->errorJson($error);
 		}
 	}
@@ -100,19 +129,5 @@ class AccountController extends Controller
 		catch(Exception $error) {
 			$this->errorJson($error);
 		}
-	}
-
-	//退出
-	public function post_logout()
-	{
-		// try {
-		// 	Session::set(Config::get('AUTH_KEY'), null);
-
-		// 	$this->assign('success', 1);
-		// 	$this->json();
-		// }
-		// catch(Exception $error) {
-		// 	$this->errorJson($error);
-		// }
 	}
 }

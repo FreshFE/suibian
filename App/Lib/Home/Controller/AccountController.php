@@ -13,4 +13,9 @@ class AccountController extends Controller
 	{
 		$this->display();
 	}
+
+	public function logout()
+	{
+		$this->display();
+	}
 }

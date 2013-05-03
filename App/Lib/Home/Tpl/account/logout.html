@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>项目</title>
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$.post(
+				'/api/account/logout',
+				{
+					"access_token": "e00fe37b0923aafb39bc29bdd1b9d373"
+				},
+				function(data) {
+					console.log(data);
+				}
+			);
+
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
