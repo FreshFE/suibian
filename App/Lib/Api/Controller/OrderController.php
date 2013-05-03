@@ -21,6 +21,12 @@ class OrderController extends Controller
 			// 订单id的数组
 			$orders = array();
 
+			// 不存在 food_id_str 捕获错误
+			if(!isset($_POST['food_id_str']))
+			{
+				throw new Exception("NO_FOODS");
+			}
+
 			// 解析字符串获得数组
 			$foods = json_decode($_POST['food_id_str'], true);
 
@@ -39,14 +45,21 @@ class OrderController extends Controller
 			
 			$foods_temp = $this->parse_foods($foods);
 
+			$orderJson = array();
+
 			// 遍历商店id，确定建立的订单数量
 			foreach ($shops as $key => $shop) {
 				$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
+				sleep(0.5);
 			}
 
-			$this->assign('success', 1);
-			$this->assign('data', '多一个测试信息');
-			$this->json();
+			if(count($orderJson) > 0)
+			{
+				$this->successJson();
+			}
+			else {
+				throw new Exception("ERROR_ORDERS_CREATE");
+			}
 		}
 		catch(Exception $error) {
 			$this->errorJson($error);
