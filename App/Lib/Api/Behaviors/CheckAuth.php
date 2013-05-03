@@ -11,7 +11,9 @@ class CheckAuth extends Behavior
 {
 	private $rule_login = array(
 		'account/logout',
-		'food/shop'
+		'order/create',
+		'order/index',
+		'food/favorite'
 	);
 
 	private $rule_login_foriben = array(
@@ -22,17 +24,14 @@ class CheckAuth extends Behavior
 	public function run(&$params)
 	{
 		$current = strtolower(CONTROLLER_NAME . '/' . ACTION_NAME);
-		// dump(Session::get(Config::get('AUTH_KEY')));
-		// 判断当前是否登录
-		File::set(LOG_PATH.'checkauth', 'start');
-		File::set(LOG_PATH.'test', $_SESSION[Config::get('AUTH_KEY')]);
 
+		// 判断当前是否登录
 		if($_SESSION[Config::get('AUTH_KEY')])
 		{
 			if(in_array($current, $this->rule_login_foriben))
 			{
 				$controller = new Controller;
-				$controller->errorJson(new Exception("NO_LOGINED2"));
+				$controller->errorJson(new Exception("ALREADY_LOGINED"));
 			}
 		}
 		// 未登录，禁止访问必须登录的项目
