@@ -1,6 +1,6 @@
 <?php
 
-use Think\Controller as Controller;
+use Smartadmin\Controller\Api as Controller;
 use Think\Request as Request;
 use Think\Session as Session;
 use Think\Lang as Lang;
