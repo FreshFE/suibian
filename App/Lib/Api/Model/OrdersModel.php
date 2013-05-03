@@ -30,6 +30,6 @@ class OrdersModel extends Model
 	protected $_auto = array(
 		array('createline', 'time', 1, 'function'),
 		array('updateline', 'time', 3, 'function')
-	)
+	);
 
 }
