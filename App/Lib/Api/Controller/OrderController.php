@@ -45,7 +45,7 @@ class OrderController extends Controller
 			}
 
 			$this->assign('success', 1);
-			$this->assign('data', $orderJson);
+			$this->assign('data', '多一个测试信息');
 			$this->json();
 		}
 		catch(Exception $error) {
