@@ -114,7 +114,7 @@ class AccountController extends Controller
 				$access_token = session_id();
 
 				// 保存用户Session
-				Session::set(Config::get('AUTH_KEY'), $user_id);
+				$_SESSION[Config::get('AUTH_KEY')] = $user_id;
 
 				// 输出
 				$this->assign('success', 1);
