@@ -41,7 +41,7 @@
 			<div class="control-group">
 				<label class="control-label">商店</label>
 				<div class="controls">
-					<select name="cid">
+					<select name="shop_id">
 						{{foreach $shops as $value}}
 						<option value="{{$value.id}}" {{if $data.shop_id == $value.id}}selected="selected"{{/if}}>{{$value.title}}</option>
 						{{/foreach}}
