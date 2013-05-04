@@ -1,6 +1,9 @@
-#Order
-##提交订单列表
-###发送
+# Order
+
+## 提交订单列表
+
+### Request
+
 	url: order/create
 	method: POST
 	params:
@@ -19,7 +22,8 @@
 			}
 		]
 
-###返回
+### Response
+
 	// 操作成功
 	{
 		"success": 1,
@@ -39,12 +43,12 @@
 		"error": "ERROR_ORDER_CREATE"，
 		"error_msg": "订单提交失败"
 	}
-		
 
+---
 
-##获取订单列表
-###发送
-	
+## 获取订单列表
+### Request
+
 	url: order/index
 	method: GET
 	params:
@@ -52,7 +56,8 @@
 		// status | true | int | 订单状态值，参考数据库status字段
 		history | true | int | 0 => 当前订单， 1 => 历史订单
 
-###返回
+### Response
+
 	// 操作成功
 	{
 		"success": 1,
@@ -68,3 +73,23 @@
 		"error_msg": "您还没有订单"
 	}
 
+---
+
+## 获得收件学校
+
+### Request
+
+	url: order/school
+	method: GET
+	params: none
+
+### Response
+
+	// 操作成功
+	{
+		"success": 1,
+		"data": [
+			"云南大学",
+			// ...
+		]
+	}
