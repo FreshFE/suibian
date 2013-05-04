@@ -1,24 +1,36 @@
-##Account
+# 账号相关接口
 
-###登录
+## JSON 字段
 
-####发送
+	{
+		"id" => 1,
+		"username" => "minowu",
+		"email" => "minowu@foxmail.com",
+		"password" => "7c4a8d09ca3762af61e59520943dc26494f8941b",
+		"createline" => 1367557908
+	}
+
+## 登录账号
+
+### Request
+
 	url: account/login
 	method: POST
 	params:
 		email | true | string
 		password | true | string
-		
-####返回
+
+### Response
+
 	//操作成功
 	{
 		"success": 1,
 		"access_token": "",
 		"data": {
-			"id": 1,
-			// ...
+			// @link 参考json字段
 		}
 	}
+
 	//操作失败
 	{
 		"success": 0,
@@ -37,10 +49,14 @@
 		"error": "ERROR_ACCOUNT",
 		"error_msg": "该账号被封锁"
 	}
-##
 
-###注册
-####发送
+---
+
+### 注册账号
+
+*注册成功后，返回的信息和登录同样，并在服务器记录了Session，所以前端设置为用户注册后为用户自动登录*
+
+### Request
 
 	url: account/register
 	method: POST
@@ -49,15 +65,13 @@
 		email | true | string
 		password | true | string
 
-####返回
-	
+### Response
+
 	//操作成功
 	{
 		"success": 1,
 		"data": {
-			// @link 直接参考account/login返回的数据，同理；
-			// 实际处理，先注册，注册成功后，后台自动处理登录；
-			// 所以返回的数据是和account/login是相同的。
+			// @link 参考json字段
 		}
 	}
 
@@ -79,18 +93,19 @@
 		"error": "ERROR_REGISTER",
 		"error_msg": "注册异常"
 	}
-##
 
-###退出
+---
 
-####发送
+## 退出账号
+
+### Request
 
 	url: account/logout
 	method: POST
 	params:
 		access_token | true | string
 
-####返回
+### Response
 
 	//操作成功
 	{
