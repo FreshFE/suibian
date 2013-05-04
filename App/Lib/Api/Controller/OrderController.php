@@ -202,4 +202,29 @@ class OrderController extends Controller
 			$this->errorJson($error);
 		}
 	}
+
+	/**
+	 * 在创建订单的时候预设拿到的学校列表
+	 *
+	 * @return void
+	 */
+	public function get_school()
+	{
+		$datas = array(
+			"云南大学",
+			"昆明理工大学",
+			"云南师范大学",
+			"云南民族大学",
+			"昆明医学院",
+			"云南艺术学院",
+			"云南中医学院",
+			"昆明学院",
+			"云南广播电视大学",
+			"云南医学高等专科学校",
+			"云南交通职业技术学院",
+			"云南财经大学"
+		);
+
+		$this->successJson($datas);
+	}
 }
