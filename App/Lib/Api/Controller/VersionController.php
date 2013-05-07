@@ -8,7 +8,7 @@ class VersionController extends Controller
 	{
 		$data = array(
 			"android" => array(
-				"newest" => "1.0.2",
+				"newest" => "1.1.0",
                 "available" => "1.0.0",
                 "link" => "http://42.121.118.13:81/suibian.apk"
 			)
