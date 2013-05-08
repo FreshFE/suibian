@@ -20,14 +20,24 @@
 
 ## 接口全局返回问题
 
-### 未登录无权限访问统一返回
+### 未登录无权限访问返回
+
 	{
-		"success":0,
-		"error":"NO_LOGINED",
-		"error_msg":"用户未登录"
+		"success": 0,
+		"error": "NO_LOGINED",
+		"error_msg": "用户未登录"
+	}
+
+### 没有权限操作当前接口返回
+
+	{
+		"success": 0,
+		"error": "NO_ACCESS",
+		"error_msg": "没有权限"
 	}
 
 ### 服务器错误返回
+
 	{
 		"success": 0，
 		"error": "ERROR_SERVER"，
