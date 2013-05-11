@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shop</title>
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$.get(
+				'/api/shop',
+				{
+					"access_token": "a0dcf4ef547991aff023a9349617d3db"
+				},
+				function(data) {
+					console.log(data);
+				}
+			);
+
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
