@@ -7,9 +7,28 @@ use Think\Lang as Lang;
 use Think\Auth as Auth;
 use Think\Config as Config;
 use Think\Exception as Exception;
+use Think\Log as Log;
 
 class OrderController extends Controller
 {
+	protected $log_key;
+
+	protected function create_log($info)
+	{
+		if(is_null($this->log_key))
+		{
+			$this->log_key = isset($_SERVER['HTTP_X_DEV_ID']) ? $_SERVER['HTTP_X_DEV_ID'] : $_SERVER['HTTP_USER_AGENT'];
+		}
+
+		$output = array(
+			"status" => $info,
+			"key" => $this->log_key,
+			"datetime" => date('Y-m-d H:i:s', time())
+		);
+
+		Log::info('Orders', $output);
+	}
+
 	/**
 	 * 创建订单
 	 *
@@ -26,6 +45,9 @@ class OrderController extends Controller
 			{
 				throw new Exception("NO_FOODS");
 			}
+
+			// 记录开始
+			$this->create_log('Start');
 
 			// 解析字符串获得数组
 			$foods = json_decode($_POST['food_id_str'], true);
@@ -55,6 +77,8 @@ class OrderController extends Controller
 
 			if(count($orderJson) > 0)
 			{
+				$this->create_log('End');
+
 				$this->successJson();
 			}
 			else {
