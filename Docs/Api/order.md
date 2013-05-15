@@ -53,7 +53,9 @@
 	method: GET
 	params:
 		access_token | true | int
-		// status | true | int | 订单状态值，参考数据库status字段
+		status | true | int | 订单状态值，参考数据库status字段
+
+		// 计划废弃中，请不要使用，但优先级高于status，即不存在history的情况下才计算status
 		history | true | int | 0 => 当前订单， 1 => 历史订单
 
 ### Response
