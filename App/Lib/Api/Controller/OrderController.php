@@ -164,14 +164,18 @@ class OrderController extends Controller
 			// 用户id
 			$condition['user_id'] = $_SESSION[Config::get('AUTH_KEY')];
 
-			// 历史订单
+			// History 历史订单
 			if(isset($_GET['history']) && $_GET['history'] == 1)
 			{
 				$condition['status'] = 30;
 			}
-			// 当前订单
-			else {
+			// History 当前订单
+			else if(isset($_GET['history']) && $_GET['history'] == 0) {
 				$condition['status'] = array('neq', 30);
+			}
+			// 根据 Status 判断
+			else if(isset($_GET['status'])) {
+				$condition['status'] = $_GET['status'];
 			}
 
 			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
