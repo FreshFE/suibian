@@ -4,7 +4,7 @@ use Smartadmin\Controller\Api as Controller;
 use Think\Lang as Lang;
 use Think\Exception as Exception;
 
-class GoodsController extends Controller
+class ProductController extends Controller
 {
 	/**
 	 * 模型属性
