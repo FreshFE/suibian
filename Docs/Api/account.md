@@ -4,11 +4,24 @@
 
 	{
 		"id" => 1,
-		"username" => "minowu",
 		"email" => "minowu@foxmail.com",
-		"password" => "7c4a8d09ca3762af61e59520943dc26494f8941b",
-		"createline" => 1367557908
+		"username" => "minowu",
+		"createline" => 1367557908,
+		"coverpath" => "",
+		"role" => "USER_MEMBER",
+		"buy_counts" => 20
 	}
+
+## 密码说明
+
+	// 密码，6 - 16位，sha1加密，修改密码时更换
+		$password = sha1('123456');
+
+	// 密码盐，md5(time())，随机数，存数据库，修改密码时才更换
+		$password_salt = md5(time());
+
+	// 返回给登录使用的
+		$password_cookie = md5($email . $password . $password_salt);
 
 ## 登录账号
 
@@ -25,11 +38,14 @@
 	//操作成功
 	{
 		"success": 1,
-		"access_token": "",
 		"data": {
 			// @link 参考json字段
 		}
 	}
+
+	// 操作成功 COOKIE 相关的变化
+	SUIIBIANUSERAUTH: 908a196790117fa01da6761cfca46cc3 // 对应 $password_cookie
+	PHPSESSID: a1ce1ff644c4d26f81fa25c0dd51e4c2 // 对应 TOKEN
 
 	//操作失败
 	{
@@ -46,15 +62,21 @@
 
 	{
 		"success": 0,
-		"error": "ERROR_ACCOUNT",
+		"error": "FORBIDDEN_ACCOUNT",
 		"error_msg": "该账号被封锁"
+	}
+
+	{
+		"success": 0,
+		"error": "ERROR_ACCOUNT",
+		"error_msg": "账号错误"
 	}
 
 ---
 
 ### 注册账号
 
-*注册成功后，返回的信息和登录同样，并在服务器记录了Session，所以前端设置为用户注册后为用户自动登录*
+*注册成功后，返回的信息和登录同样，并在服务器记录了Session，返回Cookie，所以前端设置为用户注册后为用户自动登录*
 
 ### Request
 
@@ -98,16 +120,24 @@
 
 ## 退出账号
 
+### auth
+
+	logined: require		// 用户必须在登录状态下才可使用该接口
+	role: USER_MEMBER
+
 ### Request
 
 	url: account/logout
 	method: POST
-	params:
-		access_token | true | string
+	params: none
 
 ### Response
 
 	//操作成功
 	{
-		"success": 1
+		"success": 1,
+		"data": {
+			"username": "",
+			"coverpath": ""
+		}
 	}
