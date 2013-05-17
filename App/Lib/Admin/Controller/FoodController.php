@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Admin\Controller;
 
 use Smartadmin\Controller\Content as Controller;
 use Think\Redirect as Redirect;
