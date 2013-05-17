@@ -15,15 +15,20 @@
 ## 密码说明
 
 	// 密码，6 - 16位，sha1加密，修改密码时更换
-		$password = sha1('123456');
+	$password = sha1('123456');
 
 	// 密码盐，md5(time())，随机数，存数据库，修改密码时才更换
-		$password_salt = md5(time());
+	$password_salt = md5(time());
 
 	// 返回给登录使用的
-		$password_cookie = md5($email . $password . $password_salt);
+	$password_cookie = md5($email . $password . $password_salt);
 
 ## 登录账号
+
+### Security
+
+	logined: none
+	role: just Anonymous
 
 ### Request
 
@@ -78,6 +83,11 @@
 
 *注册成功后，返回的信息和登录同样，并在服务器记录了Session，返回Cookie，所以前端设置为用户注册后为用户自动登录*
 
+### Security
+
+	logined: none
+	role: just Anonymous
+
 ### Request
 
 	url: account/register
@@ -120,7 +130,7 @@
 
 ## 退出账号
 
-### auth
+### Security
 
 	logined: require		// 用户必须在登录状态下才可使用该接口
 	role: USER_MEMBER
