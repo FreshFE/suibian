@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Api\Controller;
 
 use Smartadmin\Controller\Api as Controller;
 use Think\Lang as Lang;

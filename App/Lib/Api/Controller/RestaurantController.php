@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Api\Controller;
 
 use Think\Controller as Controller;
 use Think\Lang as Lang;
