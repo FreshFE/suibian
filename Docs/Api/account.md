@@ -27,8 +27,7 @@
 
 ### Security
 
-	logined: none
-	role: just Anonymous
+	logined: 只有在未登录状态下才有效
 
 ### Request
 
@@ -85,8 +84,7 @@
 
 ### Security
 
-	logined: none
-	role: just Anonymous
+	logined: 只有在未登录状态下才有效
 
 ### Request
 
