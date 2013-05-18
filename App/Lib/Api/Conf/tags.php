@@ -2,6 +2,6 @@
 
 return array(
 	'app_auth' => array(
-		'App\\Api\\Behaviors\\CheckAuth'
+		'App\\Auth\\Behaviors\\CheckAuth'
 	)
 );
