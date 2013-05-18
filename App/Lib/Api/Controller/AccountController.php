@@ -15,7 +15,7 @@ class AccountController extends Controller
 	 *
 	 * @return void
 	 */
-	public function get_login()
+	public function post_login()
 	{
 		// 初始化模型
 		$model = $this->getModel('User');
@@ -23,7 +23,7 @@ class AccountController extends Controller
 		// 查找email相应的值
 		$data = $model
 			->where(array(
-				'email' => Request::query('email')
+				'email' => Request::post('email')
 			))
 			->find();
 
@@ -33,11 +33,11 @@ class AccountController extends Controller
 		}
 
 		// ERROR: 提交密码为空
-		if(!Request::query('password')) {
+		if(!Request::post('password')) {
 			return $this->errorJson('NO_POST_PASSWORD');
 		}
 
-		$password = Request::query('password');
+		$password = Request::post('password');
 
 		// ERROR: 密码不正确
 		if(sha1($password . $data['password_salt']) !== $data['password']) {
@@ -55,98 +55,4 @@ class AccountController extends Controller
 	{
 		dump($user);
 	}
-
-	// /**
-	//  * 注册功能
-	//  * 检查账户信息，通过后，写入数据库并设置登录信息并放回
-	//  *
-	//  * @return void
-	//  */
-	// public function post_register()
-	// {
-	// 	try
-	// 	{
-	// 		$model = D('User');
-	// 		$data = $model->create();
-
-	// 		if($data)
-	// 		{
-	// 			$user_id = $model->add($data);
-
-	// 			if($user_id)
-	// 			{
-	// 				$this->json_auth_info($user_id);
-	// 			}
-	// 			else {
-	// 				throw new Exception("ERROR_REGISTER");
-	// 			}
-	// 		}
-	// 		// 数据不正确
-	// 		else {
-	// 			throw new Exception($model->getError());
-	// 		}
-	// 	}
-	// 	catch(Exception $error) {
-	// 		$this->errorJson($error);
-	// 	}
-	// }
-
-	// /**
-	//  * 退出账户，清除session
-	//  *
-	//  * @return void
-	//  */
-	// public function post_logout()
-	// {
-	// 	try
-	// 	{
-	// 		if(Session::get(Config::get('AUTH_KEY')))
-	// 		{
-	// 			Session::set(Config::get('AUTH_KEY'), null);
-	// 			$this->successJson();
-	// 		}
-	// 	}
-	// 	catch(Exception $error)
-	// 	{
-	// 		$this->errorJson($error);
-	// 	}
-	// }
-
-	// /**
-	//  * 根据$user_id来检查是否存在当前用户
-	//  * 如果存在，则写入session，并返回相对应的user数据
-	//  *
-	//  * @param $user_id
-	//  * @return void
-	//  */
-	// protected function json_auth_info($user_id)
-	// {
-	// 	try
-	// 	{
-	// 		// 用户数据
-	// 		$data = D('User')->find($user_id);
-
-	// 		// 是否存在该用户
-	// 		if($data)
-	// 		{
-	// 			// access token
-	// 			$access_token = session_id();
-
-	// 			// 保存用户Session
-	// 			$_SESSION[Config::get('AUTH_KEY')] = $user_id;
-
-	// 			// 输出
-	// 			$this->assign('success', 1);
-	// 			$this->assign('data', $data);
-	// 			$this->assign('access_token', $access_token);
-	// 			$this->json();
-	// 		}
-	// 		else {
-	// 			throw new Exception("NO_EXTIS_USER");
-	// 		}
-	// 	}
-	// 	catch(Exception $error) {
-	// 		$this->errorJson($error);
-	// 	}
-	// }
 }
