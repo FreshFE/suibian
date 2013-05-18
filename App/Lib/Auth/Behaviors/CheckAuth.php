@@ -1,4 +1,4 @@
-<?php namespace App\Api\Behaviors;
+<?php namespace App\Auth\Behaviors;
 
 use Think\Behavior as Behavior;
 use Think\Config as Config;
