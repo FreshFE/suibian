@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Home\Controller;
 
 use Think\Controller as Controller;
 

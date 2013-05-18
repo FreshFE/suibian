@@ -3,44 +3,88 @@
 use Think\Behavior as Behavior;
 use Think\Config as Config;
 use Think\Session as Session;
-use Smartadmin\Controller\Api as Controller;
+use Think\Cookie as Cookie;
 use Think\Exception as Exception;
 use Think\File as File;
 
 class CheckAuth extends Behavior
 {
-	private $rule_login = array(
-		'account/logout',
-		'order/create',
-		'order/index',
-		'food/favorite'
-	);
-
-	private $rule_login_foriben = array(
-		'account/login',
-		'account/register'
-	);
-
+	/**
+	 * 行为入口方法
+	 *
+	 * @param mixed &$params
+	 * @return void
+	 */
 	public function run(&$params)
 	{
-		$current = strtolower(CONTROLLER_NAME . '/' . ACTION_NAME);
-
-		// 判断当前是否登录
-		if($_SESSION[Config::get('AUTH_KEY')])
+		// 认证通过
+		if($this->checkSession())
 		{
-			if(in_array($current, $this->rule_login_foriben))
-			{
-				$controller = new Controller;
-				$controller->errorJson(new Exception("ALREADY_LOGINED"));
-			}
+			$this->checkAuthorization();
 		}
-		// 未登录，禁止访问必须登录的项目
-		else {
-			if(in_array($current, $this->rule_login))
-			{
-				$controller = new Controller();
-				$controller->errorJson(new Exception("NO_LOGINED"));
-			}
-		}
+		// 认证未通过
+	}
+
+	/**
+	 * 检查授权
+	 */
+	protected function checkAuthorization()
+	{
+
+	}
+
+	/**
+	 * 检查Session
+	 */
+	protected function checkSession()
+	{
+		$session = Session::get('USER_SESSION');
+
+		if($session) return true;
+
+		return $this->checkCookie();
+	}
+
+	/**
+	 * 检查Cookie
+	 */
+	protected function checkCookie()
+	{
+		$cookie = Cookie::get('SUIIBIANUSERAUTH');
+
+		if(!$cookie) return false;
+
+		$data = D('User')->where(array('email' => $cookie['email']))->find();
+
+		if(!$data) return false;
+
+		if($cookie['password'] !== md5($data['email'] . $data['password'] . $data['password_salt'])) return false;
+
+		return $this->passAuthentication($data);
+	}
+
+	/**
+	 * 通过认证
+	 */
+	protected function passAuthentication($user)
+	{
+		$data = array(
+			'id' => $user['id'],
+			'email' => $user['email'],
+			'username' => $user['username'],
+			'password_cookie' => md5($user['email'] . $user['password'] . $user['password_salt']),
+			'createline' => $user['createline'],
+			'role' => $user['role']
+		);
+
+		// 写入 Session
+		Session::set('USER_SESSION', $data);
+
+		// 写入 Cookie
+		Cookie::set('SUIIBIANUSERAUTH', array('email' => $data['email'], 'password' => $data['password_cookie']));
+
+		// TODO: 登录处理
+
+		return true;
 	}
 }
