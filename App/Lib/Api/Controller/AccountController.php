@@ -1,11 +1,12 @@
 <?php namespace App\Api\Controller;
 
 use Think\Controllers\Api as Controller;
-use Think\Session as Session;
-use Think\Cookie as Cookie;
-use Think\Config as Config;
-use Think\Exception as Exception;
-use Think\Request as Request;
+use Think\Session;
+use Think\Cookie;
+use Think\Config;
+use Think\Exception;
+use Think\Request;
+use App\Auth\Drivers\Authentication;
 
 class AccountController extends Controller
 {
@@ -49,7 +50,7 @@ class AccountController extends Controller
 		// ERROR: 账号被封锁
 
 		// 通过认证
-		$this->passAuthentication($data);
+		$this->setAuthentication($data);
 	}
 
 	public function post_register()
@@ -78,29 +79,22 @@ class AccountController extends Controller
 		$data = $model->find($id);
 
 		// 通过认证
-		$this->passAuthentication($data);
+		$this->setAuthentication($data);
 	}
 
-	protected function passAuthentication($user)
+	public function post_logout()
 	{
-		$data = array(
-			'id' => $user['id'],
-			'email' => $user['email'],
-			'username' => $user['username'],
-			'password_cookie' => md5($user['email'] . $user['password'] . $user['password_salt']),
-			'createline' => $user['createline'],
-			'role' => $user['role']
-		);
+		$driver = new Authentication();
+		$driver->remove();
 
-		// 写入 Session
-		Session::set('USER_SESSION', $data);
+		$this->successJson();
+	}
 
-		// 写入 Cookie
-		Cookie::set('SUIIBIANUSERAUTH', array('email' => $data['email'], 'password' => $data['password_cookie']));
-
-		// TODO: 登录处理
-
-		// 返回
-		$this->successJson($data);
+	protected function setAuthentication($user)
+	{
+		$driver = new Authentication();
+		$session = $driver->save($user);
+		
+		$this->successJson($session);
 	}
 }
