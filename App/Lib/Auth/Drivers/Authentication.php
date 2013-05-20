@@ -4,6 +4,14 @@ use Think\Session;
 use Think\Cookie;
 use Think\Model;
 
+/**
+ * 用户认证相关类
+ * 主要方法
+ * $this->check 检查认证信息
+ * $this->save 保存认证信息
+ * $this->remove 移除认证信息
+ * $this->getUser 得到用户信息
+ */
 class Authentication
 {
 	/**
@@ -18,7 +26,7 @@ class Authentication
 	 *
 	 * @var string
 	 */
-	public $cookieName = 'SUIIBIANUSERAUTH';
+	public $cookieName = 'SMARTUSERAUTH';
 
 	/**
 	 * 是否为匿名用户
@@ -49,6 +57,9 @@ class Authentication
 	 */
 	protected $user;
 
+	/**
+	 * 构造函数
+	 */
 	public function __construct($modelName = null)
 	{
 		if(!is_null($modelName)) {
@@ -268,6 +279,42 @@ class Authentication
 	protected function saveCookie($cookie)
 	{
 		Cookie::set($this->cookieName, $cookie);
+
+		return $this;
+	}
+
+	/**
+	 * 移除用户信息
+	 *
+	 * @return $this
+	 */
+	public function remove()
+	{
+		$this->removeSession()->removeCookie();
+
+		return $this;
+	}
+
+	/**
+	 * 清除 Session
+	 *
+	 * @return $this
+	 */
+	protected function removeSession()
+	{
+		Session::set($this->sessionName, null);
+
+		return $this;
+	}
+
+	/**
+	 * 清除 Cookie
+	 *
+	 * @return $this
+	 */
+	protected function removeCookie()
+	{
+		Cookie::set($this->cookieName, null);
 
 		return $this;
 	}
