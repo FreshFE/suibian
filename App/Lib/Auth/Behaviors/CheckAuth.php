@@ -6,6 +6,7 @@ use Think\Session as Session;
 use Think\Cookie as Cookie;
 use Think\Exception as Exception;
 use Think\File as File;
+use App\Auth\Drivers\Authentication;
 
 class CheckAuth extends Behavior
 {
@@ -17,74 +18,24 @@ class CheckAuth extends Behavior
 	 */
 	public function run(&$params)
 	{
-		// 认证通过
-		if($this->checkSession())
-		{
-			$this->checkAuthorization();
-		}
-		// 认证未通过
+		$authentication = $this->initAuthentication();
+
+		$authorization = $this->initAuthorization($authentication);
+	}
+
+	protected function initAuthentication()
+	{
+		$driver = new Authentication();
+
+		$user = $driver->setUserModelProvider('User')->check();
 	}
 
 	/**
 	 * 检查授权
 	 */
-	protected function checkAuthorization()
+	protected function initAuthorization($authentication)
 	{
-
-	}
-
-	/**
-	 * 检查Session
-	 */
-	protected function checkSession()
-	{
-		$session = Session::get('USER_SESSION');
-
-		if($session) return true;
-
-		return $this->checkCookie();
-	}
-
-	/**
-	 * 检查Cookie
-	 */
-	protected function checkCookie()
-	{
-		$cookie = Cookie::get('SUIIBIANUSERAUTH');
-
-		if(!$cookie) return false;
-
-		$data = D('User')->where(array('email' => $cookie['email']))->find();
-
-		if(!$data) return false;
-
-		if($cookie['password'] !== md5($data['email'] . $data['password'] . $data['password_salt'])) return false;
-
-		return $this->passAuthentication($data);
-	}
-
-	/**
-	 * 通过认证
-	 */
-	protected function passAuthentication($user)
-	{
-		$data = array(
-			'id' => $user['id'],
-			'email' => $user['email'],
-			'username' => $user['username'],
-			'password_cookie' => md5($user['email'] . $user['password'] . $user['password_salt']),
-			'createline' => $user['createline'],
-			'role' => $user['role']
-		);
-
-		// 写入 Session
-		Session::set('USER_SESSION', $data);
-
-		// 写入 Cookie
-		Cookie::set('SUIIBIANUSERAUTH', array('email' => $data['email'], 'password' => $data['password_cookie']));
-
-		// TODO: 登录处理
-
-		return true;
+		$driver = new Authorization();
+		$driver->setAuthenticationClass($authentication);
 	}
 }
