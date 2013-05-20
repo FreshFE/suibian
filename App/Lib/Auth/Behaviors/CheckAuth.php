@@ -1,11 +1,11 @@
 <?php namespace App\Auth\Behaviors;
 
-use Think\Behavior as Behavior;
-use Think\Config as Config;
-use Think\Session as Session;
-use Think\Cookie as Cookie;
-use Think\Response as Response;
-use Think\Exception as Exception;
+use Think\Behavior;
+use Think\Config;
+use Think\Session;
+use Think\Cookie;
+use Think\Response;
+use Think\Exception;
 use App\Auth\Drivers\Authentication;
 use App\Auth\Drivers\Authorization;
 
