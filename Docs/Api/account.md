@@ -6,10 +6,9 @@
 		"id" => 1,
 		"email" => "minowu@foxmail.com",
 		"username" => "minowu",
+		"password_cookie" => "",
 		"createline" => 1367557908,
-		"coverpath" => "",
 		"role" => "USER_MEMBER",
-		"buy_counts" => 20
 	}
 
 ## 密码说明
