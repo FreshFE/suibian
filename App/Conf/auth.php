@@ -12,6 +12,7 @@ return array(
 			'Api:Account' => true
 		),
 		'ROLE_MEMBER' => array(
+			'Home' => true,
 			'Api' => true,
 			'Api:Account:login' => false,
 			'Api:Account:register' => false,
