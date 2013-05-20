@@ -49,6 +49,13 @@ class Authentication
 	 */
 	protected $user;
 
+	public function __construct($modelName = null)
+	{
+		if(!is_null($modelName)) {
+			$this->setUserModelProvider($modelName);
+		}
+	}
+
 	/**
 	 * 设置UserModel提供对象
 	 *
@@ -108,6 +115,17 @@ class Authentication
 	public function getUser()
 	{
 		return $this->user;
+	}
+
+	public function getUserRole()
+	{
+		if($this->isAnonymous) {
+			return 'ROLE_ANONYMOUS';
+		}
+		else {
+			$user = $this->user;
+			return isset($user['role']) ? $user['role'] : 'ROLE_ANONYMOUS';
+		}
 	}
 
 	/**
