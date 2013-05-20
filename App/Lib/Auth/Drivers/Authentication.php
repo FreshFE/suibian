@@ -190,6 +190,13 @@ class Authentication
 		// 获取
 		$cookie = Cookie::get($this->cookieName);
 
+		$cookie = explode('|', $cookie);
+
+		$cookie = array(
+			'email' => $cookie[0],
+			'password' => $cookie[1]
+		);
+
 		// 不存在cookie
 		if(!$cookie) return false;
 
@@ -250,7 +257,7 @@ class Authentication
 
 		// 是否记住
 		if($isRemember) {
-			$cookie = array('email' => $session['email'], 'password' => $session['password_cookie']);
+			$cookie = join(array($session['email'], $session['password_cookie']), '|');
 			$this->saveCookie($cookie);
 		}
 
@@ -317,5 +324,16 @@ class Authentication
 		Cookie::set($this->cookieName, null);
 
 		return $this;
+	}
+
+	public static function getUserBySession()
+	{
+		return Session::get($this->sessionName);
+	}
+
+	public static function getUserIdBySession()
+	{
+		$user = static::getUserBySession();
+		return $user['id'];
 	}
 }
