@@ -254,7 +254,7 @@ class Authentication
 			$this->saveCookie($cookie);
 		}
 
-		return $this;
+		return $session;
 	}
 
 	/**
