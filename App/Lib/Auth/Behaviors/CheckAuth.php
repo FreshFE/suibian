@@ -7,9 +7,24 @@ use Think\Cookie as Cookie;
 use Think\Exception as Exception;
 use Think\File as File;
 use App\Auth\Drivers\Authentication;
+use App\Auth\Drivers\Authorization;
 
 class CheckAuth extends Behavior
 {
+	public $roleRules = array(
+		'ROLE_ANONYMOUS' => array(
+			'Api/Account' => true
+		),
+		'ROLE_MEMBER' => array(
+			'Api' => true,
+			'Api/Account/login' => false,
+			'Api/Account/register' => false
+		),
+		'ROLE_ADMIN' => array(),
+	);
+
+	public $modelName = 'User';
+
 	/**
 	 * 行为入口方法
 	 *
@@ -18,24 +33,27 @@ class CheckAuth extends Behavior
 	 */
 	public function run(&$params)
 	{
-		$authentication = $this->initAuthentication();
+		$authentication = $this->checkAuthentication($this->modelName);
 
-		$authorization = $this->initAuthorization($authentication);
+		$authorization = $this->checkAuthorization($authentication->getUserRole(), $this->roleRules);
 	}
 
-	protected function initAuthentication()
+	protected function checkAuthentication($modelName)
 	{
-		$driver = new Authentication();
+		$driver = new Authentication($modelName);
 
-		$user = $driver->setUserModelProvider('User')->check();
+		return $driver->check();
 	}
 
 	/**
 	 * 检查授权
 	 */
-	protected function initAuthorization($authentication)
+	protected function checkAuthorization($userRole, $roleRules)
 	{
-		$driver = new Authorization();
-		$driver->setAuthenticationClass($authentication);
+		// 实例化
+		$driver = new Authorization($userRole, $roleRules);
+
+		// 返回检查结果
+		return $driver->check();
 	}
 }
