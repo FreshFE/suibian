@@ -1,13 +1,13 @@
 <?php namespace App\Api\Controller;
 
 use Smartadmin\Controller\Api as Controller;
-use Think\Request as Request;
-use Think\Session as Session;
-use Think\Lang as Lang;
-use Think\Auth as Auth;
-use Think\Config as Config;
-use Think\Exception as Exception;
-use Think\Log as Log;
+use Think\Request;
+use Think\Lang;
+use Think\Auth;
+use Think\Config;
+use Think\Exception;
+use Think\Log;
+use App\Auth\Drivers\Authentication;
 
 class OrderController extends Controller
 {
@@ -115,7 +115,7 @@ class OrderController extends Controller
 
 			// 订单数据
 			$orders = array(
-				'user_id' => Session::get(Config::get('AUTH_KEY')),
+				'user_id' => Authentication::getUserIdBySession(),
 				'shop_id' => $shop_id,
 				'price' => 0
 			);
@@ -186,7 +186,7 @@ class OrderController extends Controller
 	{
 		try {
 			// 用户id
-			$condition['user_id'] = $_SESSION[Config::get('AUTH_KEY')];
+			$condition['user_id'] = Authentication::getUserIdBySession();
 
 			// History 历史订单
 			if(isset($_GET['history']) && $_GET['history'] == 1)
