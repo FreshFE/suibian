@@ -93,7 +93,7 @@ class AccountController extends Controller
 	protected function setAuthentication($user)
 	{
 		$driver = new Authentication();
-		$session = $driver->save($user);
+		$session = $driver->save($user, true);
 		
 		$this->successJson($session);
 	}
