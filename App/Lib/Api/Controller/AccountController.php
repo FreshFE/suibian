@@ -6,6 +6,7 @@ use Think\Cookie;
 use Think\Config;
 use Think\Exception;
 use Think\Request;
+use Think\Log;
 use App\Auth\Drivers\Authentication;
 
 class AccountController extends Controller
@@ -19,6 +20,8 @@ class AccountController extends Controller
 	 */
 	public function post_login()
 	{
+		Log::info('login', array($_SERVER, $_POST, $_GET));
+
 		// 初始化模型
 		$model = $this->getModel('User');
 
