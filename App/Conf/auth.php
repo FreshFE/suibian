@@ -9,7 +9,9 @@ return array(
 	'AUTH_RULES' => array(
 		
 		'ROLE_ANONYMOUS' => array(
-			'Api:Account' => true
+			'Home' => true,
+			'Api:Account' => true,
+			'Api:Account:logout' => false
 		),
 		'ROLE_MEMBER' => array(
 			'Home' => true,
