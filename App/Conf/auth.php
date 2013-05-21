@@ -32,16 +32,11 @@ return array(
 			'Api' => true,
 			'Api:Account:login' => false,
 			'Api:Account:register' => false,
-		),
-		'ROLE_SHOPKEEPER' => array(
 
 			// Shopmanager
 			'Shopmanager' => array('App\\Shopmanager\\Drivers\\CheckShopkeeper', true),
-			// 'Shopmanager' => true,
 			'Shopmanager:Account:login' => false,
 			'Shopmanager:Account:register' => false,
-
-			'_extends' => array('ROLE_MEMBER')
 		),
 		'ROLE_ADMIN' => array(
 			'Admin' => true,
