@@ -29,7 +29,19 @@ class Authorization
 			// 数组的话，执行指定类方法
 			if(is_array($access)) {
 
-				if($this->$access[1]()) return $access[0];
+				// 执行类
+				$class = $access[0];
+
+				// 实例化
+				$object = new $class();
+
+				// 执行
+				$result = $object->run();
+
+				// 返回
+				if($result) {
+					return $access[1];
+				}
 			}
 
 			// 布尔值的话，返回
