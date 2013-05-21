@@ -1,0 +1,37 @@
+{{extends file='../Bases/layout.html'}}
+
+{{block 'mainarea'}}
+
+	<form action="__SELF__" method="post" class="form-horizontal">
+
+		<fieldset>
+			<legend>商店管理</legend>
+		</fieldset>
+
+		<div class="control-group">
+			<label class="control-label">电子邮件</label>
+			<div class="controls">
+				<div class="input-prepend">
+					<span class="add-on"><i class="icon-user"></i></span>
+					<input type="text" name="email" placeholder="电子邮件">
+				</div>
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label">密码</label>
+			<div class="controls">
+				<div class="input-prepend">
+					<span class="add-on"><i class="icon-lock"></i></span>
+					<input type="password" name="password" placeholder="密码">
+				</div>
+			</div>
+		</div>
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">登录</button>
+		</div>
+
+	</form>
+
+{{/block}}
