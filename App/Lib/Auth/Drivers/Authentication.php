@@ -325,15 +325,4 @@ class Authentication
 
 		return $this;
 	}
-
-	public static function getUserBySession()
-	{
-		return Session::get($this->sessionName);
-	}
-
-	public static function getUserIdBySession()
-	{
-		$user = static::getUserBySession();
-		return $user['id'];
-	}
 }
