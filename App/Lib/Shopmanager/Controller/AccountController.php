@@ -14,7 +14,9 @@ class AccountController extends Controller
 
 	protected function setAuthentication($user)
 	{
-		if($user['role'] !== 'ROLE_SHOPKEEPER') {
+		$data = D('ShopManager')->where(array('user_id' => $user['id']))->find();
+
+		if(!$data) {
 			Redirect::error('当前账户没有权限登录', Url::make('account/login'));
 		}
 
