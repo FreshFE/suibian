@@ -1,7 +1,14 @@
 {{extends file="../Bases/layout.html"}}
 
 {{block 'mainarea'}}
-	<div class="well">
-		<h1>商店名称</h1>
+	<div class="section-title">
+		<h1>全局</h1>
+	</div>
+
+	<div class="section">
+		<div class="well">
+			<p>嗨，{{$user.username}} !</p>
+			<p>欢迎来到 {{$shop.title}} 的管理系统</p>
+		</div>
 	</div>
 {{/block}}
