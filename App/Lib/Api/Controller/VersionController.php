@@ -1,6 +1,6 @@
 <?php namespace App\Api\Controller;
 
-use Smartadmin\Controller\Api as Controller;
+use Think\Controllers\Api as Controller;
 
 class VersionController extends Controller
 {
