@@ -3,6 +3,7 @@
 use Think\Session;
 use Think\Cookie;
 use Think\Model;
+use Think\Request;
 
 /**
  * 用户认证相关类
@@ -100,7 +101,12 @@ class Authentication
 
 		// 非匿名用户获得设置 User 信息
 		if(!$this->isAnonymous) {
-			$this->setUser($this->getSession());
+
+			// 用户信息
+			$user = $this->setUser($this->getSession());
+
+			// 认证通过，写入User信息
+			Request::setStorage('user', $user);
 		}
 
 		return $this;
