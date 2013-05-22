@@ -139,11 +139,20 @@
 	// 操作成功
 	{
 		"success": 1,
-		"data": {
-			// @link 参考order字段
-			// @add 多加字段
-			"products": {
-				// @link 参考产品字段
+		"data": [
+			{
+				"id": 1,
+				"orders_id": 1,
+				"orders": {
+					// @link 参考 Orders JSON
+				},
+				"product_id": 1,
+				"product": {
+					// @link 参考 Product JSON
+				},
+				"num": 3,
+				"createline": 0,
+				"updateline": 0
 			}
-		}
+		]
 	}

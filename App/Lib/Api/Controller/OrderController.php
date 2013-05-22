@@ -204,16 +204,18 @@ class OrderController extends Controller
 	public function get_detail()
 	{
 		try {
-			if(Request::query('order_id')) {
-				$condition['order_id'] = Request::query('order_id');
+			if(Request::query('orders_id')) {
+				$condition['orders_id'] = Request::query('orders_id');
 			}
 			else {
 				throw new Exception("NO_POST_ORDER");
 			}
 
-			$data = D('Orders')->where($condition)->findWithOrdersProduct();
+			$model = $this->getModel('OrdersProduct');
 
-			$this->successJson($data);
+			$datas = $model->where($condition)->selectWithJoin();
+
+			$this->successJson($datas);
 		}
 		catch(Exception $error) {
 			$this->errorJson($error);
