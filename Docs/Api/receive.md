@@ -8,18 +8,24 @@
         "school": "",
         "address": "",
         "receiver": "",
+        "phone": "",
         "createline": "",
         "updateline": ""
     }
 
 ## 获取地址
 
+### Security
+
+    logined: require
+    role: USER_MEMBER
+
 ### Request
 
     url: receive/index
     method: GET
     param:
-        token | true | string
+        rows | false | int | 默认返回5条
 
 ### Response
 
@@ -28,9 +34,6 @@
         "data": [
             {
                 // @link 参考 JSON字段
-            },
-            {
-
             }
         ]
     }
