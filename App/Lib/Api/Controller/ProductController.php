@@ -42,6 +42,9 @@ class ProductController extends Controller
 			if(Request::query('shop')) {
 				$condition['shop_id'] = Request::query('shop');
 			}
+			else {
+				throw new Exception("NO_POST_SHOP");
+			}
 
 			// 分类查找
 			if(Request::query('category')) {
