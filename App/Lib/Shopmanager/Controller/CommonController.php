@@ -13,4 +13,15 @@ class CommonController extends Controller
 
 		$this->shop = Request::getStorage('shop');
 	}
+
+	protected function getShopId()
+	{
+		$shop = $this->shop;
+		return $shop['id'];
+	}
+
+	protected function getShop()
+	{
+		return $this->shop;
+	}
 }
