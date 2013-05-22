@@ -21,7 +21,9 @@ return array(
 			// Api
 			'Api:Account' => true,
 			'Api:Account:logout' => false,
-			'Api:Shop' => true
+			'Api:Shop' => true,
+			'Api:Product' => true,
+			'Api:Version' => true
 		),
 		'ROLE_MEMBER' => array(
 
