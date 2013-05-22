@@ -211,7 +211,7 @@ class OrderController extends Controller
 				throw new Exception("NO_POST_ORDER");
 			}
 
-			$data = D('Orders')->where($condition)->findJoin();
+			$data = D('Orders')->where($condition)->findWithOrdersProduct();
 
 			$this->successJson($data);
 		}

@@ -4,22 +4,6 @@ use Think\Model as Model;
 
 class OrdersModel extends Model
 {
-
-	// protected $_auto = array(
-	// 	array('str_id', 'parse_str_id', 1, 'callback');
-	// );
-
-	// public function parse_str_id($str_id)
-	// {
-	// 	// 处理$str_id的值的方法
-
-	// 	$foods = explode(',', $str_id);
-
-	// 	foreach ($foods as $key => $food) {
-			
-	// 	}
-	// }
-
 	protected $_validate = array(
 		array('school', 'require', 'NO_SCHOOL'),
 		array('address', 'require', 'NO_ADDRESS'),
@@ -32,7 +16,10 @@ class OrdersModel extends Model
 		array('updateline', 'time', 3, 'function')
 	);
 
-	public function findJoin()
+	/**
+	 * 
+	 */
+	public function findWithOrdersProduct()
 	{
 		$data = $this->find();
 
@@ -40,17 +27,17 @@ class OrdersModel extends Model
 			return false;
 		}
 
-		$orderProduct = D('OrdersProduct')->group('product_id')->where(array('orders_id' => $data['id']))->select();
+		// 获得相关的orderProduct信息
+		$orderProduct = D('OrdersProduct')->group('product_id')->where(array('orders_id' => $data['id']))->field('product_id')->select();
 
-		$productIds = array();
-
+		// 遍历product_id
 		foreach ($orderProduct as $key => $value) {
 			$productIds[] = $value['product_id'];
 		}
 
-		$data['foods'] = D('Product')->where(array('id' => array('in', join($productIds, ','))))->select();
+		// 查询Product表
+		$data['products'] = D('Product')->where(array('id' => array('in', join($productIds, ','))))->select();
 
 		return $data;
 	}
-
 }
