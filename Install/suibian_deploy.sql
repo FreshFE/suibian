@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `suibian` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `suibian`;
+CREATE DATABASE  IF NOT EXISTS `suibian3` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `suibian3`;
 -- MySQL dump 10.13  Distrib 5.5.24, for osx10.5 (i386)
 --
--- Host: 127.0.0.1    Database: suibian
+-- Host: 127.0.0.1    Database: suibian3
 -- ------------------------------------------------------
 -- Server version	5.5.25
 
@@ -16,67 +16,6 @@ USE `suibian`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `category`
---
-
-DROP TABLE IF EXISTS `category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `category` (
-  `cid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `fid` int(10) unsigned NOT NULL,
-  `name` varchar(15) NOT NULL,
-  `fullname` varchar(45) NOT NULL,
-  `priority` tinyint(3) unsigned NOT NULL,
-  PRIMARY KEY (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `category`
---
-
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,0,'餐品','',1),(2,1,'盖浇饭','',1),(3,1,'面','',2),(4,0,'餐厅','',1);
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `food`
---
-
-DROP TABLE IF EXISTS `food`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `food` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cid` int(10) unsigned NOT NULL,
-  `shop_id` int(10) unsigned NOT NULL,
-  `title` varchar(45) NOT NULL,
-  `price` decimal(12,2) NOT NULL,
-  `content` varchar(500) NOT NULL,
-  `hidden` tinyint(3) unsigned NOT NULL,
-  `createline` int(10) unsigned NOT NULL,
-  `updateline` int(10) unsigned NOT NULL,
-  `coverpath` char(26) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_goods_category_cid_idx` (`cid`),
-  CONSTRAINT `fk_goods_category_cid` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `food`
---
-
-LOCK TABLES `food` WRITE;
-/*!40000 ALTER TABLE `food` DISABLE KEYS */;
-INSERT INTO `food` VALUES (5,1,1,'锅贴',6.00,'还不错',1,0,1367483140,''),(6,3,1,'雪菜肉丝面',6.00,'额',1,0,0,''),(7,2,2,'烧卖',10.00,'为什么高教区没有盛泽烧卖',1,0,0,''),(8,3,3,'薯条',9.00,'好吧，我是怎么会想出放这项的',1,0,0,''),(9,3,0,'汶竹面',30.00,'',1,1367482733,1367482975,'2013/18/5182225cf3b60.png');
-/*!40000 ALTER TABLE `food` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `image`
@@ -101,7 +40,7 @@ CREATE TABLE `image` (
   `updateline` int(10) unsigned NOT NULL,
   `createline` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,22 +49,24 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (1,'2013/18/5182225cf3b60.png','./upload/images/','o','2013/18/','./upload/images/o/2013/18/','5182225cf3b60','1.1.1-320-480.png','application/octet-stream','png',145662,'thumb',1367482973,1367482973),(2,'2013/18/51822406f09a8.png','./upload/images/','o','2013/18/','./upload/images/o/2013/18/','51822406f09a8','Suibian_v1.0.0.png','application/octet-stream','png',114434,'thumb',1367483399,1367483399);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `login_record`
+-- Table structure for table `login_log`
 --
 
-DROP TABLE IF EXISTS `login_record`;
+DROP TABLE IF EXISTS `login_log`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `login_record` (
+CREATE TABLE `login_log` (
   `int` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
-  `createline` int(10) unsigned NOT NULL,
   `ip` char(15) NOT NULL,
+  `phone_dev` varchar(60) NOT NULL,
+  `login_type` varchar(45) NOT NULL,
+  `useragent` varchar(255) NOT NULL,
+  `createline` int(10) unsigned NOT NULL,
   PRIMARY KEY (`int`),
   KEY `fk_login_record_user_id_idx` (`user_id`),
   CONSTRAINT `fk_login_record_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -133,12 +74,12 @@ CREATE TABLE `login_record` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `login_record`
+-- Dumping data for table `login_log`
 --
 
-LOCK TABLES `login_record` WRITE;
-/*!40000 ALTER TABLE `login_record` DISABLE KEYS */;
-/*!40000 ALTER TABLE `login_record` ENABLE KEYS */;
+LOCK TABLES `login_log` WRITE;
+/*!40000 ALTER TABLE `login_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `login_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -157,15 +98,15 @@ CREATE TABLE `orders` (
   `address` varchar(200) NOT NULL,
   `receiver` varchar(50) NOT NULL,
   `phone` varchar(20) NOT NULL,
-  `status` tinyint(3) unsigned NOT NULL COMMENT '订单状态。\\n0 => 订单被创建，但是未执行，\\n100 => 订单在处理中，\\n200 => 订单在配送中，\\n300 => 订单已经完成。',
+  `status` tinyint(3) unsigned NOT NULL COMMENT '订单状态。\n0 => 订单被创建，但是未执行，\n100 => 订单在处理中，\n200 => 订单在配送中，\n300 => 订单已经完成。',
   `createline` int(10) unsigned NOT NULL,
   `updateline` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orders_user_user_id_idx` (`user_id`),
   KEY `fk_orders_shop_id_idx` (`shop_id`),
-  CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=193 DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_orders_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,40 +115,105 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (169,1,1,0.00,'','','','',0,0,0),(170,1,2,0.00,'','','','',0,0,0),(171,1,3,0.00,'','','','',0,0,0),(172,1,1,0.00,'','','','',0,0,0),(173,1,2,0.00,'','','','',0,0,0),(174,1,3,0.00,'','','','',0,0,0),(175,1,1,0.00,'北京大学','404','田柯','',0,0,0),(176,1,2,0.00,'北京大学','404','田柯','',0,0,0),(177,1,3,0.00,'北京大学','404','田柯','',0,0,0),(178,1,1,0.00,'北京大学','404','田柯','',0,0,0),(179,1,2,0.00,'北京大学','404','田柯','',0,0,0),(180,1,3,0.00,'北京大学','404','田柯','',0,0,0),(181,1,1,12.00,'北京大学','404','田柯','',0,0,0),(182,1,2,10.00,'北京大学','404','田柯','',0,0,0),(183,1,3,9.00,'北京大学','404','田柯','',0,0,0),(184,1,1,12.00,'北京大学','404','田柯','',0,0,0),(185,1,2,10.00,'北京大学','404','田柯','',0,0,0),(186,1,3,9.00,'北京大学','404','田柯','',0,0,0),(187,1,1,12.00,'北京大学','404','田柯','',0,0,0),(188,1,2,10.00,'北京大学','404','田柯','',0,0,0),(189,1,3,9.00,'北京大学','404','田柯','',0,0,0),(190,1,1,12.00,'北京大学','404','田柯','13862531169',0,0,0),(191,1,2,10.00,'北京大学','404','田柯','13862531169',0,0,0),(192,1,3,9.00,'北京大学','404','田柯','13862531169',0,0,0);
+INSERT INTO `orders` VALUES (7,2,1,38.00,'北京大学','403','田柯','13862531169',0,1369193678,1369193678);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `orders_food`
+-- Table structure for table `orders_product`
 --
 
-DROP TABLE IF EXISTS `orders_food`;
+DROP TABLE IF EXISTS `orders_product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders_food` (
+CREATE TABLE `orders_product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `orders_id` int(10) unsigned NOT NULL,
-  `food_id` int(10) unsigned NOT NULL,
+  `product_id` int(10) unsigned NOT NULL,
   `num` int(10) unsigned NOT NULL COMMENT '单位数量',
   `createline` int(10) unsigned NOT NULL,
   `updateline` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orders_goods_orders_id_idx` (`orders_id`),
-  KEY `fk_orders_goods_goods_id_idx` (`food_id`),
-  CONSTRAINT `fk_orders_goods_goods_id` FOREIGN KEY (`food_id`) REFERENCES `food` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orders_goods_orders_id` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=285 DEFAULT CHARSET=utf8;
+  KEY `fk_orders_goods_goods_id_idx` (`product_id`),
+  CONSTRAINT `fk_orders_product_orders_id` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orders_product_product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orders_food`
+-- Dumping data for table `orders_product`
 --
 
-LOCK TABLES `orders_food` WRITE;
-/*!40000 ALTER TABLE `orders_food` DISABLE KEYS */;
-INSERT INTO `orders_food` VALUES (265,178,5,1,1367492690,1367492690),(266,178,6,2,1367492690,1367492690),(267,179,7,2,1367492690,1367492690),(268,180,8,2,1367492690,1367492690),(269,181,5,1,1367492741,1367492741),(270,181,6,2,1367492741,1367492741),(271,182,7,2,1367492741,1367492741),(272,183,8,2,1367492741,1367492741),(273,184,5,1,1367492752,1367492752),(274,184,6,2,1367492752,1367492752),(275,185,7,2,1367492752,1367492752),(276,186,8,2,1367492752,1367492752),(277,187,5,1,1367492779,1367492779),(278,187,6,2,1367492779,1367492779),(279,188,7,2,1367492779,1367492779),(280,189,8,2,1367492779,1367492779),(281,190,5,1,1367492967,1367492967),(282,190,6,2,1367492967,1367492967),(283,191,7,2,1367492967,1367492967),(284,192,8,2,1367492967,1367492967);
-/*!40000 ALTER TABLE `orders_food` ENABLE KEYS */;
+LOCK TABLES `orders_product` WRITE;
+/*!40000 ALTER TABLE `orders_product` DISABLE KEYS */;
+INSERT INTO `orders_product` VALUES (6,7,1,1,1369193678,1369193678),(7,7,2,2,1369193678,1369193678);
+/*!40000 ALTER TABLE `orders_product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `product_categoty_id` int(10) unsigned NOT NULL,
+  `shop_id` int(10) unsigned NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `price` decimal(12,2) NOT NULL,
+  `content` varchar(500) NOT NULL,
+  `hidden` tinyint(3) unsigned NOT NULL,
+  `createline` int(10) unsigned NOT NULL,
+  `updateline` int(10) unsigned NOT NULL,
+  `coverpath` char(26) NOT NULL,
+  `buy_counts` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_prodcut_category_id_idx` (`product_categoty_id`),
+  CONSTRAINT `fk_product_prodcut_category_id` FOREIGN KEY (`product_categoty_id`) REFERENCES `product_category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,1,1,'炸大排鸡蛋面',22.00,'',1,0,0,'',12),(2,2,1,'辣酱番茄意大利面',16.00,'',1,0,0,'',5);
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_category`
+--
+
+DROP TABLE IF EXISTS `product_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `product_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `shop_id` int(10) unsigned NOT NULL,
+  `fid` int(10) unsigned NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `fullname` varchar(45) NOT NULL,
+  `priority` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_product_category_shop_id_idx` (`shop_id`),
+  CONSTRAINT `fk_product_category_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_category`
+--
+
+LOCK TABLES `product_category` WRITE;
+/*!40000 ALTER TABLE `product_category` DISABLE KEYS */;
+INSERT INTO `product_category` VALUES (1,1,0,'盖浇饭','',1),(2,1,0,'面','',2),(3,2,0,'排骨饭','',1);
+/*!40000 ALTER TABLE `product_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -223,6 +229,7 @@ CREATE TABLE `receive_address` (
   `school` varchar(100) NOT NULL,
   `address` varchar(200) NOT NULL,
   `receiver` varchar(50) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `createline` int(10) unsigned NOT NULL,
   `updateline` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -249,17 +256,24 @@ DROP TABLE IF EXISTS `shop`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `shop` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `cid` int(10) unsigned NOT NULL,
+  `shop_category_id` int(10) unsigned NOT NULL,
   `title` varchar(45) NOT NULL,
+  `descripe` varchar(255) NOT NULL,
   `content` varchar(500) NOT NULL,
+  `starttime` char(5) NOT NULL,
+  `endtime` char(5) NOT NULL,
+  `closing` tinyint(3) unsigned NOT NULL COMMENT '0 => 开门，1 => 关门',
+  `close_msg` varchar(255) NOT NULL,
   `hidden` tinyint(3) unsigned NOT NULL,
   `createline` int(10) unsigned NOT NULL,
   `updateline` int(10) unsigned NOT NULL,
   `coverpath` char(26) NOT NULL,
+  `address` varchar(255) NOT NULL COMMENT '商店地址',
+  `areaname` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_shops_category_cid_idx` (`cid`),
-  CONSTRAINT `fk_shops_category_cid` FOREIGN KEY (`cid`) REFERENCES `category` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  KEY `fk_shops_category_cid_idx` (`shop_category_id`),
+  CONSTRAINT `fk_shops_category_cid` FOREIGN KEY (`shop_category_id`) REFERENCES `shop_category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,8 +282,67 @@ CREATE TABLE `shop` (
 
 LOCK TABLES `shop` WRITE;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
-INSERT INTO `shop` VALUES (1,4,'四海游龙','额，一般吧',1,0,1367483428,'2013/18/51822406f09a8.png'),(2,4,'老娘舅','家常便饭',1,0,0,''),(3,4,'百碗香排骨饭','超级排骨饭',1,0,0,'');
+INSERT INTO `shop` VALUES (1,1,'四海游龙','锅贴店','四海游龙','06:00','22:30',0,'',1,0,0,'','西交大','独墅湖高教区'),(2,1,'百碗香','排骨饭','百碗香排骨饭','10:30','8:30',0,'',1,0,0,'','文星广场食堂二楼','独墅湖高教区'),(3,2,'随便超市','随便超市','随便超市','08:30','01:30',0,'',1,0,0,'','','');
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shop_category`
+--
+
+DROP TABLE IF EXISTS `shop_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shop_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fid` int(10) unsigned NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `fullname` varchar(45) NOT NULL,
+  `priority` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shop_category`
+--
+
+LOCK TABLES `shop_category` WRITE;
+/*!40000 ALTER TABLE `shop_category` DISABLE KEYS */;
+INSERT INTO `shop_category` VALUES (1,0,'餐厅','',1),(2,0,'超市','',2);
+/*!40000 ALTER TABLE `shop_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shop_manager`
+--
+
+DROP TABLE IF EXISTS `shop_manager`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `shop_manager` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `shop_id` int(10) unsigned NOT NULL,
+  `role` varchar(20) NOT NULL,
+  `createline` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQUE_user_id_shop_id` (`user_id`,`shop_id`),
+  KEY `fk_shop_manager_shop_id_idx` (`shop_id`),
+  KEY `fk_shop_manager_user_id_idx` (`user_id`),
+  CONSTRAINT `fk_shop_manager_shop_id` FOREIGN KEY (`shop_id`) REFERENCES `shop` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_shop_manager_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shop_manager`
+--
+
+LOCK TABLES `shop_manager` WRITE;
+/*!40000 ALTER TABLE `shop_manager` DISABLE KEYS */;
+INSERT INTO `shop_manager` VALUES (1,2,1,'admin',0);
+/*!40000 ALTER TABLE `shop_manager` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -284,11 +357,17 @@ CREATE TABLE `user` (
   `email` varchar(100) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` char(40) NOT NULL,
+  `password_salt` char(32) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `createline` int(10) unsigned NOT NULL,
+  `coverpath` char(26) NOT NULL,
+  `role` varchar(20) NOT NULL COMMENT '用户角色',
+  `buy_counts` int(10) unsigned NOT NULL COMMENT '购买数量',
+  `total_credits` int(10) unsigned NOT NULL COMMENT '积分',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -297,36 +376,8 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'minowu@foxmail.com','admin','7c4a8d09ca3762af61e59520943dc26494f8941b',0);
+INSERT INTO `user` VALUES (1,'minowu@foxmail.com','minowu','409214b6144a8f86b593e2bfb0c036accb41a8c1','6bf70e156ec89562031ec3ef4929d969','',1368885031,'','ROLE_MEMBER',0,0),(2,'minowu@vip.qq.com','威哥','409214b6144a8f86b593e2bfb0c036accb41a8c1','6bf70e156ec89562031ec3ef4929d969','',1368885031,'','ROLE_MEMBER',0,0),(3,'q','qq','c97923611d4720e5d7e1d985cfd1e69c049de3f9','c3db3f13b06472a194dd083e19618491','',1369039809,'','ROLE_MEMBER',0,0),(4,'g','g','a50def93adeebe213b11214c8e69879d25a2fdce','ffb019f0cbff21f529b7695a5852718c','',1369048102,'','ROLE_MEMBER',0,0),(5,'t','t','5b72c55c843f4b164fe33f5d721b5fb7d0231dba','2eebf0ea3e15fdd286c7d326cff22e7b','',1369099144,'','ROLE_MEMBER',0,0),(6,'jjjjj','uuu','d6caae78d81ac763893ed702601cd03f8b2abc72','67c405f7622dd66c97d6bd5c84ff36e0','',1369101024,'','ROLE_MEMBER',0,0),(7,'sb','h','261274cb3b99a3f13c30932302b21e39c6dae98a','9591964b63cc21db6f606d921c4c4c93','',1369101126,'','ROLE_MEMBER',0,0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `user_role`
---
-
-DROP TABLE IF EXISTS `user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `user_role` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `role_id` int(10) unsigned NOT NULL,
-  `typeof` char(10) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_user_role_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_user_role_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_role`
---
-
-LOCK TABLES `user_role` WRITE;
-/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
-INSERT INTO `user_role` VALUES (1,1,2,'');
-/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -338,4 +389,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-05-02 19:14:49
+-- Dump completed on 2013-05-22 13:50:21
