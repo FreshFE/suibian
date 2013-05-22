@@ -2,14 +2,11 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-ALTER TABLE `suibian`.`orders_food` DROP FOREIGN KEY `fk_orders_goods_orders_id` ;
+ALTER TABLE `suibian3`.`user` ADD COLUMN `phone` VARCHAR(20) NOT NULL  AFTER `password_salt` ;
 
-ALTER TABLE `suibian`.`orders_food` 
-  ADD CONSTRAINT `fk_orders_goods_orders_id`
-  FOREIGN KEY (`orders_id` )
-  REFERENCES `suibian`.`orders` (`id` )
-  ON DELETE CASCADE
-  ON UPDATE NO ACTION;
+ALTER TABLE `suibian3`.`shop` CHANGE COLUMN `startline` `starttime` CHAR(5) NOT NULL  , CHANGE COLUMN `endline` `endtime` CHAR(5) NOT NULL  ;
+
+ALTER TABLE `suibian3`.`receive_address` ADD COLUMN `phone` VARCHAR(20) NOT NULL  AFTER `receiver` ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
