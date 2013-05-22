@@ -32,4 +32,25 @@ class OrdersModel extends Model
 		array('updateline', 'time', 3, 'function')
 	);
 
+	public function findJoin()
+	{
+		$data = $this->find();
+
+		if(!$data) {
+			return false;
+		}
+
+		$orderProduct = D('OrdersProduct')->group('product_id')->where(array('orders_id' => $data['id']))->select();
+
+		$productIds = array();
+
+		foreach ($orderProduct as $key => $value) {
+			$productIds[] = $value['product_id'];
+		}
+
+		$data['foods'] = D('Product')->where(array('id' => array('in', join($productIds, ','))))->select();
+
+		return $data;
+	}
+
 }
