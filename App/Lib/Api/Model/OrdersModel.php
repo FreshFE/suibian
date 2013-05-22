@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Api\Model;
 
 use Think\Model as Model;
 
