@@ -1,13 +1,10 @@
 <?php namespace App\Api\Controller;
 
-use Smartadmin\Controller\Api as Controller;
+use Think\Controllers\Api as Controller;
 use Think\Request;
-use Think\Lang;
-use Think\Auth;
-use Think\Config;
 use Think\Exception;
 use Think\Log;
-use App\Auth\Drivers\Authentication;
+use Think\Auths\UserSession;
 
 class OrderController extends Controller
 {
@@ -69,6 +66,9 @@ class OrderController extends Controller
 
 			$orderJson = array();
 
+			dump($shops);
+			exit();
+
 			// 遍历商店id，确定建立的订单数量
 			foreach ($shops as $key => $shop) {
 				$orderJson[] = $this->add_order($shop['shop_id'], $foods_temp);
@@ -115,7 +115,7 @@ class OrderController extends Controller
 
 			// 订单数据
 			$orders = array(
-				'user_id' => Authentication::getUserIdBySession(),
+				'user_id' => UserSession::getId(),
 				'shop_id' => $shop_id,
 				'price' => 0
 			);
@@ -185,8 +185,9 @@ class OrderController extends Controller
 	public function get_index()
 	{
 		try {
+
 			// 用户id
-			$condition['user_id'] = Authentication::getUserIdBySession();
+			$condition['user_id'] = UserSession::getId();
 
 			// History 历史订单
 			if(isset($_GET['history']) && $_GET['history'] == 1)
