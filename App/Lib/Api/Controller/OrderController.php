@@ -60,14 +60,11 @@ class OrderController extends Controller
 			$condition['id'] = array('in', implode(',', $temp));
 
 			// 查询商店信息
-			$shops = M('Food')->group('shop_id')->field('shop_id')->where($condition)->select();
+			$shops = M('Product')->group('shop_id')->field('shop_id')->where($condition)->select();
 			
 			$foods_temp = $this->parse_foods($foods);
 
 			$orderJson = array();
-
-			dump($shops);
-			exit();
 
 			// 遍历商店id，确定建立的订单数量
 			foreach ($shops as $key => $shop) {
@@ -79,7 +76,7 @@ class OrderController extends Controller
 			{
 				$this->create_log('End');
 
-				$this->successJson();
+				$this->successJson($orderJson);
 			}
 			else {
 				throw new Exception("ERROR_ORDERS_CREATE");
@@ -109,6 +106,7 @@ class OrderController extends Controller
 
 			// 创建数据并检查
 			$data = D('Orders')->create();
+
 			if(!$data) {
 				throw new Exception(D('Orders')->getError());
 			}
@@ -151,14 +149,14 @@ class OrderController extends Controller
 			$condition['shop_id'] = $orders['shop_id'];
 
 			// 查询并得到结果
-			$datas = M('Food')->field('id,price')->where($condition)->select();
+			$datas = M('Product')->field('id,price')->where($condition)->select();
 
 			$total_price = 0;
 			
 			foreach ($datas as $key => $value) {
 				$arr[] = array(
 					'orders_id' => $orders_id,
-					'food_id' => $value['id'],
+					'product_id' => $value['id'],
 					'num' => $foods[$value['id']],
 					'createline' => time(),
 					'updateline' => time()
@@ -169,7 +167,7 @@ class OrderController extends Controller
 			}
 
 			// 添加orders和food表之间的关系
-			M('OrdersFood')->addAll($arr);
+			M('OrdersProduct')->addAll($arr);
 
 			// 更新价格
 			M('Orders')->where(array('id' => $orders_id))->save(array('price' => $total_price));
@@ -209,15 +207,15 @@ class OrderController extends Controller
 			{
 				foreach ($datas as $key => &$data)
 				{
-					$temp = D('OrdersFood')->group('food_id')->where(array('orders_id' => $data['id']))->select();
+					$temp = D('OrdersProduct')->group('product_id')->where(array('orders_id' => $data['id']))->select();
 
 					$temp2 = array();
 
 					foreach ($temp as $key => $value) {
-						$temp2[] = $value['food_id'];
+						$temp2[] = $value['product_id'];
 					}
 
-					$data['foods'] = D('Food')->where(array('id' => array('in', join($temp2, ','))))->select();
+					$data['foods'] = D('Product')->where(array('id' => array('in', join($temp2, ','))))->select();
 				}
 			}
 			else {
