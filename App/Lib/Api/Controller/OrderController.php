@@ -187,45 +187,35 @@ class OrderController extends Controller
 			// 用户id
 			$condition['user_id'] = UserSession::getId();
 
-			// History 历史订单
-			if(isset($_GET['history']) && $_GET['history'] == 1)
-			{
-				$condition['status'] = 30;
-			}
-			// History 当前订单
-			else if(isset($_GET['history']) && $_GET['history'] == 0) {
-				$condition['status'] = array('neq', 30);
-			}
 			// 根据 Status 判断
-			else if(isset($_GET['status'])) {
+			if(isset($_GET['status'])) {
 				$condition['status'] = $_GET['status'];
 			}
 
 			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
 
-			if($datas)
-			{
-				foreach ($datas as $key => &$data)
-				{
-					$temp = D('OrdersProduct')->group('product_id')->where(array('orders_id' => $data['id']))->select();
-
-					$temp2 = array();
-
-					foreach ($temp as $key => $value) {
-						$temp2[] = $value['product_id'];
-					}
-
-					$data['foods'] = D('Product')->where(array('id' => array('in', join($temp2, ','))))->select();
-				}
-			}
-			else {
-				$datas = array();
-			}
-
 			$this->successJson($datas);
 		}
-		catch(Exception $error)
-		{
+		catch(Exception $error) {
+			$this->errorJson($error);
+		}
+	}
+
+	public function get_detail()
+	{
+		try {
+			if(Request::query('order_id')) {
+				$condition['order_id'] = Request::query('order_id');
+			}
+			else {
+				throw new Exception("NO_POST_ORDER");
+			}
+
+			$data = D('Orders')->where($condition)->findJoin();
+
+			$this->successJson($data);
+		}
+		catch(Exception $error) {
 			$this->errorJson($error);
 		}
 	}
