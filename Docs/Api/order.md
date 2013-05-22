@@ -1,5 +1,34 @@
 # Order
 
+## 订单 JSON 字段
+
+### Order JSON
+
+	{
+		"id": 1,
+		"user_id": 1,
+		"shop_id": 1,
+		"price": "22.00",
+		"school": "",
+		"address": "",
+		"receiver": "",
+		"phone": "",
+		"status": 0,
+		"createline": 0,
+		"updateline": 0
+	}
+
+### OrderProduct JSON
+
+	{
+		"id": 1,
+		"orders_id": 1,
+		"product_id": 1,
+		"num": 2,
+		"createline": 0,
+		"updateline": 0
+	}
+
 ## 提交订单列表
 
 ### Request
@@ -94,4 +123,27 @@
 			"云南大学",
 			// ...
 		]
+	}
+
+## 获得订单详情
+
+### Request
+
+	url: order/detail
+	method: GET
+	params:
+		order_id | true | int | // 映射到order_id
+
+### Response
+
+	// 操作成功
+	{
+		"success": 1,
+		"data": {
+			// @link 参考order字段
+			// @add 多加字段
+			"products": {
+				// @link 参考产品字段
+			}
+		}
 	}
