@@ -1,0 +1,44 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'mainarea'}}
+	
+	<ul class="breadcrumb">
+		<li><a href="__GROUP__/index">Home</a> <span class="divider">/</span></li>
+		<li><a href="__URL__/index">商品分类</a> <span class="divider">/</span></li>
+		<li class="active">创建</li>
+	</ul>
+
+	<div class="section">
+		<form action="__SELF__" method="post" class="form-horizontal">
+			<fieldset>
+				<legend>创建</legend>
+			</fieldset>
+
+			<div class="control-group">
+				<div class="control-label">分类名称</div>
+				<div class="controls">
+					<input type="text" name="name" value="{{$data.name}}">
+				</div>
+			</div>
+
+			<div class="control-group">
+				<div class="control-label"><abbr title="Set column priority, 0 is first">优先级</abbr></div>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-hand-up"></i></span>
+						<input type="text" class="span1" name="priority" value="{{$data.priority}}">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				{{if $data.id}}
+				<input type="hidden" name="id" value="{{$data.id}}">
+				{{/if}}
+				<button type="submit" class="btn btn-primary">保存设置</button>
+				<a href="__URL__/index" class="btn">取消</a>
+			</div>
+		</form>
+	</div>
+
+{{/block}}
