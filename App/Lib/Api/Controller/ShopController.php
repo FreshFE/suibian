@@ -1,8 +1,9 @@
 <?php namespace App\Api\Controller;
 
-use Smartadmin\Controller\Api as Controller;
-use Think\Lang as Lang;
-use Think\Exception as Exception;
+use Think\Controllers\Api as Controller;
+use Think\Lang;
+use Think\Exception;
+use Think\Request;
 
 class ShopController extends Controller
 {
@@ -23,7 +24,7 @@ class ShopController extends Controller
 	{
 		parent::__construct();
 
-		$this->model = D('Shop');
+		$this->model = $this->getModel('Shop');
 	}
 
 	/**
@@ -45,9 +46,9 @@ class ShopController extends Controller
 			$condition = array('hidden' => 1);
 
 			// 是否存在type，便捷方法
-			if(isset($_GET['type'])) {
+			if(Request::query('type')) {
 
-				$type = $_GET['type'];
+				$type = Request::query('type');
 
 				if($type == 'restaurant') {
 					$condition['shop_category_id'] = 1;
@@ -58,16 +59,20 @@ class ShopController extends Controller
 			}
 
 			// 是否存在category字段，存在则覆盖type
-			if(isset($_GET['category'])) {
-				$condition['shop_category_id'] = $_GET['category'];
+			if(Request::query('category')) {
+				$condition['shop_category_id'] = Request::query('category');
 			}
 
 			// 设置page
-			$rows = isset($_GET['rows']) ? $_GET['rows'] : 10;
-			$page = isset($_GET['page']) ? $_GET['page'] : 1;
+			$rows = Request::query('rows') ? Request::query('rows') : 10;
+			$page = Request::query('page') ? Request::query('page') : 1;
 
 			// 检索
 			$datas = $this->model->where($condition)->page($page, $rows)->select();
+
+			if(!$datas) {
+				$datas = array();
+			}
 
 			// 输出
 			$this->successJson($datas);
