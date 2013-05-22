@@ -1,8 +1,9 @@
 <?php namespace App\Api\Controller;
 
-use Smartadmin\Controller\Api as Controller;
-use Think\Lang as Lang;
-use Think\Exception as Exception;
+use Think\Controllers\Api as Controller;
+use Think\Lang;
+use Think\Exception;
+use Think\Request;
 
 class ProductController extends Controller
 {
@@ -23,7 +24,7 @@ class ProductController extends Controller
 	{
 		parent::__construct();
 
-		$this->model = D('Food');
+		$this->model = $this->getModel('Product');
 	}
 
 	/**
@@ -38,18 +39,53 @@ class ProductController extends Controller
 			$condition = array('hidden' => 1);
 
 			// 是否存在category字段，存在则覆盖type
-			if(isset($_GET['shop'])) {
-				$condition['shop_id'] = $_GET['shop'];
+			if(Request::query('shop')) {
+				$condition['shop_id'] = Request::query('shop');
+			}
+
+			// 分类查找
+			if(Request::query('category')) {
+				$condition['product_categoty_id'] = Request::query('category');
 			}
 
 			// 设置page
-			$rows = isset($_GET['rows']) ? $_GET['rows'] : 10;
-			$page = isset($_GET['page']) ? $_GET['page'] : 1;
+			$rows = Request::query('rows') ? Request::query('rows') : 10;
+			$page = Request::query('page') ? Request::query('page') : 1;
 
 			// 检索
 			$datas = $this->model->where($condition)->page($page, $rows)->select();
 
+			// 不存在datas时，为空
+			if(!$datas) {
+				$datas = array();
+			}
+
 			// 输出
+			$this->successJson($datas);
+		}
+		catch(Exception $error) {
+			$this->errorJson($error);
+		}
+	}
+
+	public function category()
+	{
+		try {
+
+			// 未获得Shop的值
+			if(!Request::query('shop')) {
+				throw new Exception("NO_POST_SHOP");
+			}
+
+			$condition['shop_id'] = Request::query('shop');
+
+			$model = $this->getModel('ProductCategory');
+			$datas = $model->where($condition)->select();
+
+			if(!$datas) {
+				$datas = array();
+			}
+
 			$this->successJson($datas);
 		}
 		catch(Exception $error) {
