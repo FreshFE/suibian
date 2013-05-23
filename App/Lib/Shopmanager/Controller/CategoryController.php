@@ -51,9 +51,35 @@ class CategoryController extends CommonController
 		Redirect::success('分类创建成功', Url::make('index'));
 	}
 
-	public function edit()
+	public function get_edit()
 	{
+		if(Request::query('id')) {
+			$id = Request::query('id');
+		}
 
+		$model = $this->getModel('ProductCategory');
+		$data = $model->find($id);
+		$this->assign('data', $data);
+		$this->display('create');
+	}
+
+	public function post_edit()
+	{
+		$model = $this->getModel('ProductCategory');
+
+		$data = $model->create();
+
+		if(!$data) {
+			Redirect::error($model->getError());
+		}
+
+		$id = $model->save($data);
+
+		if(!$id) {
+			Redirect::error($model->getError());
+		}
+
+		Redirect::success('分类编辑成功', Url::make('index'));
 	}
 
 	public function delete()

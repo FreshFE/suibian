@@ -32,8 +32,8 @@
 			</div>
 
 			<div class="form-actions">
-				{{if $data.id}}
-				<input type="hidden" name="id" value="{{$data.id}}">
+				{{if $smarty.get.id}}
+				<input type="hidden" name="id" value="{{$smarty.get.id}}">
 				{{/if}}
 				<button type="submit" class="btn btn-primary">保存设置</button>
 				<a href="__URL__/index" class="btn">取消</a>
