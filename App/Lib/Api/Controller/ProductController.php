@@ -48,7 +48,7 @@ class ProductController extends Controller
 
 			// 分类查找
 			if(Request::query('category')) {
-				$condition['product_categoty_id'] = Request::query('category');
+				$condition['product_category_id'] = Request::query('category');
 			}
 
 			// 设置page
