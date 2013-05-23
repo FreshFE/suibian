@@ -38,7 +38,7 @@ class OrderController extends Controller
 			$orders = array();
 
 			// 不存在 food_id_str 捕获错误
-			if(!isset($_POST['food_id_str']))
+			if(!Request::post('food_id_str'))
 			{
 				throw new Exception("NO_FOODS");
 			}
@@ -47,7 +47,7 @@ class OrderController extends Controller
 			$this->create_log('Start');
 
 			// 解析字符串获得数组
-			$foods = json_decode($_POST['food_id_str'], true);
+			$foods = json_decode(Request::post('food_id_str'), true);
 
 			// 排序
 			sort($foods);
@@ -188,11 +188,44 @@ class OrderController extends Controller
 			$condition['user_id'] = UserSession::getId();
 
 			// 根据 Status 判断
-			if(isset($_GET['status'])) {
-				$condition['status'] = $_GET['status'];
+			if(Request::query('status')) {
+
+				$status = Request::query('status');
+
+				// 非数字时，解析字符串为数字
+				if(!is_numeric($status)) {
+					switch ($status) {
+						case 'new':
+							$status = 0;
+							break;
+
+						case 'doing':
+							$status = 20;
+							break;
+
+						case 'finish':
+							$status = 30;
+							break;
+						
+						default:
+							throw new Exception("ERROR_GET_STATUS");
+							break;
+					}
+				}
+				
+				// 加入查询条件
+				$condition['status'] = $status;
+			}
+			// 不存在则返回错误
+			else {
+				throw new Exception("NO_GET_STATUS");
 			}
 
 			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
+
+			if(!$datas) {
+				$datas = array();
+			}
 
 			$this->successJson($datas);
 		}
