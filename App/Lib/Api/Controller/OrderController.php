@@ -74,6 +74,8 @@ class OrderController extends Controller
 
 			if(count($orderJson) > 0)
 			{
+				$this->setReceiveAddress();
+
 				$this->create_log('End');
 
 				$this->successJson($orderJson);
@@ -85,6 +87,36 @@ class OrderController extends Controller
 		catch(Exception $error) {
 			$this->errorJson($error);
 		}
+	}
+
+	protected function setReceiveAddress()
+	{
+		$condition = array(
+			"user_id" => UserSession::getId(),
+			"school" => Request::post('school'),
+			"address" => Request::post('address'),
+			"receiver" => Request::post('receiver'),
+			"phone" => Request::post('phone')
+		);
+
+		$model = $this->getModel('ReceiveAddress');
+
+		$data = $model->where($condition)->find();
+
+		// 存在则更新
+		if($data) {
+			$model->where(array('id' => $data['id']))->save(array("updateline" => time()));
+		}
+		// 不存在则写入
+		else {
+
+			$condition['createline'] = time();
+			$condition['updateline'] = time();
+
+			$model->add($condition);
+		}
+
+		return true;
 	}
 
 	protected function parse_foods($foods)
