@@ -21,16 +21,10 @@ return array(
 	'PROJ_THUMB_TYPE' => array(
 
 		// 默认样式，宽度，高度，模式
-		'thumb' => array(200, 200, 'both')
-	),
+		'thumb' => array(200, 200, 'both'),
 
-	/**
-	 * 路由配置
-	 */
-	'URL_ROUTER_ON'   => true,			//开启路由
-	// 路由配置方法
-	'URL_ROUTE_RULES' => array(
-		'signup/:code' => array('Home/Account/register'),
-		'signup' => array('Home/Account/register')
-	)
+		// 产品图片配置
+		'400x400' => array(400, 400, 'both'),
+		'480x800' => array(480, 800, 'both')
+	),
 );
