@@ -20,7 +20,7 @@ class AccountController extends Controller
 	 */
 	public function post_login()
 	{
-		Log::info('login', array($_SERVER, $_POST, $_GET));
+		// Log::info('login', array($_SERVER, $_POST, $_GET));
 
 		// 初始化模型
 		$model = $this->getModel('User');
