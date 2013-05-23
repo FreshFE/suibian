@@ -11,7 +11,9 @@ class ProductController extends CommonController
 {
 	protected $model;
 
-	protected $cover_thumb_name = 'thumb';
+	protected $model_name = 'Product';
+
+	protected $cover_thumb_name = '400x400,480x800,thumb';
 
 	protected $pk_name = 'id';
 
@@ -22,7 +24,7 @@ class ProductController extends CommonController
 		parent::__construct();
 
 		// 创建主模型
-		$this->model = D($this->model_name);
+		$this->model = $this->getModel($this->model_name);
 
 		// 保存id
 		$this->pk_id = $_GET[$this->pk_name];
@@ -125,7 +127,11 @@ class ProductController extends CommonController
 		$info = Upload::image($_FILES['uploadify_file'], $this->cover_thumb_name);
 
 		// 建立数据表
-		$this->model->where(array('id' => $_POST['id']))->save(array('coverpath' => $info['name']));
+		$id = $this->model->where(array('id' => $_POST['id']))->save(array('coverpath' => $info['name']));
+
+		if(!$id) {
+			Response::json(array("success" => 0));
+		}
 
 		// 输出JSON
 		Response::json($info);
@@ -142,9 +148,6 @@ class ProductController extends CommonController
 		if($this->pk_id) {
 
 			$data = $this->model->find($this->pk_id);
-			dump($data);
-			// dump($this->model->name);
-			exit();
 			$this->model->hidden = !$this->model->hidden;
 			$this->model->save();
 
