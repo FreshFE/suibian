@@ -188,7 +188,8 @@ class OrderController extends Controller
 			$condition['user_id'] = UserSession::getId();
 
 			// 根据 Status 判断
-			if(Request::query('status')) {
+			// 允许status为0
+			if(Request::query('status') || Request::query('status') !== 0) {
 
 				$status = Request::query('status');
 
