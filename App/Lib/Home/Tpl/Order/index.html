@@ -8,7 +8,9 @@
 
 			$.get(
 				'/api/order',
-				{},
+				{
+					"status": 0
+				},
 				function(data) {
 					console.log(data);
 				}
