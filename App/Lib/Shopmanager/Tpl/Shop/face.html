@@ -1,0 +1,59 @@
+{{extends file="./layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">基本信息</a> <span class="divider">/</span></li>
+		<li class="active">管理头像</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>管理头像</h1>
+	</div>
+
+	<div class="section">
+		<div class="control-group">
+			<label class="control-label">头像</label>
+			<div class="controls">
+				<img src="{{Helper::img($data['coverpath'], 'thumb')}}" id="J_cover">
+			</div>
+		</div>
+
+		<div class="control-group">
+			<label class="control-label">上传头像</label>
+			<div class="controls">
+				<input type="file" id="J_uploadCover" name="cover_upload">
+			</div>
+		</div>
+	</div>
+
+{{/block}}
+
+{{block 'bodyjs' append}}
+
+	<!-- Uploadify -->
+	<script type="text/javascript" src="@/admin/js/uploadify/jquery.uploadify.js"></script>
+	<script type="text/javascript" src="@/admin/js/uploadify/uploadify.config.js"></script>
+	<link rel="stylesheet" type="text/css" href="@/admin/js/uploadify/uploadify.css">
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			// 上传封面图片
+			var uploadCover = new UploadImg('#J_uploadCover');
+			// uploadCover.config.formData = { 'id': {{$smarty.get.id}} };
+			uploadCover.onUploadSuccess = function(file, data, response) {
+				
+				var info = $.parseJSON(data);
+				$('#J_cover').attr('src', "@/images/thumb/" + info.name);
+			};
+			uploadCover.upload('__URL__/cover');
+
+			// 日期选择器
+			$('#J_datepicker').datepicker({
+				'format': 'yyyy-mm-dd'
+			});
+
+		});
+	</script>
+{{/block}}
