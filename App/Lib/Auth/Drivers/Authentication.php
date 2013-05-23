@@ -4,6 +4,7 @@ use Think\Session;
 use Think\Cookie;
 use Think\Model;
 use Think\Request;
+use Think\Log;
 
 /**
  * 用户认证相关类
@@ -66,6 +67,8 @@ class Authentication
 		if(!is_null($modelName)) {
 			$this->setUserModelProvider($modelName);
 		}
+
+		Log::info('request_cookie', array('request' => $_COOKIE));
 	}
 
 	/**
@@ -207,7 +210,7 @@ class Authentication
 		if(!$cookie) return false;
 
 		// 不存在记录
-		if(!D('User')->where(array('email' => $cookie['email']))->find()) return false;
+		if(!M('User')->where(array('email' => $cookie['email']))->find()) return false;
 
 		// 哈希不正确
 		if($cookie['password'] !== md5($data['email'] . $data['password'] . $data['password_salt'])) return false;
