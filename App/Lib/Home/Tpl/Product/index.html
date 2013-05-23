@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shop</title>
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			$.get(
+				'/api/product',
+				{
+					"shop": 1
+				},
+				function(data) {
+					console.log(data);
+				}
+			);
+
+		});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
