@@ -43,7 +43,7 @@ class ReceiveController extends Controller
 			$page = Request::query('page') ? Request::query('page') : 1;
 
 			// 检索
-			$datas = $this->model->where($condition)->page($page, $rows)->select();
+			$datas = $this->model->where($condition)->page($page, $rows)->order('updateline DESC')->select();
 
 			// 不存在datas时，为空
 			if(!$datas) {
