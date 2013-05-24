@@ -1,7 +1,7 @@
 <?php namespace App\Shopmanager\Controller;
 
 use App\Api\Controller\AccountController as Controller;
-use App\Auth\Drivers\Authentication;
+use Think\Auths\Authentication;
 use Think\Redirect;
 use Think\Url;
 

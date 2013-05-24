@@ -6,8 +6,8 @@ use Think\Session;
 use Think\Cookie;
 use Think\Response;
 use Think\Exception;
-use App\Auth\Drivers\Authentication;
-use App\Auth\Drivers\Authorization;
+use Think\Auths\Authentication;
+use Think\Auths\Authorization;
 
 class CheckAuth extends Behavior
 {

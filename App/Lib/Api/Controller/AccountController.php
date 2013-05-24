@@ -7,7 +7,7 @@ use Think\Config;
 use Think\Exception;
 use Think\Request;
 use Think\Log;
-use App\Auth\Drivers\Authentication;
+use Think\Auths\Authentication;
 
 class AccountController extends Controller
 {
