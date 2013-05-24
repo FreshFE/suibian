@@ -8,8 +8,10 @@ class ProductModel extends Model
 	{
 		$datas = $this->select();
 
-		foreach ($datas as $key => &$data) {
-			$data['product'] = D('Shop')->field('id,title')->find($data['id']);
+		if($datas) {
+			foreach ($datas as $key => &$data) {
+				$data['shop'] = D('Shop')->field('id,title')->find($data['shop_id']);
+			}
 		}
 
 		return $datas;
