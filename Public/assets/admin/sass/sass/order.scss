@@ -1,82 +1,133 @@
 @import "compass";
 
 body {
-	// background: #f2f2f2;
+	background: #eee;
 }
 
-#order-page {
+.sidebar {
+	width: 300px;
+	padding-top: 0;
 
-	margin: 20px 0;
-	margin-top: 60px;
-
-	.stage {
-		width: 980px;
-		min-height: 300px;
-		background: #fff;
-		margin: 0 auto;
-		background: #d5e6f3;
-		border: solid 1px #ddd;
-		border-color: rgba(0,0,0,.05);
-		@include clearfix();
-		@include border-radius(8px);
-		@include box-shadow(0 2px 5px rgba(0,0,0,.1));
+	> .inner {
+		position: static;
+		width: auto;
 	}
 
-	.sidetip {
-		width: 300px;
-		float: left;
-		min-height: 300px;
+	h5 {
+		padding: 0;
+		margin: 0;
+		background: darken(#eee, 3%);
+		border-bottom: solid 1px #d5d5d5;
 
-		.title {
-			border-bottom: solid 1px #5ebdc7;
-			border-right: solid 1px #5ebdc7;
-			background: #999;
-			color: #fff;
-			padding: 10px 20px;
-			font-size: 16px;
-			font-weight: bold;
-		}
+		a {
+			display: block;
+			padding: 20px 20px;
+			color: darken(#eee, 30%);
+			text-decoration: none;
 
-		ul.nav {
-			li {
+			i {
+				@include opacity(.4);
+			}
 
-				padding: 10px 20px;
-				border-bottom: solid 1px #d5d5d5;
-				border-right: solid 1px #d5d5d5;
-				cursor: pointer;
+			&:hover {
+				color: darken(#eee, 50%);
 
-				p {
-					padding: 0;
-					margin: 0;
-					line-height: 20px;
-					color: #999;
-				}
-
-				&:hover {
-					background: #f6f6f6;
-					
-					p {
-						color: #666;
-					}
-				}
-
-				&.active {
-					background: #fff;
-					border-right: none;
-					@include box-shadow(0 -1px 2px rgba(0,0,0,.1));
-					
-					p {
-						color: #000;
-					}
+				i {
+					@include opacity(.6);
 				}
 			}
 		}
 	}
 
-	.maintip {
-		width: 680px;
-		float: right;
-		min-height: 300px;
-		background: #fff;
+	.nav-sidebar {
+
+		padding: 0;
+		margin: 0;
+
+		li {
+			border-bottom: solid 1px #d5d5d5;
+			padding: 10px 10px;
+			background: darken(#eee, 3%);
+			color: #999;
+			cursor: pointer;
+
+			.count {
+				float: left;
+				width: 28px;
+				height: 28px;
+				text-align: center;
+				line-height: 28px;
+				background: #bbb;
+			}
+
+			.info {
+				margin-left: 40px;
+			}
+
+			p {
+				margin: 0;
+				padding: 0;
+			}
+
+			&:hover {
+				color: #666;
+				background: darken(#eee, 7%);
+			}
+
+			&.active {
+				color: #666;
+				background: #fff;
+				.count {
+					color: #fff;
+					background: #ed145b;
+				}
+			}
+		}
+	}
+}
+
+.mainarea {
+	margin-left: 300px;
+}
+
+.order-menu-nav {
+
+	@include clearfix();
+	margin-left: -20px;
+	margin-top: -20px;
+
+	li {
+
+		background: #eee;
+		height: 100px;
+		width: 300px;
+		float: left;
+		margin-left: 20px;
+		margin-top: 20px;
+
+		.face {
+			width: 100px;
+			float: left;
+
+			img {
+				width: 100px;
+				height: 100px;
+			}
+		}
+
+		.info {
+			padding: 13px 0;
+			margin-left: 120px;
+
+			p {
+				margin: 0;
+				padding: 0;
+			}
+
+			.title {
+				font-size: 16px;
+				margin-bottom: 10px;
+			}
+		}
 	}
 }

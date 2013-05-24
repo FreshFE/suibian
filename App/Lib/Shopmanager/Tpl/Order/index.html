@@ -4,35 +4,85 @@
 	<link rel="stylesheet" type="text/css" href="@/admin/css/order.css">
 {{/block}}
 
-{{block 'content'}}
-	<div id="order-page">
-
-		<div class="stage">
-
-			<div class="sidetip">
-				<div class="title">
-					新订单 Feed
-				</div>
-				<ul class="nav">
-					<li>
-						<p>云南大学</p>
-						<p>民族路1号学生公寓A区 9# 313室</p>
-						<p>田柯 | ￥32.00</p>
-					</li>
-
-					<li class="active">
-						<p>云南大学</p>
-						<p>民族路1号学生公寓A区 9# 313室</p>
-						<p>田柯 | ￥32.00</p>
-					</li>
-				</ul>
+{{block 'sidebar'}}
+	
+	<h5><a href="#"><i class="icon-repeat"></i> 新订单</a></h5>
+	<ul class="nav nav-pills nav-stacked nav-sidebar">
+		<li class="active">
+			<div class="count"><i class="icon-share-alt icon-white"></i></div>
+			<div class="info">
+				<p>云南大学</p>
+				<p>民族路1号学生公寓A区 9# 313室</p>
+				<p>田柯 | 12:03</p>
 			</div>
+		</li>
 
-			<div class="maintip"></div>
+		<li>
+			<div class="count"><i class="icon-share-alt icon-white"></i></div>
+			<div class="info">
+				<p>云南大学</p>
+				<p>民族路1号学生公寓A区 9# 313室</p>
+				<p>田柯 | 12:05</p>
+			</div>
+		</li>
+	</ul>
 
-		</div>
+{{/block}}
 
+{{block 'mainarea'}}
+
+	<div class="section-title">
+		23125 号订单
 	</div>
+
+	<div class="section">
+		<blockquote>
+			<p><i class="icon-bookmark"></i> 云南大学</p>
+			<p><i class="icon-map-marker"></i> 民族路1号学生公寓A区 9# 313室</p>
+			<p><i class="icon-user"></i> 田柯</p>
+			<p><i class="icon-signal"></i> 13862531169</p>
+			<p><i class="icon-tags"></i> ￥32.00 合计</p>
+		</blockquote>
+	</div>
+
+	<div class="section-title">
+		购买列表
+	</div>
+
+	<div class="section">
+		<ul class="nav order-menu-nav">
+			<li>
+				<div class="face">
+					<img src="@/assets/images/example.jpg">
+				</div>
+				<div class="info">
+					<p class="title">辣酱意大利面</p>
+					<p><i class="icon-tag"></i> ￥30.00</p>
+					<p><i class="icon-star"></i>&nbsp;&nbsp;3 份</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="section-title">
+		订单相关
+	</div>
+
+	<div class="section">
+		<p>当前状态：处理中</p>
+		<p>创建时间：18:00 2013年4月5日</p>
+		<p>更新时间：18:02 2013年4月5日</p>
+	</div>
+
+	<div class="section-title">
+		订单操作
+	</div>
+
+	<div class="section">
+		<a href="#" class="btn btn-primary">确定为有效订单，并已打单</a>
+		<a href="#" class="btn btn-danger">确定为无效订单</a>
+	</div>
+
 {{/block}}
 
 {{block 'footer'}}

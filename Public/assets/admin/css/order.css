@@ -1,0 +1,136 @@
+/* line 3, ../sass/sass/order.scss */
+body {
+  background: #eee;
+}
+
+/* line 7, ../sass/sass/order.scss */
+.sidebar {
+  width: 300px;
+  padding-top: 0;
+}
+/* line 11, ../sass/sass/order.scss */
+.sidebar > .inner {
+  position: static;
+  width: auto;
+}
+/* line 16, ../sass/sass/order.scss */
+.sidebar h5 {
+  padding: 0;
+  margin: 0;
+  background: #e6e6e6;
+  border-bottom: solid 1px #d5d5d5;
+}
+/* line 22, ../sass/sass/order.scss */
+.sidebar h5 a {
+  display: block;
+  padding: 20px 20px;
+  color: #a2a2a2;
+  text-decoration: none;
+}
+/* line 28, ../sass/sass/order.scss */
+.sidebar h5 a i {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
+/* line 32, ../sass/sass/order.scss */
+.sidebar h5 a:hover {
+  color: #6e6e6e;
+}
+/* line 35, ../sass/sass/order.scss */
+.sidebar h5 a:hover i {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  opacity: 0.6;
+}
+/* line 42, ../sass/sass/order.scss */
+.sidebar .nav-sidebar {
+  padding: 0;
+  margin: 0;
+}
+/* line 47, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li {
+  border-bottom: solid 1px #d5d5d5;
+  padding: 10px 10px;
+  background: #e6e6e6;
+  color: #999;
+  cursor: pointer;
+}
+/* line 54, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li .count {
+  float: left;
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  line-height: 28px;
+  background: #bbb;
+}
+/* line 63, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li .info {
+  margin-left: 40px;
+}
+/* line 67, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li p {
+  margin: 0;
+  padding: 0;
+}
+/* line 72, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li:hover {
+  color: #666;
+  background: gainsboro;
+}
+/* line 77, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li.active {
+  color: #666;
+  background: #fff;
+}
+/* line 80, ../sass/sass/order.scss */
+.sidebar .nav-sidebar li.active .count {
+  color: #fff;
+  background: #ed145b;
+}
+
+/* line 89, ../sass/sass/order.scss */
+.mainarea {
+  margin-left: 300px;
+}
+
+/* line 93, ../sass/sass/order.scss */
+.order-menu-nav {
+  overflow: hidden;
+  *zoom: 1;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+/* line 99, ../sass/sass/order.scss */
+.order-menu-nav li {
+  background: #eee;
+  height: 100px;
+  width: 300px;
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+/* line 108, ../sass/sass/order.scss */
+.order-menu-nav li .face {
+  width: 100px;
+  float: left;
+}
+/* line 112, ../sass/sass/order.scss */
+.order-menu-nav li .face img {
+  width: 100px;
+  height: 100px;
+}
+/* line 118, ../sass/sass/order.scss */
+.order-menu-nav li .info {
+  padding: 13px 0;
+  margin-left: 120px;
+}
+/* line 122, ../sass/sass/order.scss */
+.order-menu-nav li .info p {
+  margin: 0;
+  padding: 0;
+}
+/* line 127, ../sass/sass/order.scss */
+.order-menu-nav li .info .title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
