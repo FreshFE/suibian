@@ -7,24 +7,8 @@
 {{block 'sidebar'}}
 	
 	<h5><a href="#"><i class="icon-repeat"></i> 新订单</a></h5>
-	<ul class="nav nav-pills nav-stacked nav-sidebar">
-		<li class="active">
-			<div class="count"><i class="icon-share-alt icon-white"></i></div>
-			<div class="info">
-				<p>云南大学</p>
-				<p>民族路1号学生公寓A区 9# 313室</p>
-				<p>田柯 | 12:03</p>
-			</div>
-		</li>
-
-		<li>
-			<div class="count"><i class="icon-share-alt icon-white"></i></div>
-			<div class="info">
-				<p>云南大学</p>
-				<p>民族路1号学生公寓A区 9# 313室</p>
-				<p>田柯 | 12:05</p>
-			</div>
-		</li>
+	<ul class="nav nav-pills nav-stacked nav-sidebar" id="J_neworder">
+		
 	</ul>
 
 {{/block}}
@@ -86,4 +70,20 @@
 {{/block}}
 
 {{block 'footer'}}
+{{/block}}
+
+{{block 'bodyjs' append}}
+
+	<script type="text/javascript" src="@/admin/js/order_sidebar.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var orderSidebar = new OrderSidebar('__URL__/newlist');
+			
+			orderSidebar.send();
+			
+			setInterval(function () {
+				orderSidebar.send();
+			}, 5000);
+		});
+	</script>
 {{/block}}

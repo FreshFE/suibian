@@ -1,0 +1,10 @@
+{{foreach $datas as $data}}
+<li class="active">
+	<div class="count"><i class="icon-share-alt icon-white"></i></div>
+	<div class="info">
+		<p>{{$data.school}}</p>
+		<p>{{$data.address}}</p>
+		<p>{{$data.receiver}} | {{date('H:i', $data['createline'])}}</p>
+	</div>
+</li>
+{{/foreach}}
