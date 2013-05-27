@@ -112,8 +112,15 @@ class ProductController extends CommonController
 	 */
 	public function add()
 	{
-		$product_category_id = $this->getModel('ProductCategory')->where(array('shop_id' => $this->getShopId()))->getField('id');
-
+		if(!Request::query('product_category_id')) {
+			$product_category_id = $this->getModel('ProductCategory')
+										->where(array('shop_id' => $this->getShopId()))
+										->getField('id');	
+		}
+		else {
+			$product_category_id = Request::query('product_category_id');
+		}
+		
 		$default = array(
 			"product_category_id" => $product_category_id,
 			"shop_id" => $this->getShopId(),
