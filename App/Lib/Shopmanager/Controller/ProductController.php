@@ -85,8 +85,19 @@ class ProductController extends CommonController
 			$condition['product_category_id'] = Request::query('product_category_id');
 		}
 
-		$datas = $this->model->where($condition)->select();
+		// 页数
+		$page = Request::query('page') ? Request::query('page') : 1;
+
+		// 每页20行
+		$list_rows = 20;
+
+		// 获得内容并输出页码数组
+		$datas = $this->model->where($condition)->page($page, $list_rows)->select();
 		$this->assign('datas', $datas);
+
+		$pager = $this->model->where($condition)->pager($page, $list_rows);
+		$this->assign('pager', $pager);
+
 		$this->display();
 	}
 
