@@ -85,6 +85,10 @@ class ProductController extends CommonController
 			$condition['product_category_id'] = Request::query('product_category_id');
 		}
 
+		if(Request::query('search')) {
+			$condition['title'] = array('like', Request::query('search'));
+		}
+
 		// 页数
 		$page = Request::query('page') ? Request::query('page') : 1;
 
