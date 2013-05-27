@@ -15,25 +15,25 @@ class IndexController extends Controller
 		$this->display();
 	}
 
-	public function test()
-	{
-		$email = 'minowu@foxmail.com';
-		$password = '123456';
-		$salt = '275ad0af833e1c7384e10a9d6ef3ab2a';
+	// public function test()
+	// {
+	// 	$email = 'minowu@foxmail.com';
+	// 	$password = '123456';
+	// 	$salt = '275ad0af833e1c7384e10a9d6ef3ab2a';
 
-		$password = sha1($password . $salt);
+	// 	$password = sha1($password . $salt);
 
-		$save_password = md5($email . $password . $salt);
+	// 	$save_password = md5($email . $password . $salt);
 
-		dump([
-			$password,
-			$salt,
-			$save_password
-		]);
+	// 	// dump([
+	// 	// 	$password,
+	// 	// 	$salt,
+	// 	// 	$save_password
+	// 	// ]);
 
-		// 密码，6 - 16位，sha1加密，修改密码时更换
-		// 密码盐，md5(time())，随机数，存数据库，修改密码时才更换
-		// 返回给登录使用的 $cookie_password，md5($email . $password . $password_salt)
+	// 	// 密码，6 - 16位，sha1加密，修改密码时更换
+	// 	// 密码盐，md5(time())，随机数，存数据库，修改密码时才更换
+	// 	// 返回给登录使用的 $cookie_password，md5($email . $password . $password_salt)
 
-	}
+	// }
 }
