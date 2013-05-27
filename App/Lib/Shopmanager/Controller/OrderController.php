@@ -14,9 +14,9 @@ class OrderController extends CommonController
 	{
 		$model = $this->getModel('Orders');
 
-		if(Request::query('timeline')) {
-			$time = time(Request::query('timeline'));
-			$condition['updateline'] = array('egt', $time);
+		if(Request::query('timestamp')) {
+			// $time = time(Request::query('timeline'));
+			$condition['updateline'] = array('egt', Request::query('timestamp'));
 		}
 
 		$condition['shop_id'] = $this->getShopId();
@@ -29,7 +29,12 @@ class OrderController extends CommonController
 		}
 
 		$this->assign('datas', $datas);
-		$this->display();
+		$temp = $this->fetch();
+
+		Response::json(array(
+			'timestamp' => time(),
+			'temp' => $temp
+		));
 	}
 
 	public function detail()
