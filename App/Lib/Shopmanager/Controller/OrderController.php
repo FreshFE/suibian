@@ -15,7 +15,6 @@ class OrderController extends CommonController
 		$model = $this->getModel('Orders');
 
 		if(Request::query('timestamp')) {
-			// $time = time(Request::query('timeline'));
 			$condition['updateline'] = array('egt', Request::query('timestamp'));
 		}
 

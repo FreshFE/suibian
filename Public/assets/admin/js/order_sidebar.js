@@ -26,9 +26,9 @@
 
 		"onSuceess": function (datas) {
 			if(datas !== 'none') {
+				
 				// 将请求加入时间戳
 				this.params.timestamp = datas.timestamp;
-				console.log(this.params.timestamp);
 
 				// 赋值模板
 				this.$el.append(datas.temp);
