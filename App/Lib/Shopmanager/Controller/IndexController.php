@@ -2,13 +2,13 @@
 
 use Think\Controller;
 use Think\Request;
+use Think\Redirect;
+use Think\Url;
 
 class IndexController extends Controller
 {
 	public function index()
 	{
-		$this->assign('shop', Request::getStorage('shop'));
-		$this->assign('user', Request::getStorage('user'));
-		$this->display();
+		Redirect::success('', Url::make('shop/index'));
 	}
 }

@@ -3,71 +3,76 @@
 {{block 'mainarea'}}
 
 	<ul class="breadcrumb">
-		<li><a href="__URL__/index">餐品管理</a> <span class="divider">/</span></li>
-		<li class="active">列表</li>
+		<li class="active">基本信息</li>
 	</ul>
-
-	<div class="section-title">
-		<h1>餐品管理</h1>
-		<div class="bar">
-			<a href="__URL__/add" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
-		</div>
-	</div>
 
 	<div class="section">
 
-		<table class="table table-hover table-striped">
-				
-			<thead>
-				<tr>
-					<td class="span1">ID</td>
-					<td class="span1">公开？</td>
-					<td>标题</td>
-					<td>更新日期</td>
-					<td class="span1"></td>
-				</tr>
-			</thead>
+		<form action="__SELF__" method="post" class="form-horizontal">
 
-			<tbody>
+			<fieldset>
+				<legend>基本信息</legend>
+			</fieldset>
 
-				{{foreach $datas as $data}}
-				<tr>
+			<div class="control-group">
+				<label class="control-label">店名</label>
+				<div class="controls">
+					<input type="text" value="{{$data.title}}" disabled="disabled">
+				</div>
+			</div>
 
-					<td>#{{$data.id}}</td>
+			<div class="control-group">
+				<label class="control-label">是否临时关店</label>
+				<div class="controls">
+					<label class="radio">
+						<input type="radio" name="closing" value="0"{{if $data.closing == 0}} checked="checked"{{/if}}>
+						开店中
+					</label>
+					<label class="radio">
+						<input type="radio" name="closing" value="1"{{if $data.closing == 1}} checked="checked"{{/if}}>
+						临时关店
+					</label>
+				</div>
+			</div>
 
-					<td>
-						{{if $data.hidden == 0}}
-							<div class="btn-group">
-								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-danger btn-small"><i class="icon-remove icon-white"></i></a>
-								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-danger btn-small">未公开</a>
-							</div>
-						{{else}}
-							<div class="btn-group">
-								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-success btn-small"><i class="icon-ok icon-white"></i></a>
-								<a href="__URL__/enable/id/{{$data.id}}" class="btn btn-success btn-small">公开</a>
-							</div>
-						{{/if}}
-					</td>
-					<td>
-						{{$data.title}}
-					</td>
+			<div class="control-group">
+				<label class="control-label">临时关店的提示</label>
+				<div class="controls">
+					<textarea class="span6" rows="4" name="close_msg">{{$data.close_msg}}</textarea>
+				</div>
+			</div>
 
-					<td>{{date('Y-m-d', $data['updateline'])}}</td>
-					
-					<td>
-						<div class="btn-group">
-							<a href="__URL__/edit/id/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i></a>
-							<a href="__URL__/delete/id/{{$data.id}}" class="btn btn-mini" title="Delete"><i class="icon-trash"></i></a>
-						</div>
-					</td>
+			<div class="control-group">
+				<label class="control-label">地址</label>
+				<div class="controls">
+					<input type="text" name="address" value="{{$data.address}}" class="span6">
+				</div>
+			</div>
 
-				</tr>
-				{{/foreach}}
+			<div class="control-group">
+				<label class="control-label">营业时间</label>
+				<div class="controls">
+					<input type="text" name="starttime" value="{{$data.starttime}}" class="span1">
+					-
+					<input type="text" name="endtime" value="{{$data.endtime}}" class="span1">
+				</div>
+			</div>
 
-			</tbody>
-		</table>
+			<div class="control-group">
+				<label class="control-label">最低起送价</label>
+				<div class="controls">
+					<input type="text" name="min_price" value="{{$data.min_price}}" class="span1">
+				</div>
+			</div>
 
-		{{include file="../Bases/page.html"}}
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{{$data.id}}">
+				<button type="submit" class="btn btn-primary">保存设置</button>
+				<a href="__URL__/index" class="btn">取消</a>
+			</div>
+
+		</form>
+
 	</div>
 
 {{/block}}

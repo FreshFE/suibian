@@ -2,14 +2,32 @@
 
 use Think\Library\Upload\Upload;
 use Think\Response;
+use Think\Redirect;
 
 class ShopController extends CommonController
 {
 	protected $cover_thumb_name = '400x400,480x800,thumb';
 	
-	public function index()
+	public function get_index()
 	{
+		$model = $this->getModel('Shop');
+		$data = $model->find($this->getShopId());
+		$this->assign('data', $data);
 		$this->display();
+	}
+
+	public function post_index()
+	{
+		$model = $this->getModel('Shop');
+		$data = $model->create();
+		$id = $model->save($data);
+
+		if($id) {
+			Redirect::success('编辑成功');
+		}
+		else {
+			Redirect::error('编辑失败');
+		}
 	}
 
 	public function face()

@@ -1,7 +1,7 @@
 <?php namespace App\Shopmanager\Controller;
 
-// use Think\Controller as Controller;
-use Think\Session as Session;
+use Think\Session;
+use Think\Request;
 
 class WidgetController extends CommonController {
 
@@ -35,5 +35,12 @@ class WidgetController extends CommonController {
 		$this->assign('count', $count);
 
 		return $this->fetch('Widget:systemorder');
+	}
+
+	public function systemPanel()
+	{
+		$this->assign('shop', Request::getStorage('shop'));
+		$this->assign('user', Request::getStorage('user'));
+		return $this->fetch('Widget:systempanel');
 	}
 }
