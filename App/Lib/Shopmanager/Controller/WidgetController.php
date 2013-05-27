@@ -1,9 +1,9 @@
 <?php namespace App\Shopmanager\Controller;
 
-use Think\Controller as Controller;
+// use Think\Controller as Controller;
 use Think\Session as Session;
 
-class WidgetController extends Controller {
+class WidgetController extends CommonController {
 
 	public function systemTip() {
 
@@ -26,5 +26,14 @@ class WidgetController extends Controller {
 		}
 
 		return ;
+	}
+
+	public function systemOrder()
+	{
+		$model = $this->getModel('Orders');
+		$count = $model->where(array('shop_id' => $this->getShopId(), 'status' => 0))->count();
+		$this->assign('count', $count);
+
+		return $this->fetch('Widget:systemorder');
 	}
 }
