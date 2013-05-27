@@ -6,7 +6,7 @@
 
 {{block 'sidebar'}}
 	
-	<h5><a href="#"><i class="icon-repeat"></i> 新订单</a></h5>
+	<h5><a href="javascript:window.location.reload();"><i class="icon-repeat"></i> 新订单</a></h5>
 	<ul class="nav nav-pills nav-stacked nav-sidebar" id="J_neworder">
 		
 	</ul>
@@ -15,56 +15,7 @@
 
 {{block 'mainarea'}}
 
-	<div class="section-title">
-		23125 号订单
-	</div>
-
-	<div class="section">
-		<blockquote>
-			<p><i class="icon-bookmark"></i> 云南大学</p>
-			<p><i class="icon-map-marker"></i> 民族路1号学生公寓A区 9# 313室</p>
-			<p><i class="icon-user"></i> 田柯</p>
-			<p><i class="icon-signal"></i> 13862531169</p>
-			<p><i class="icon-tags"></i> ￥32.00 合计</p>
-		</blockquote>
-	</div>
-
-	<div class="section-title">
-		购买列表
-	</div>
-
-	<div class="section">
-		<ul class="nav order-menu-nav">
-			<li>
-				<div class="face">
-					<img src="@/assets/images/example.jpg">
-				</div>
-				<div class="info">
-					<p class="title">辣酱意大利面</p>
-					<p><i class="icon-tag"></i> ￥30.00</p>
-					<p><i class="icon-star"></i>&nbsp;&nbsp;3 份</p>
-				</div>
-			</li>
-		</ul>
-	</div>
-
-	<div class="section-title">
-		订单相关
-	</div>
-
-	<div class="section">
-		<p>当前状态：处理中</p>
-		<p>创建时间：18:00 2013年4月5日</p>
-		<p>更新时间：18:02 2013年4月5日</p>
-	</div>
-
-	<div class="section-title">
-		订单操作
-	</div>
-
-	<div class="section">
-		<a href="#" class="btn btn-primary">确定为有效订单，并已打单</a>
-		<a href="#" class="btn btn-danger">确定为无效订单</a>
+	<div id="J_detail">
 	</div>
 
 {{/block}}
@@ -77,13 +28,89 @@
 	<script type="text/javascript" src="@/admin/js/order_sidebar.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			// 实例化
 			var orderSidebar = new OrderSidebar('__URL__/newlist');
 			
+			// 默认执行
 			orderSidebar.send();
 			
+			// 定时器
 			setInterval(function () {
 				orderSidebar.send();
 			}, 5000);
+
+			var $detail = $('#J_detail');
+
+			// 新订单列表绑定
+			var $order = $('#J_neworder')
+					.delegate('li', 'click', function () {
+						var $this = $(this);
+						
+						$.get(
+							'__URL__/detail/id/' + $this.data('id'),
+							{},
+							function (data) {
+
+								// 清除并写入
+								$detail.html('');
+								$(data).appendTo($detail).fadeIn();
+
+								// Sidebar
+								$this.parent().find('.active').removeClass('active');
+								$this.addClass('active');
+							}
+						);
+
+						return false;
+					});
+
+			// 处理结果事件绑定
+			$detail.delegate('.J_order_success', 'click', function () {
+				// 确定处理
+				if(confirm('确定该订单为有效订单，并已打印出单？')) {
+					var $this = $(this);
+
+					$.post(
+						'__URL__/confirm',
+						{
+							"id": $this.data('id'),
+							"status": 20
+						},
+						function (data) {
+							if(data.success == 1) {
+								$detail.html('');
+								$('#J_sidebar_' + data.data.id).remove();
+							}
+						}
+					);
+				}
+
+				return false;
+			});
+
+			$detail.delegate('.J_order_error', 'click', function () {
+				// 确定处理
+				if(confirm('确定这是无效订单？')) {
+					var $this = $(this);
+
+					$.post(
+						'__URL__/confirm',
+						{
+							"id": $this.data('id'),
+							"status": 10
+						},
+						function (data) {
+							if(data.success == 1) {
+								$detail.html('');
+								$('#J_sidebar_' + data.data.id).remove();
+							}
+						}
+					);
+				}
+
+				return false;
+			});
 		});
 	</script>
 {{/block}}

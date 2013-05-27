@@ -1,0 +1,55 @@
+<div style="display: none;">
+	<div class="section-title">
+		{{$data.id}} 号订单
+	</div>
+
+	<div class="section">
+		<blockquote>
+			<p><i class="icon-bookmark"></i> {{$data.school}}</p>
+			<p><i class="icon-map-marker"></i> {{$data.address}}</p>
+			<p><i class="icon-user"></i> {{$data.receiver}}</p>
+			<p><i class="icon-signal"></i> {{$data.phone}}</p>
+			<p><i class="icon-tags"></i> ￥{{$data.price}} 合计</p>
+		</blockquote>
+	</div>
+
+	<div class="section-title">
+		购买列表
+	</div>
+
+	<div class="section">
+		<ul class="nav order-menu-nav">
+			{{foreach $data.products as $product}}
+			<li>
+				<div class="face">
+					<img src="{{Helper::img($product['coverpath'], 'thumb')}}">
+				</div>
+				<div class="info">
+					<p class="title">{{$product.title}}</p>
+					<p><i class="icon-tag"></i> ￥{{$product.price}}</p>
+					<p><i class="icon-star"></i>&nbsp;&nbsp;{{$num}} 份</p>
+				</div>
+			</li>
+			{{/foreach}}
+		</ul>
+	</div>
+
+	<div class="section-title">
+		订单相关
+	</div>
+
+	<div class="section">
+		<p>当前状态：处理中</p>
+		<p>创建时间：{{date('H:i Y年m月d日', $data['createline'])}}</p>
+		<p>更新时间：{{date('H:i Y年m月d日', $data['updateline'])}}</p>
+	</div>
+
+	<div class="section-title">
+		订单操作
+	</div>
+
+	<div class="section">
+		<a href="#" class="btn btn-primary J_order_success" data-id="{{$data.id}}">确定为有效订单，并已打单</a>
+		<a href="#" class="btn btn-danger J_order_error" data-id="{{$data.id}}">确定为无效订单</a>
+	</div>
+</div>
