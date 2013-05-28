@@ -100,14 +100,70 @@ class ProductController extends Controller
 	{
 		try {
 
+			// 获得商店相关
+			$shopIds = $this->getShopIdsByType();
+
+			// 获得产品相关
+			$productIds = $this->getProductIds($shopIds);
+
+			// 获得模型
 			$model = $this->getModel('Product');
-			$data = $model->find();
+
+			// 初始化 $data
+			$data = false;
+
+			// 循环
+			while ($data === false) {
+				
+				// 数组随机数
+				$rand = array_rand($productIds);
+
+				// 根据随机数获得ID
+				$id = $productIds[$rand];
+
+				// 获取
+				$data = $model->where(array('id' => $id))->find();
+			}
 
 			$this->successJson($data);
-
 		}
 		catch(Exception $error) {
 			$this->errorJson($error);
 		}
+	}
+
+	protected function getProductIds($shopIds)
+	{
+		$model = $this->getModel('Product');
+		$condition = array('shop_id' => array('in', join($shopIds, ',')));
+		$datas = $model->where($condition)->field('id')->select();
+
+		// 遍历
+		foreach ($datas as $key => $value) {
+			$temp[] = $value['id'];
+		}
+
+		return $temp;
+	}
+
+	protected function getShopIdsByType($type = 'restaurant')
+	{
+		// 解析类型
+		if($type == 'restaurant') {
+			$condition['shop_category_id'] = 1;
+		}
+		else if($type == 'market') {
+			$condition['shop_category_id'] = 2;
+		}
+
+		// 获取
+		$datas = $this->getModel('Shop')->where($condition)->field('id')->select();
+
+		// 遍历
+		foreach ($datas as $key => $value) {
+			$temp[] = $value['id'];
+		}
+
+		return $temp;
 	}
 }
