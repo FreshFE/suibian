@@ -95,4 +95,19 @@ class ProductController extends Controller
 			$this->errorJson($error);
 		}
 	}
+
+	public function random()
+	{
+		try {
+
+			$model = $this->getModel('Product');
+			$data = $model->find();
+
+			$this->successJson($data);
+
+		}
+		catch(Exception $error) {
+			$this->errorJson($error);
+		}
+	}
 }
