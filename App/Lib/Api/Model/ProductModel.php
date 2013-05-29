@@ -16,4 +16,13 @@ class ProductModel extends Model
 
 		return $datas;
 	}
+
+	public function findJoin()
+	{
+		$data = $this->find();
+
+		$data['shop'] = D('Shop')->field('id,title')->find($data['shop_id']);
+
+		return $data;
+	}
 }

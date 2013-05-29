@@ -122,7 +122,7 @@ class ProductController extends Controller
 				$id = $productIds[$rand];
 
 				// 获取
-				$data = $model->where(array('id' => $id))->find();
+				$data = $model->where(array('id' => $id))->findJoin();
 			}
 
 			$this->successJson($data);
