@@ -1,0 +1,76 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'content'}}
+                
+<div id="info">
+    <a href="account/login" data-post="email=minowu@vip.qq.com&password=123456">Login</a>
+    <a href="account/logout">Logout</a>
+
+    <hr>
+
+    <a href="food/index">餐品列表</a>
+    <a href="food/shop" data-post="shop_id=1">获得商店的餐品</a>
+    <a href="food/favorite">吃过的餐品</a>
+
+    <hr>
+
+    <a href="resraurant/index">餐厅列表</a>
+
+    <hr>
+
+    <a href="order/create" data-post='food_id_str=[{"id":1,"num":2}]'>创建订单</a>
+</div>
+
+<script type="text/javascript" src="@/assets/js/jquery.js"></script>
+<script type="text/javascript">
+    
+    window.access_token = null;
+
+    function ajax(address, params) {
+
+        if(window.access_token !== null) {
+            params = params + '&access_token=' + window.access_token;
+        }
+
+        $.ajax({
+            "type": 'POST',
+            "url": '/api/' + address,
+            "data": params,
+            "dataType": 'JSON',
+            "success": function (data) {
+                console.log(data);
+
+                if(data && data.access_token && data.access_token !== null && data.access_token !== '') {
+                    window.access_token = data.access_token;
+                }
+
+                console.log(window.access_token);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+
+        var $info = $('#info');
+        
+
+        // $(window).on('hashchange', function() {
+
+        //      var hash = window.location.hash;
+        //      ajax(hash.split('#')[1]);
+                
+        // });
+
+        $info.delegate('a', 'click', function() {
+
+            var href = $(this).attr('href');
+            var params = $(this).data('post');
+
+            ajax(href, params);
+            return false;
+        });
+    });
+
+</script>
+
+{{/block}}

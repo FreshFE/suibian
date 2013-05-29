@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Poster</title>
+	<meta charset="utf-8">
+	<title>Anyhow Shopkeeper</title>
+	{{block 'css'}}
+	<link rel="stylesheet" type="text/css" href="@/admin/css/login.css">
+	{{/block}}
 </head>
 <body>
 
-	{{block 'content'}}
-	{{/block}}
+	<div id="header">
+		{{block 'header'}}
+		<div class="inner">
+
+			<a href="#" class="brand">Anyhow</a>
+
+			<ul class="nav">
+				<li><a href="#">关于Anyhow</a></li>
+				<li><a href="#">商店主权利</a></li>
+				<li><a href="#">合作与广告</a></li>
+			</ul>
+		</div>
+		{{/block}}
+	</div>
+
+	<div id="content">
+		{{block 'content'}}
+		{{/block}}
+	</div>
 
 </body>
 </html>
