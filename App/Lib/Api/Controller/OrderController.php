@@ -229,19 +229,19 @@ class OrderController extends Controller
 				if(!is_numeric($status)) {
 					switch ($status) {
 						case 'new':
-							$status = 0;
+							$status = array('between', '0,9');
 							break;
 
 						case 'refuse':
-							$status = 10;
+							$status = array('between', '10,19');
 							break;
 
 						case 'doing':
-							$status = 20;
+							$status = array('between', '20,29');
 							break;
 
 						case 'finish':
-							$status = 30;
+							$status = array('between', '30,39');
 							break;
 						
 						default:
