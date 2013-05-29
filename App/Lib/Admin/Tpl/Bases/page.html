@@ -1,0 +1,29 @@
+{{if $pager}}
+
+{{if $pager.totalPages != 1}}
+<div class="pagination">
+	<ul>
+		{{if $pager.preLink}}
+		<li><a href="{{$pager.preLink}}">上一页</a></li>
+		{{else}}
+		<li><span>上一页</span></li>
+		{{/if}}
+
+		{{foreach $pager.numLink as $key => $value}}
+			{{if $pager.nowPage != $key}}
+				<li><a href="{{$value}}">{{$key}}</a></li>
+			{{else}}
+				<li><span>{{$key}}</span></li>
+			{{/if}}
+		{{/foreach}}
+
+		{{if $pager.nextLink}}
+		<li><a href="{{$pager.nextLink}}">下一页</a></li>
+		{{else}}
+		<li><span>下一页</span></li>
+		{{/if}}
+	</ul>
+</div>
+{{/if}}
+
+{{/if}}

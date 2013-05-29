@@ -1,0 +1,81 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'mainarea'}}
+	
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">客户管理</a> <span class="divider">/</span></li>
+		<li class="active">基本资料</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>客户管理 {{$data.username}}</h1>
+		<div class="bar">
+		</div>
+	</div>
+
+	<div class="section">
+
+		<table class="table table-striped table-bordered">
+			<tbody>
+
+				<tr>
+					<th class="span3">用户名</th>
+					<td>{{$data.username}}</td>
+				</tr>
+
+				<tr>
+					<th>电子邮件</th>
+					<td>{{$data.email}}</td>
+				</tr>
+
+				<tr>
+					<th>生日</th>
+					<td>{{date('Y-m-d', $data['birthday'])}}</td>
+				</tr>
+
+				<tr>
+					<th>联系方式</th>
+					<td>{{$data.phone}}</td>
+				</tr>
+
+				<tr>
+					<th>公司</th>
+					<td>{{$data.company}}</td>
+				</tr>
+
+				<tr>
+					<th>证件号</th>
+					<td>{{$data.idcard}}</td>
+				</tr>
+
+				<tr>
+					<th>国家</th>
+					<td>{{$data.country}}</td>
+				</tr>
+
+				<tr>
+					<th>城市</th>
+					<td>{{$data.city}}</td>
+				</tr>
+
+				<tr>
+					<th>安装方式</th>
+					<td>{{$data.install_type}} - {{$data.install_way}}</td>
+				</tr>
+
+				<tr>
+					<th>加入时间</th>
+					<td>{{date('Y-m-d H:i:s', $data['createline'])}}</td>
+				</tr>
+				
+				<tr>
+					<th>营业执照</th>
+					<td><img src="{{Helper::img($data['license_cover'])}}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>
+
+{{/block}}
