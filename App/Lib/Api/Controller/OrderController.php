@@ -232,7 +232,7 @@ class OrderController extends Controller
 							$status = 0;
 							break;
 
-						case 'refuse'
+						case 'refuse':
 							$status = 10;
 							break;
 
