@@ -156,6 +156,8 @@ class ProductController extends Controller
 			$condition['shop_category_id'] = 2;
 		}
 
+		$condition['closing'] = 0;
+
 		// 获取
 		$datas = $this->getModel('Shop')->where($condition)->field('id')->select();
 
