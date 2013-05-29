@@ -232,6 +232,10 @@ class OrderController extends Controller
 							$status = 0;
 							break;
 
+						case 'refuse'
+							$status = 10;
+							break;
+
 						case 'doing':
 							$status = 20;
 							break;
