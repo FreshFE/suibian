@@ -10,6 +10,8 @@ class ShopController extends Controller
 {
 	protected $model_name = 'Shop';
 
+	protected $list_rows = 10;
+
 	public function detail_query_after()
 	{
 		$model = $this->getModel('ShopManager');
