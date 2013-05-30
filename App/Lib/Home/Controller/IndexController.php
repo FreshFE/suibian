@@ -25,6 +25,8 @@ class IndexController extends Controller
 			}
 
 			$this->assign('role', true);
+
+			$this->assign('user', $user);
 		}
 
 		$this->display();
