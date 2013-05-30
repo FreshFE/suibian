@@ -86,7 +86,7 @@ class ProductController extends CommonController
 		}
 
 		if(Request::query('search')) {
-			$condition['title'] = array('like', Request::query('search'));
+			$condition['title'] = array('like', '%' . Request::query('search') . '%');
 		}
 
 		// 页数
