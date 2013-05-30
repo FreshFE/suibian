@@ -1,0 +1,68 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'mainarea'}}
+	
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">商店管理</a> <span class="divider">/</span></li>
+		<li class="active">基本资料</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>{{$data.username}}</h1>
+	</div>
+
+	<div class="section">
+		<blockquote>
+			<p>商店名：{{$data.title}}</p>
+			<p>描述：{{$data.email}}</p>
+			<p>营业时间：{{$data.starttime}} - {{$data.endtime}}</p>
+			<p>店铺状态：{{if $data.closing}}临时关店{{else}}营业中{{/if}}</p>
+			<p>地址：{{$data.address}}</p>
+			<p>最低起送价：{{$data.min_price}}</p>
+		</blockquote>
+	</div>
+
+	<div class="section-title">
+		<h1>委派管理员</h1>
+	</div>
+
+	<div class="section">
+		<form action="__URL__/addmanager/id/{{$smarty.get.id}}" method="post" class="form-horizontal">
+
+			<div class="control-group">
+				<label class="control-label">管理员电子邮件</label>
+				<div class="controls">
+					<input type="text" class="span4" name="email" placeholder="输入管理员邮件地址">
+					<button type="submit" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">管理员</label>
+				<div class="controls">
+					<table class="table table-bordered table-condensed" style="width: 600px;">
+						<thead>
+							<tr>
+								<td>用户名</td>
+								<td>电子邮件</td>
+								<td class="span1">操作</td>
+							</tr>
+						</thead>
+						<tbody>
+							{{foreach $users as $value}}
+							<tr>
+								<td>{{$value.username}}</td>
+								<td>{{$value.email}}</td>
+								<td><a href="__URL__/removemanager/id/{{$smarty.get.id}}/user_id/{{$value.id}}" class="btn btn-mini"><i class="icon-trash"></i></a></td>
+							</tr>
+							{{/foreach}}
+						</tbody>
+					</table>
+					<span class="helper-block">
+						<label class="label label-warning"><i class="icon-info-sign icon-white"></i> 一个商店最多添加3个管理员</label>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>
+
+{{/block}}

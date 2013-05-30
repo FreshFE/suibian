@@ -3,12 +3,12 @@
 {{block 'mainarea'}}
 
 	<ul class="breadcrumb">
-		<li><a href="__URL__/index">用户管理</a> <span class="divider">/</span></li>
+		<li><a href="__URL__/index">商店管理</a> <span class="divider">/</span></li>
 		<li class="active">列表</li>
 	</ul>
 
 	<div class="section-title">
-		<h1>用户管理</h1>
+		<h1>商店管理</h1>
 	</div>
 
 	<div class="section">
@@ -33,20 +33,28 @@
 					<td>#{{$data.id}}</td>
 
 					<td>
-						{{$data.username}}
+						{{$data.title}}
 					</td>
 
 					<td>
-						{{$data.email}}
+						{{if $data.shop_category_id == 1}}
+							餐厅
+						{{else}}
+							超市
+						{{/if}}
 					</td>
 
 					<td>
-						{{$data.role}}
+						{{if $data.closing}}
+							停止营业
+						{{else}}
+							营业中
+						{{/if}}
 					</td>
 					
 					<td>
 						<div class="btn-group">
-							<a href="__URL__/detail/id/{{$data.id}}" class="btn btn-mini"><i class="icon-user"></i> 用户详情</a>
+							<a href="__URL__/detail/id/{{$data.id}}" class="btn btn-mini"><i class="icon-shopping-cart"></i> 详情</a>
 						</div>
 					</td>
 
