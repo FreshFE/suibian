@@ -9,10 +9,8 @@ class CheckAccountController extends Behavior
 {
 	public function run(&$params)
 	{
-		if(GROUP_NAME !== 'Home' || GROUP_NAME !== 'Api') {
-			if(CONTROLLER_NAME === 'Account') {
-				Redirect::success('', Url::make('Home/' . CONTROLLER_NAME . '/' . ACTION_NAME));
-			}
+		if(in_array(GROUP_NAME, array('Admin', 'Shopmanager')) && CONTROLLER_NAME === 'Account') {
+			Redirect::success('', Url::make('Home/' . CONTROLLER_NAME . '/' . ACTION_NAME));
 		}
 	}
 }
