@@ -9,6 +9,12 @@
 
 	<div class="section-title">
 		<h1>商店管理</h1>
+		<div class="bar">
+			<form class="form-search" method="get">
+				{{C('TOKEN_ON', false)}}
+				<input type="text" name="search" class="input-medium search-query" value="{{$smarty.get.search}}" placeholder="回车搜索">
+			</form>
+		</div>
 	</div>
 
 	<div class="section">

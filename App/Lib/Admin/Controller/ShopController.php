@@ -12,6 +12,16 @@ class ShopController extends Controller
 
 	protected $list_rows = 10;
 
+	public function index_query_before()
+	{
+		if(Request::query('search')) {
+
+			$search = Request::query('search');
+
+			$this->condition['title'] = array('like', '%'.$search.'%');
+		}
+	}
+
 	public function detail_query_after()
 	{
 		$model = $this->getModel('ShopManager');
