@@ -6,6 +6,49 @@
 		Welcome to Anyhow
 		<br>
 		一个给你提供外送简餐和日用品的软件
+
+		<div class="buttonarea">
+			{{if $role_admin}}
+			<a href="__APP__/admin" class="btn">超级管理员</a>
+			{{/if}}
+
+			{{if $role_shop_manager}}
+			<a href="__APP__/shopmanager" class="btn">商店管理员</a>
+			{{/if}}
+
+			{{if $role}}
+			<a href="__APP__/account/logout" class="btn">注销</a>
+			{{else}}
+			<a href="__APP__/account/login" class="btn">登录</a>
+			{{/if}}
+		</div>
 	</div>
+
+{{/block}}
+
+{{block 'css' append}}
+
+	<style type="text/css">
+
+		.buttonarea {
+			padding: 20px 0;
+		}
+
+		.buttonarea a.btn {
+			display: inline-block;
+			padding: 5px 15px;
+			font-size: 14px;
+			color: #5c666f;
+			background: #24292e;
+			text-decoration: none;
+			border-radius: 6px;
+			box-shadow: inset 1px 1px 2px rgba(0,0,0,.2);
+		}
+
+		.buttonarea a.btn:hover {
+			color: #95a3af;
+		}
+
+	</style>
 
 {{/block}}
