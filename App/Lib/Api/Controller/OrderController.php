@@ -205,10 +205,12 @@ class OrderController extends Controller
 			M('OrdersProduct')->addAll($arr);
 
 			// 更新价格
-			M('Orders')->where(array('id' => $orders_id))->save(array('price' => $total_price));
-
-			// 更新到Shop中
-			M('Shop')->where(array('id' => $shop_id))->save(array('buy_counts' => $total_num));
+			M('Orders')
+				->where(array('id' => $orders_id))
+				->save(array(
+					'price' => $total_price,
+					'buy_counts' => $total_num
+				));
 
 			return $orders_id;
 		}
