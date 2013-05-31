@@ -83,7 +83,7 @@ class ProductController extends Controller
 			$condition['shop_id'] = Request::query('shop');
 
 			$model = $this->getModel('ProductCategory');
-			$datas = $model->where($condition)->select();
+			$datas = $model->where($condition)->order('proirity ASC')->select();
 
 			if(!$datas) {
 				$datas = array();
