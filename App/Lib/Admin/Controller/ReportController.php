@@ -16,14 +16,24 @@ class ReportController extends Controller
 		// 今日订单数量
 		$data['today_orders_count'] = $Orders->where($today_condition)->count();
 
-		// 今日已完成订单数
-		$data['today_orders_doing_count'] = $Orders
-						->where(array_merge($today_condition, array('status' => 20)))
+		// 今日新订单数
+		$data['today_orders_new_count'] = $Orders
+						->where(array_merge($today_condition, array('status' => array('between', '0,9'))))
 						->count();
 
 		// 今日被拒订单数量
 		$data['today_orders_refuse_count'] = $Orders
-						->where(array_merge($today_condition, array('status' => 10)))
+						->where(array_merge($today_condition, array('status' => array('between', '10,19'))))
+						->count();
+
+		// 今日处理中订单数
+		$data['today_orders_doing_count'] = $Orders
+						->where(array_merge($today_condition, array('status' => array('between', '20,29'))))
+						->count();
+
+		// 今日已完成订单数
+		$data['today_orders_finish_count'] = $Orders
+						->where(array_merge($today_condition, array('status' => array('between', '30,39'))))
 						->count();
 
 		// 处理中订单总金额
