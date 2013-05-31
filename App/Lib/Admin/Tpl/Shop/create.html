@@ -1,0 +1,52 @@
+{{extends file="./layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li class="active">基本信息</li>
+	</ul>
+
+	<div class="section">
+
+		<form action="__SELF__" method="post" class="form-horizontal">
+
+			<fieldset>
+				<legend>基本信息</legend>
+			</fieldset>
+
+			<div class="control-group">
+				<label class="control-label">店名</label>
+				<div class="controls">
+					<input type="text" name="title">
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">分类</label>
+				<div class="controls">
+					<select name="shop_category_id">
+						{{foreach $category as $value}}
+						<option value="{{$value.id}}">{{$value.name}}</option>
+						{{/foreach}}
+					</select>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">地址</label>
+				<div class="controls">
+					<input type="text" name="address" class="span6">
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">保存设置</button>
+				<a href="__URL__/index" class="btn">取消</a>
+			</div>
+
+		</form>
+
+	</div>
+
+{{/block}}
+

@@ -2,6 +2,7 @@
 
 use Think\Controllers\Content as Controller;
 use Think\Redirect;
+use Think\Url;
 use Think\Request;
 use Think\Exception;
 use Think\Lang;
@@ -108,5 +109,27 @@ class ShopController extends Controller
 		else {
 			Redirect::success('移除失败');	
 		}
+	}
+
+	public function get_create()
+	{
+		$ShopCategory = $this->getModel('ShopCategory')->select();
+		$this->assign('category', $ShopCategory);
+
+		$this->display();
+	}
+
+	public function post_create()
+	{
+		$data = $this->model->create();
+
+		if($data) {
+			$id = $this->model->add($data);
+			if($id) {
+				Redirect::success('创建成功', Url::make('shop/index'));
+			}
+		}
+
+		Redirect::error('创建失败', Url::make('shop/index'));
 	}
 }
