@@ -307,12 +307,12 @@ body {
   position: relative;
   width: 100%;
   height: 464px;
-  background: #3b4146;
+  background: #fff;
   margin-bottom: 20px;
   overflow-x: hidden;
 }
 
-/* line 171, ../sass/sass/login.scss */
+/* line 172, ../sass/sass/login.scss */
 .home-slide {
   position: absolute;
   width: 1366px;
@@ -321,26 +321,26 @@ body {
   left: 50%;
   margin-left: -683px;
 }
-/* line 185, ../sass/sass/login.scss */
+/* line 186, ../sass/sass/login.scss */
 .home-slide .item {
   width: 1366px;
   height: 464px;
   float: left;
 }
-/* line 191, ../sass/sass/login.scss */
+/* line 192, ../sass/sass/login.scss */
 .home-slide .item img {
   display: block;
   width: 1366px;
   height: 464px;
 }
 
-/* line 199, ../sass/sass/login.scss */
+/* line 200, ../sass/sass/login.scss */
 .home-intro {
   width: 800px;
   margin: 0 auto;
   margin-bottom: 60px;
 }
-/* line 205, ../sass/sass/login.scss */
+/* line 206, ../sass/sass/login.scss */
 .home-intro h1 {
   display: none;
   padding: 0;
@@ -353,7 +353,7 @@ body {
   padding: 10px 20px;
   border-radius: 3px;
 }
-/* line 218, ../sass/sass/login.scss */
+/* line 219, ../sass/sass/login.scss */
 .home-intro ul.nav {
   list-style: none;
   padding: 0;
@@ -371,7 +371,7 @@ body {
 .home-intro ul.nav:after {
   clear: both;
 }
-/* line 225, ../sass/sass/login.scss */
+/* line 226, ../sass/sass/login.scss */
 .home-intro ul.nav li {
   list-style: none;
   float: left;
@@ -380,28 +380,28 @@ body {
   margin: 0;
   margin-left: 40px;
 }
-/* line 233, ../sass/sass/login.scss */
+/* line 234, ../sass/sass/login.scss */
 .home-intro ul.nav li h3 {
   font-size: 16px;
   color: #333;
 }
-/* line 238, ../sass/sass/login.scss */
+/* line 239, ../sass/sass/login.scss */
 .home-intro ul.nav li p {
   font-size: 14px;
   color: #666;
   line-height: 18px;
 }
-/* line 244, ../sass/sass/login.scss */
+/* line 245, ../sass/sass/login.scss */
 .home-intro ul.nav li.bordered {
   border-bottom: dashed 1px #ddd;
 }
 
-/* line 251, ../sass/sass/login.scss */
+/* line 252, ../sass/sass/login.scss */
 #footer {
   border-top: solid 1px #ddd;
   background: #f5f5f5;
 }
-/* line 261, ../sass/sass/login.scss */
+/* line 262, ../sass/sass/login.scss */
 #footer > .inner {
   width: 800px;
   margin: 0 auto;
@@ -411,7 +411,7 @@ body {
   color: #999;
 }
 
-/* line 271, ../sass/sass/login.scss */
+/* line 272, ../sass/sass/login.scss */
 .home-download {
   position: relative;
   width: 800px;
@@ -419,7 +419,7 @@ body {
   margin: 0 auto;
 }
 
-/* line 278, ../sass/sass/login.scss */
+/* line 279, ../sass/sass/login.scss */
 .home-download-panel {
   position: absolute;
   width: 220px;
@@ -429,7 +429,7 @@ body {
   top: -300px;
   z-index: 900;
 }
-/* line 289, ../sass/sass/login.scss */
+/* line 290, ../sass/sass/login.scss */
 .home-download-panel a.btn {
   display: block;
   height: 18px;
@@ -448,11 +448,11 @@ body {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
 }
-/* line 304, ../sass/sass/login.scss */
+/* line 305, ../sass/sass/login.scss */
 .home-download-panel a.btn:hover {
   background: #ea2b17;
 }
-/* line 309, ../sass/sass/login.scss */
+/* line 310, ../sass/sass/login.scss */
 .home-download-panel .code {
   margin-bottom: 20px;
   *zoom: 1;
@@ -467,14 +467,14 @@ body {
 .home-download-panel .code:after {
   clear: both;
 }
-/* line 314, ../sass/sass/login.scss */
+/* line 315, ../sass/sass/login.scss */
 .home-download-panel .code img {
   display: block;
   margin: 0 auto;
   width: 150px;
 }
 
-/* line 323, ../sass/sass/login.scss */
+/* line 324, ../sass/sass/login.scss */
 .system-tip {
   top: 30px;
   left: 20px;
@@ -493,7 +493,7 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 340, ../sass/sass/login.scss */
+/* line 341, ../sass/sass/login.scss */
 .system-tip.error {
   background: #bd362f;
   background: rgba(189, 54, 47, 0.7);
