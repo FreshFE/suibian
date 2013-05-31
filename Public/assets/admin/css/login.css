@@ -144,9 +144,10 @@ body {
   padding: 0;
   margin: 0;
   margin-top: 70px;
+  font-family: "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", "Microsoft Yahei", "微软雅黑", Tahoma, Arial, STHeiti, sans-serif;
 }
 
-/* line 18, ../sass/sass/login.scss */
+/* line 19, ../sass/sass/login.scss */
 #header {
   position: fixed;
   width: 100%;
@@ -159,7 +160,7 @@ body {
   -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-/* line 29, ../sass/sass/login.scss */
+/* line 30, ../sass/sass/login.scss */
 #header > .inner {
   margin: 0 auto;
   width: 800px;
@@ -176,7 +177,7 @@ body {
 #header > .inner:after {
   clear: both;
 }
-/* line 36, ../sass/sass/login.scss */
+/* line 37, ../sass/sass/login.scss */
 #header a.brand {
   display: block;
   float: left;
@@ -187,7 +188,7 @@ body {
   padding-top: 30px;
   text-decoration: none;
 }
-/* line 51, ../sass/sass/login.scss */
+/* line 52, ../sass/sass/login.scss */
 #header ul.nav {
   list-style: none;
   padding: 0;
@@ -195,12 +196,12 @@ body {
   padding-top: 18px;
   float: right;
 }
-/* line 58, ../sass/sass/login.scss */
+/* line 59, ../sass/sass/login.scss */
 #header ul.nav li {
   list-style: none;
   float: left;
 }
-/* line 62, ../sass/sass/login.scss */
+/* line 63, ../sass/sass/login.scss */
 #header ul.nav li a {
   display: block;
   padding: 10px;
@@ -208,30 +209,30 @@ body {
   font-size: 12px;
   color: #989a9d;
 }
-/* line 69, ../sass/sass/login.scss */
+/* line 70, ../sass/sass/login.scss */
 #header ul.nav li a:hover {
   color: #474e53;
 }
 
-/* line 78, ../sass/sass/login.scss */
+/* line 79, ../sass/sass/login.scss */
 .loginbox {
   width: 400px;
   margin: 0 auto;
   padding-top: 80px;
 }
-/* line 83, ../sass/sass/login.scss */
+/* line 84, ../sass/sass/login.scss */
 .loginbox .controls {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-/* line 89, ../sass/sass/login.scss */
+/* line 90, ../sass/sass/login.scss */
 .loginbox label.control-label {
   display: block;
   color: #fff;
   font-size: 14px;
   margin-bottom: 10px;
 }
-/* line 100, ../sass/sass/login.scss */
+/* line 101, ../sass/sass/login.scss */
 .loginbox input {
   width: 380px;
   display: block;
@@ -250,11 +251,11 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 114, ../sass/sass/login.scss */
+/* line 115, ../sass/sass/login.scss */
 .loginbox input:focus {
   border-color: #181b1d;
 }
-/* line 119, ../sass/sass/login.scss */
+/* line 120, ../sass/sass/login.scss */
 .loginbox button {
   width: 80px;
   padding: 8px 0;
@@ -268,11 +269,11 @@ body {
   border-radius: 5px;
 }
 
-/* line 131, ../sass/sass/login.scss */
+/* line 132, ../sass/sass/login.scss */
 .buttonarea {
   padding: 20px 0;
 }
-/* line 135, ../sass/sass/login.scss */
+/* line 136, ../sass/sass/login.scss */
 .buttonarea a.btn {
   display: inline-block;
   padding: 5px 15px;
@@ -285,23 +286,23 @@ body {
   -moz-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
   box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
-/* line 145, ../sass/sass/login.scss */
+/* line 146, ../sass/sass/login.scss */
 .buttonarea a.btn:hover {
   color: #95a3af;
 }
 
-/* line 151, ../sass/sass/login.scss */
+/* line 152, ../sass/sass/login.scss */
 .vertical-super {
   vertical-align: super;
   font-size: .5em;
 }
 
-/* line 156, ../sass/sass/login.scss */
+/* line 157, ../sass/sass/login.scss */
 .font-small {
   font-size: .8em;
 }
 
-/* line 160, ../sass/sass/login.scss */
+/* line 161, ../sass/sass/login.scss */
 .home-banner {
   position: relative;
   width: 100%;
@@ -311,7 +312,7 @@ body {
   overflow-x: hidden;
 }
 
-/* line 170, ../sass/sass/login.scss */
+/* line 171, ../sass/sass/login.scss */
 .home-slide {
   position: absolute;
   width: 1366px;
@@ -320,26 +321,26 @@ body {
   left: 50%;
   margin-left: -683px;
 }
-/* line 184, ../sass/sass/login.scss */
+/* line 185, ../sass/sass/login.scss */
 .home-slide .item {
   width: 1366px;
   height: 464px;
   float: left;
 }
-/* line 190, ../sass/sass/login.scss */
+/* line 191, ../sass/sass/login.scss */
 .home-slide .item img {
   display: block;
   width: 1366px;
   height: 464px;
 }
 
-/* line 198, ../sass/sass/login.scss */
+/* line 199, ../sass/sass/login.scss */
 .home-intro {
   width: 800px;
   margin: 0 auto;
   margin-bottom: 60px;
 }
-/* line 204, ../sass/sass/login.scss */
+/* line 205, ../sass/sass/login.scss */
 .home-intro h1 {
   display: none;
   padding: 0;
@@ -352,7 +353,7 @@ body {
   padding: 10px 20px;
   border-radius: 3px;
 }
-/* line 217, ../sass/sass/login.scss */
+/* line 218, ../sass/sass/login.scss */
 .home-intro ul.nav {
   list-style: none;
   padding: 0;
@@ -370,7 +371,7 @@ body {
 .home-intro ul.nav:after {
   clear: both;
 }
-/* line 224, ../sass/sass/login.scss */
+/* line 225, ../sass/sass/login.scss */
 .home-intro ul.nav li {
   list-style: none;
   float: left;
@@ -379,28 +380,28 @@ body {
   margin: 0;
   margin-left: 40px;
 }
-/* line 232, ../sass/sass/login.scss */
+/* line 233, ../sass/sass/login.scss */
 .home-intro ul.nav li h3 {
   font-size: 16px;
   color: #333;
 }
-/* line 237, ../sass/sass/login.scss */
+/* line 238, ../sass/sass/login.scss */
 .home-intro ul.nav li p {
   font-size: 14px;
   color: #666;
   line-height: 18px;
 }
-/* line 243, ../sass/sass/login.scss */
+/* line 244, ../sass/sass/login.scss */
 .home-intro ul.nav li.bordered {
   border-bottom: dashed 1px #ddd;
 }
 
-/* line 250, ../sass/sass/login.scss */
+/* line 251, ../sass/sass/login.scss */
 #footer {
   border-top: solid 1px #ddd;
   background: #f5f5f5;
 }
-/* line 260, ../sass/sass/login.scss */
+/* line 261, ../sass/sass/login.scss */
 #footer > .inner {
   width: 800px;
   margin: 0 auto;
@@ -410,7 +411,7 @@ body {
   color: #999;
 }
 
-/* line 270, ../sass/sass/login.scss */
+/* line 271, ../sass/sass/login.scss */
 .home-download {
   position: relative;
   width: 800px;
@@ -418,7 +419,7 @@ body {
   margin: 0 auto;
 }
 
-/* line 277, ../sass/sass/login.scss */
+/* line 278, ../sass/sass/login.scss */
 .home-download-panel {
   position: absolute;
   width: 220px;
@@ -428,7 +429,7 @@ body {
   top: -300px;
   z-index: 900;
 }
-/* line 288, ../sass/sass/login.scss */
+/* line 289, ../sass/sass/login.scss */
 .home-download-panel a.btn {
   display: block;
   height: 18px;
@@ -447,11 +448,11 @@ body {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
   margin-bottom: 20px;
 }
-/* line 303, ../sass/sass/login.scss */
+/* line 304, ../sass/sass/login.scss */
 .home-download-panel a.btn:hover {
   background: #ea2b17;
 }
-/* line 308, ../sass/sass/login.scss */
+/* line 309, ../sass/sass/login.scss */
 .home-download-panel .code {
   margin-bottom: 20px;
   *zoom: 1;
@@ -466,14 +467,14 @@ body {
 .home-download-panel .code:after {
   clear: both;
 }
-/* line 313, ../sass/sass/login.scss */
+/* line 314, ../sass/sass/login.scss */
 .home-download-panel .code img {
   display: block;
   margin: 0 auto;
   width: 150px;
 }
 
-/* line 322, ../sass/sass/login.scss */
+/* line 323, ../sass/sass/login.scss */
 .system-tip {
   top: 30px;
   left: 20px;
@@ -492,7 +493,7 @@ body {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 339, ../sass/sass/login.scss */
+/* line 340, ../sass/sass/login.scss */
 .system-tip.error {
   background: #bd362f;
   background: rgba(189, 54, 47, 0.7);
