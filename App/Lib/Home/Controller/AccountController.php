@@ -5,6 +5,7 @@ use Think\Auths\Authentication;
 use Think\Redirect;
 use Think\Url;
 use Think\Session;
+use Think\Lang;
 
 class AccountController extends Controller
 {
@@ -33,5 +34,17 @@ class AccountController extends Controller
 		$driver->remove();
 
 		Redirect::success('退出成功', Url::make('account/login'));
+	}
+
+	public function errorJson($error)
+	{
+		if(is_object($error)) {
+			$msg = Lang::get($error->getMessage());
+		}
+		else if(is_string($error)) {
+			$msg = Lang::get($error);
+		}
+
+		Redirect::error($msg);
 	}
 }
