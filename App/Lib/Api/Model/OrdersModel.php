@@ -47,7 +47,7 @@ class OrdersModel extends Model
 
 		if($datas) {
 			foreach ($datas as $key => &$data) {
-				$data['shop'] = D('Shop')->find($data['shop_id']);
+				$data['shop'] = D('Shop')->field('title')->find($data['shop_id']);
 			}
 		}
 		else {
