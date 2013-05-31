@@ -258,11 +258,11 @@ class OrderController extends Controller
 				throw new Exception("NO_GET_STATUS");
 			}
 
-			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
+			$datas = $this->getModel('Orders')->where($condition)->limit(10)->order('id DESC')->selectJoin();
 
-			if(!$datas) {
-				$datas = array();
-			}
+			// if(!$datas) {
+			// 	$datas = array();
+			// }
 
 			$this->successJson($datas);
 		}

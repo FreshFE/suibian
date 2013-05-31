@@ -40,4 +40,20 @@ class OrdersModel extends Model
 
 		return $data;
 	}
+
+	public function selectJoin()
+	{
+		$datas = $this->select();
+
+		if($datas) {
+			foreach ($datas as $key => &$data) {
+				$data['shop'] = D('Shop')->find($data['shop_id']);
+			}
+		}
+		else {
+			$datas = array();
+		}
+
+		return $datas;
+	}
 }
