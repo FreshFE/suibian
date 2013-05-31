@@ -16,7 +16,7 @@ class CategoryController extends CommonController
 		$condition = array('shop_id' => $this->shop['id']);
 
 		// 获取
-		$datas = $model->where($condition)->order('proirity ASC')->select();
+		$datas = $model->where($condition)->order('priority ASC')->select();
 
 		// 赋值
 		$this->assign('datas', $datas);
