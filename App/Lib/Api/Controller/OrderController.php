@@ -194,8 +194,8 @@ class OrderController extends Controller
 					'updateline' => time()
 				);
 
-				// 计算价格
-				$total_price += $value['price'];
+				// 计算价格 单价 * 数量
+				$total_price += $value['price'] * $foods[$value['id']];
 			}
 
 			// 添加orders和food表之间的关系
