@@ -138,18 +138,28 @@ textarea {
   vertical-align: top;
 }
 
-/* line 7, ../sass/sass/login.scss */
+/* line 9, ../sass/sass/login.scss */
 body {
-  background: #474e54;
+  background: #fff;
   padding: 0;
   margin: 0;
+  margin-top: 70px;
 }
 
-/* line 13, ../sass/sass/login.scss */
+/* line 18, ../sass/sass/login.scss */
 #header {
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  z-index: 1000;
+  top: 0;
+  left: 0;
   background: #fff;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-/* line 16, ../sass/sass/login.scss */
+/* line 29, ../sass/sass/login.scss */
 #header > .inner {
   margin: 0 auto;
   width: 800px;
@@ -166,7 +176,7 @@ body {
 #header > .inner:after {
   clear: both;
 }
-/* line 23, ../sass/sass/login.scss */
+/* line 36, ../sass/sass/login.scss */
 #header a.brand {
   display: block;
   float: left;
@@ -177,7 +187,7 @@ body {
   padding-top: 30px;
   text-decoration: none;
 }
-/* line 38, ../sass/sass/login.scss */
+/* line 51, ../sass/sass/login.scss */
 #header ul.nav {
   list-style: none;
   padding: 0;
@@ -185,12 +195,12 @@ body {
   padding-top: 18px;
   float: right;
 }
-/* line 45, ../sass/sass/login.scss */
+/* line 58, ../sass/sass/login.scss */
 #header ul.nav li {
   list-style: none;
   float: left;
 }
-/* line 49, ../sass/sass/login.scss */
+/* line 62, ../sass/sass/login.scss */
 #header ul.nav li a {
   display: block;
   padding: 10px;
@@ -198,30 +208,30 @@ body {
   font-size: 12px;
   color: #989a9d;
 }
-/* line 56, ../sass/sass/login.scss */
+/* line 69, ../sass/sass/login.scss */
 #header ul.nav li a:hover {
   color: #474e53;
 }
 
-/* line 65, ../sass/sass/login.scss */
+/* line 78, ../sass/sass/login.scss */
 .loginbox {
   width: 400px;
   margin: 0 auto;
   padding-top: 80px;
 }
-/* line 70, ../sass/sass/login.scss */
+/* line 83, ../sass/sass/login.scss */
 .loginbox .controls {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-/* line 76, ../sass/sass/login.scss */
+/* line 89, ../sass/sass/login.scss */
 .loginbox label.control-label {
   display: block;
   color: #fff;
   font-size: 14px;
   margin-bottom: 10px;
 }
-/* line 87, ../sass/sass/login.scss */
+/* line 100, ../sass/sass/login.scss */
 .loginbox input {
   width: 380px;
   display: block;
@@ -240,11 +250,11 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 101, ../sass/sass/login.scss */
+/* line 114, ../sass/sass/login.scss */
 .loginbox input:focus {
   border-color: #181b1d;
 }
-/* line 106, ../sass/sass/login.scss */
+/* line 119, ../sass/sass/login.scss */
 .loginbox button {
   width: 80px;
   padding: 8px 0;
@@ -256,4 +266,234 @@ body {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+}
+
+/* line 131, ../sass/sass/login.scss */
+.buttonarea {
+  padding: 20px 0;
+}
+/* line 135, ../sass/sass/login.scss */
+.buttonarea a.btn {
+  display: inline-block;
+  padding: 5px 15px;
+  font-size: 14px;
+  color: #5c666f;
+  background: #24292e;
+  text-decoration: none;
+  border-radius: 6px;
+  -webkit-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+/* line 145, ../sass/sass/login.scss */
+.buttonarea a.btn:hover {
+  color: #95a3af;
+}
+
+/* line 151, ../sass/sass/login.scss */
+.vertical-super {
+  vertical-align: super;
+  font-size: .5em;
+}
+
+/* line 156, ../sass/sass/login.scss */
+.font-small {
+  font-size: .8em;
+}
+
+/* line 160, ../sass/sass/login.scss */
+.home-banner {
+  position: relative;
+  width: 100%;
+  height: 464px;
+  background: #3b4146;
+  margin-bottom: 20px;
+  overflow-x: hidden;
+}
+
+/* line 170, ../sass/sass/login.scss */
+.home-slide {
+  position: absolute;
+  width: 1366px;
+  height: 464px;
+  overflow: hidden;
+  left: 50%;
+  margin-left: -683px;
+}
+/* line 184, ../sass/sass/login.scss */
+.home-slide .item {
+  width: 1366px;
+  height: 464px;
+  float: left;
+}
+/* line 190, ../sass/sass/login.scss */
+.home-slide .item img {
+  display: block;
+  width: 1366px;
+  height: 464px;
+}
+
+/* line 198, ../sass/sass/login.scss */
+.home-intro {
+  width: 800px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+/* line 204, ../sass/sass/login.scss */
+.home-intro h1 {
+  display: none;
+  padding: 0;
+  margin: 0;
+  width: 800px;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 14px;
+  background: #3b4146;
+  padding: 10px 20px;
+  border-radius: 3px;
+}
+/* line 217, ../sass/sass/login.scss */
+.home-intro ul.nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-left: -40px;
+  *zoom: 1;
+}
+/* line 15, ../sass/sass/bootstrap/_mixins.scss */
+.home-intro ul.nav:before, .home-intro ul.nav:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+/* line 22, ../sass/sass/bootstrap/_mixins.scss */
+.home-intro ul.nav:after {
+  clear: both;
+}
+/* line 224, ../sass/sass/login.scss */
+.home-intro ul.nav li {
+  list-style: none;
+  float: left;
+  width: 380px;
+  padding: 0;
+  margin: 0;
+  margin-left: 40px;
+}
+/* line 232, ../sass/sass/login.scss */
+.home-intro ul.nav li h3 {
+  font-size: 16px;
+  color: #333;
+}
+/* line 237, ../sass/sass/login.scss */
+.home-intro ul.nav li p {
+  font-size: 14px;
+  color: #666;
+  line-height: 18px;
+}
+/* line 243, ../sass/sass/login.scss */
+.home-intro ul.nav li.bordered {
+  border-bottom: dashed 1px #ddd;
+}
+
+/* line 250, ../sass/sass/login.scss */
+#footer {
+  border-top: solid 1px #ddd;
+  background: #f5f5f5;
+}
+/* line 260, ../sass/sass/login.scss */
+#footer > .inner {
+  width: 800px;
+  margin: 0 auto;
+  font-size: 12px;
+  padding: 20px 0;
+  text-align: center;
+  color: #999;
+}
+
+/* line 270, ../sass/sass/login.scss */
+.home-download {
+  position: relative;
+  width: 800px;
+  height: 1px;
+  margin: 0 auto;
+}
+
+/* line 277, ../sass/sass/login.scss */
+.home-download-panel {
+  position: absolute;
+  width: 220px;
+  height: 280px;
+  padding: 20px;
+  right: 0;
+  top: -300px;
+  z-index: 900;
+}
+/* line 288, ../sass/sass/login.scss */
+.home-download-panel a.btn {
+  display: block;
+  height: 18px;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  background: #ec412f;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 20px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+}
+/* line 303, ../sass/sass/login.scss */
+.home-download-panel a.btn:hover {
+  background: #ea2b17;
+}
+/* line 308, ../sass/sass/login.scss */
+.home-download-panel .code {
+  margin-bottom: 20px;
+  *zoom: 1;
+}
+/* line 15, ../sass/sass/bootstrap/_mixins.scss */
+.home-download-panel .code:before, .home-download-panel .code:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+/* line 22, ../sass/sass/bootstrap/_mixins.scss */
+.home-download-panel .code:after {
+  clear: both;
+}
+/* line 313, ../sass/sass/login.scss */
+.home-download-panel .code img {
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+}
+
+/* line 322, ../sass/sass/login.scss */
+.system-tip {
+  top: 30px;
+  left: 20px;
+  position: fixed;
+  font-size: 12px;
+  background: #51a351;
+  background: rgba(81, 163, 81, 0.7);
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  max-width: 300px;
+  min-width: 120px;
+  cursor: pointer;
+  z-index: 9000;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+/* line 339, ../sass/sass/login.scss */
+.system-tip.error {
+  background: #bd362f;
+  background: rgba(189, 54, 47, 0.7);
 }

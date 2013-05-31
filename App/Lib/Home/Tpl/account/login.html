@@ -1,5 +1,15 @@
 {{extends file="../Bases/layout.html"}}
 
+{{block 'css' append}}
+
+<style type="text/css">
+	body {
+		background: #474e54;
+	}
+</style>
+
+{{/block}}
+
 {{block 'content'}}
 	<div class="loginbox">
 		<form action="__SELF__" method="post" class="form-horizontal">
@@ -30,4 +40,7 @@
 
 		</form>
 	</div>
+{{/block}}
+
+{{block 'footerwrap'}}
 {{/block}}

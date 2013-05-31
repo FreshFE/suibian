@@ -6,6 +6,9 @@
 	{{block 'css'}}
 	<link rel="stylesheet" type="text/css" href="@/admin/css/login.css">
 	{{/block}}
+	{{block 'js'}}
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	{{/block}}
 </head>
 <body>
 
@@ -13,14 +16,20 @@
 		{{block 'header'}}
 		<div class="inner">
 
-			<a href="#" class="brand">Anyhow</a>
+			<a href="__APP__/" class="brand">随<span class="vertical-super">2</span><span class="font-small">Anyhow</span></a>
 
 			<ul class="nav">
-				<li><a href="#">关于Anyhow</a></li>
+				<li><a href="#">关于我们</a></li>
 				<li><a href="#">商店主权利</a></li>
 				<li><a href="#">合作与广告</a></li>
+				{{Helper::widget('systemPanel')}}
 			</ul>
 		</div>
+		{{/block}}
+	</div>
+
+	<div id="banner">
+		{{block 'banner'}}
 		{{/block}}
 	</div>
 
@@ -28,6 +37,23 @@
 		{{block 'content'}}
 		{{/block}}
 	</div>
+
+	{{block 'footerwrap'}}
+	<div id="footer">
+		{{block 'footer'}}
+		<div class="inner">
+			<div class="copyright">
+				Copyright@2013 Yuntro All Rights Reserved 云卓公司 版权所有
+			</div>
+		</div>
+		{{/block}}
+	</div>
+	{{/block}}
+
+	{{Helper::widget('systemTip')}}
+
+	{{block 'bodyjs'}}
+	{{/block}}
 
 </body>
 </html>
