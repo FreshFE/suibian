@@ -196,6 +196,9 @@ class OrderController extends Controller
 
 				// 计算价格 单价 * 数量
 				$total_price += $value['price'] * $foods[$value['id']];
+
+				// 计算总数量
+				$total_num += $foods[$value['id']];
 			}
 
 			// 添加orders和food表之间的关系
@@ -203,6 +206,9 @@ class OrderController extends Controller
 
 			// 更新价格
 			M('Orders')->where(array('id' => $orders_id))->save(array('price' => $total_price));
+
+			// 更新到Shop中
+			M('Shop')->where(array('id' => $shop_id))->save(array('buy_counts' => $total_num));
 
 			return $orders_id;
 		}
