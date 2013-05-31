@@ -8,7 +8,7 @@
 	</ul>
 
 	<div class="section-title">
-		<h1>{{$data.username}}</h1>
+		<h1>{{$data.title}}</h1>
 	</div>
 
 	<div class="section">
@@ -65,4 +65,24 @@
 		</form>
 	</div>
 
+	<div class="section-title">
+		<h1>管理</h1>
+	</div>
+
+	<div class="section">
+		<a href="__URL__/delete/id/{{$smarty.get.id}}" class="btn btn-danger btn-small" id="J_delete"><i class="icon-trash icon-white"></i> 删除该商店</a>
+	</div>
+
+{{/block}}
+
+{{block bodyjs append}}
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#J_delete').on('click', function () {
+			if(!confirm('确定删除？')) {
+				return false;
+			}
+		});
+	});
+</script>
 {{/block}}

@@ -132,4 +132,16 @@ class ShopController extends Controller
 
 		Redirect::error('创建失败', Url::make('shop/index'));
 	}
+
+	public function delete()
+	{
+		if($this->pk_id) {
+
+			$id = $this->model->delete($this->pk_id);
+
+			if($id) {
+				Redirect::success('删除成功', Url::make('shop/index'));
+			}
+		}
+	}
 }
