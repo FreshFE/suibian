@@ -1,76 +1,48 @@
 {{extends file="../Bases/layout.html"}}
 
+{{block 'banner'}}
+
+	<div class="home-banner">
+		<div class="home-slide" id="J_slide">
+			<div class="reel">
+				<div class="item"><img src="@/assets/images/banner1.jpg"></div>
+				<div class="item"><img src="@/assets/images/banner2.jpg"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="home-download">
+		<div class="home-download-panel">
+			<div class="code">
+				<img src="@/assets/images/qrcode.png">
+			</div>
+			<a href="http://42.121.118.13:90/suibian.apk" class="btn">下载 Android 版</a>
+
+		</div>
+	</div>
+
+{{/block}}
+
 {{block 'content'}}
-                
-<div id="info">
-    <a href="account/login" data-post="email=minowu@vip.qq.com&password=123456">Login</a>
-    <a href="account/logout">Logout</a>
 
-    <hr>
+{{/block}}
 
-    <a href="food/index">餐品列表</a>
-    <a href="food/shop" data-post="shop_id=1">获得商店的餐品</a>
-    <a href="food/favorite">吃过的餐品</a>
+{{block 'bodyjs' append}}
 
-    <hr>
+	<script type="text/javascript" src="@/assets/js/jquery.switchable.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
 
-    <a href="resraurant/index">餐厅列表</a>
+			var $slide = $('#J_slide .reel');
 
-    <hr>
-
-    <a href="order/create" data-post='food_id_str=[{"id":1,"num":2}]'>创建订单</a>
-</div>
-
-<script type="text/javascript" src="@/assets/js/jquery.js"></script>
-<script type="text/javascript">
-    
-    window.access_token = null;
-
-    function ajax(address, params) {
-
-        if(window.access_token !== null) {
-            params = params + '&access_token=' + window.access_token;
-        }
-
-        $.ajax({
-            "type": 'POST',
-            "url": '/api/' + address,
-            "data": params,
-            "dataType": 'JSON',
-            "success": function (data) {
-                console.log(data);
-
-                if(data && data.access_token && data.access_token !== null && data.access_token !== '') {
-                    window.access_token = data.access_token;
-                }
-
-                console.log(window.access_token);
-            }
-        });
-    }
-
-    $(document).ready(function() {
-
-        var $info = $('#info');
-        
-
-        // $(window).on('hashchange', function() {
-
-        //      var hash = window.location.hash;
-        //      ajax(hash.split('#')[1]);
-                
-        // });
-
-        $info.delegate('a', 'click', function() {
-
-            var href = $(this).attr('href');
-            var params = $(this).data('post');
-
-            ajax(href, params);
-            return false;
-        });
-    });
-
-</script>
+			$slide.switchable({
+				'triggers': false,
+				'autoplay': true,
+				'effect': 'scrollLeft',
+				'easing': 'ease-in-out',
+				'duration': 1
+			});
+		});
+	</script>
 
 {{/block}}

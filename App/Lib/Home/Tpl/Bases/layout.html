@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Poster</title>
+	<meta charset="utf-8">
+	<title>随2 | 做好外送</title>
+	{{block 'css'}}
+	<link rel="stylesheet" type="text/css" href="@/admin/css/login.css">
+	{{/block}}
+	{{block 'js'}}
+	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
+	{{/block}}
 </head>
 <body>
 
-	{{block 'content'}}
+	<div id="header">
+		{{block 'header'}}
+		<div class="inner">
+
+			<a href="__APP__/" class="brand">
+				<img src="@/assets/images/logo.png" width="36">
+			</a>
+
+			<ul class="nav">
+				<li><a href="http://42.121.118.13:90/suibian.apk">下载Android版</a></li>
+				{{Helper::widget('systemPanel')}}
+			</ul>
+		</div>
+		{{/block}}
+	</div>
+
+	<div id="banner">
+		{{block 'banner'}}
+		{{/block}}
+	</div>
+
+	<div id="content">
+		{{block 'content'}}
+		{{/block}}
+	</div>
+
+	{{block 'footerwrap'}}
+	<div id="footer">
+		{{block 'footer'}}
+		<div class="inner">
+			<div class="copyright">
+				Copyright@2013 Yuntro All Rights Reserved 云卓公司 版权所有
+			</div>
+		</div>
+		{{/block}}
+	</div>
+	{{/block}}
+
+	{{Helper::widget('systemTip')}}
+
+	{{block 'bodyjs'}}
 	{{/block}}
 
 </body>

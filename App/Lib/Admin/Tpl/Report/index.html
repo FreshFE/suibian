@@ -1,0 +1,53 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">统计数据</a> <span class="divider">/</span></li>
+		<li class="active">列表</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>今日相关数据</h1>
+	</div>
+
+	<div class="section">
+
+		<blockquote>
+			<p>今日订单总数：{{$data.today_orders_count}}</p>
+			<p>今日新订单总数：{{$data.today_orders_new_count}}</p>
+			<p>今日被拒订单数量：{{$data.today_orders_refuse_count}}</p>
+			<p>今日处理中订单数：{{$data.today_orders_doing_count}}</p>
+			<p>今日已完成订单数：{{$data.today_orders_finish_count}}</p>
+			<p>今日新增用户总数：{{$data.today_user}}</p>
+		</blockquote>
+	</div>
+
+	<div class="section-title">
+		<h1>总金额数据</h1>
+	</div>
+
+	<div class="section">
+		<blockquote>
+			<p>处理中订单总金额：{{$data.orders_doing_price}}</p>
+			<p>已完成的订单总金额：{{$data.orders_finish_price}}</p>
+		</blockquote>
+	</div>
+
+	<div class="section-title">
+		<h1>总数</h1>
+	</div>
+
+	<div class="section">
+		<blockquote>
+			<p>订单总数：{{$data.orders}}</p>
+			<p>商店总数：{{$data.shop}}</p>
+			<p>商品总数：{{$data.product}}</p>
+			<p>用户总数：{{$data.user}}</p>
+		</blockquote>
+	</div>
+
+	
+
+{{/block}}
+

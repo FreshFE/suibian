@@ -1,0 +1,69 @@
+{{extends file="./layout.html"}}
+
+{{block 'mainarea'}}
+
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">用户管理</a> <span class="divider">/</span></li>
+		<li class="active">列表</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>用户管理</h1>
+		<div class="bar">
+			<form class="form-search" method="get">
+				{{C('TOKEN_ON', false)}}
+				<input type="text" name="search" class="input-medium search-query" value="{{$smarty.get.search}}" placeholder="回车搜索">
+			</form>
+		</div>
+	</div>
+
+	<div class="section">
+
+		<table class="table table-hover table-striped">
+				
+			<thead>
+				<tr>
+					<td class="span1">ID</td>
+					<td>用户名</td>
+					<td>电子邮件</td>
+					<td>用户组</td>
+					<td class="span1"></td>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				{{foreach $datas as $data}}
+				<tr>
+
+					<td>#{{$data.id}}</td>
+
+					<td>
+						{{$data.username}}
+					</td>
+
+					<td>
+						{{$data.email}}
+					</td>
+
+					<td>
+						{{$data.role}}
+					</td>
+					
+					<td>
+						<div class="btn-group">
+							<a href="__URL__/detail/id/{{$data.id}}" class="btn btn-mini"><i class="icon-user"></i> 用户详情</a>
+						</div>
+					</td>
+
+				</tr>
+				{{/foreach}}
+
+			</tbody>
+		</table>
+
+		{{include file="../Bases/page.html"}}
+	</div>
+
+{{/block}}
+

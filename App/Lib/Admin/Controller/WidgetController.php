@@ -1,7 +1,8 @@
-<?php
+<?php namespace App\Admin\Controller;
 
-use Think\Controller as Controller;
-use Think\Session as Session;
+use Think\Controller;
+use Think\Session;
+use Think\Request;
 
 class WidgetController extends Controller {
 
@@ -26,5 +27,11 @@ class WidgetController extends Controller {
 		}
 
 		return ;
+	}
+
+	public function systemPanel()
+	{
+		$this->assign('user', Request::getStorage('user'));
+		return $this->fetch('Widget:systempanel');
 	}
 }

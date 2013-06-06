@@ -194,15 +194,23 @@ class OrderController extends Controller
 					'updateline' => time()
 				);
 
-				// 计算价格
-				$total_price += $value['price'];
+				// 计算价格 单价 * 数量
+				$total_price += $value['price'] * $foods[$value['id']];
+
+				// 计算总数量
+				$total_num += $foods[$value['id']];
 			}
 
 			// 添加orders和food表之间的关系
 			M('OrdersProduct')->addAll($arr);
 
 			// 更新价格
-			M('Orders')->where(array('id' => $orders_id))->save(array('price' => $total_price));
+			M('Orders')
+				->where(array('id' => $orders_id))
+				->save(array(
+					'price' => $total_price,
+					'buy_counts' => $total_num
+				));
 
 			return $orders_id;
 		}
@@ -229,15 +237,19 @@ class OrderController extends Controller
 				if(!is_numeric($status)) {
 					switch ($status) {
 						case 'new':
-							$status = 0;
+							$status = array('between', '0,9');
+							break;
+
+						case 'refuse':
+							$status = array('between', '10,19');
 							break;
 
 						case 'doing':
-							$status = 20;
+							$status = array('between', '20,29');
 							break;
 
 						case 'finish':
-							$status = 30;
+							$status = array('between', '30,39');
 							break;
 						
 						default:
@@ -254,11 +266,11 @@ class OrderController extends Controller
 				throw new Exception("NO_GET_STATUS");
 			}
 
-			$datas = D('Orders')->where($condition)->limit(10)->order('id DESC')->select();
+			$datas = $this->getModel('Orders')->where($condition)->limit(10)->order('id DESC')->selectJoin();
 
-			if(!$datas) {
-				$datas = array();
-			}
+			// if(!$datas) {
+			// 	$datas = array();
+			// }
 
 			$this->successJson($datas);
 		}

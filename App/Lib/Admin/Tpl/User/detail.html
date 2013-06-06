@@ -1,0 +1,64 @@
+{{extends file="../Bases/layout.html"}}
+
+{{block 'mainarea'}}
+	
+	<ul class="breadcrumb">
+		<li><a href="__URL__/index">用户管理</a> <span class="divider">/</span></li>
+		<li class="active">基本资料</li>
+	</ul>
+
+	<div class="section-title">
+		<h1>{{$data.username}}</h1>
+	</div>
+
+	<div class="section">
+		<div class="row">
+			<div class="span2">
+				<img src="{{Helper::img($data['coverpath'])}}">
+			</div>
+			<div class="span7">
+				<blockquote>
+					<p>用户名：{{$data.username}}</p>
+					<p>电子邮件：{{$data.email}}</p>
+					<p>用户角色：{{$data.role}}</p>
+					<p>加入时间：{{date('Y年m月d日 H时', $data['createline'])}}</p>
+					<p>上次登录：{{date('Y年m月d日 H时', $data['updateline'])}}</p>
+					{{if $data.phone}}
+					<p>联系方式：{{$data.phone}}</p>
+					{{/if}}
+				</blockquote>
+			</div>
+		</div>
+	</div>
+
+	<div class="section-title">
+		<h1>管理</h1>
+	</div>
+
+	<div class="section">
+		<form action="__URL__/edit" method="post" class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">更换用户角色</label>
+				<div class="controls">
+					<select name="role">
+						{{foreach array('ROLE_FORBIDDEN', 'ROLE_MEMBER', 'ROLE_ADMIN') as $value}}
+						<option value="{{$value}}" {{if $data.role == $value}}selected="selected"{{/if}}>{{$value}}</option>
+						{{/foreach}}
+					</select>
+					<div class="help-block">
+						<label class="label label-warning"><i class="icon-info-sign icon-white"></i> 慎重使用本功能</label><br>
+						<p>ROLE_FORBIDDEN -- 禁止访问用户组</p>
+						<p>ROLE_MEMBER -- 普通会员用户组</p>
+						<p>ROLE_ADMIN -- 超级管理员用户组</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<input type="hidden" name="id" value="{{$data.id}}">
+				<button type="submit" class="btn btn-primary">保存设置</button>
+			</div>
+		</form>
+	</div>
+
+{{/block}}

@@ -14,25 +14,29 @@
 </head>
 <body>
 
+	{{block 'header'}}
 	<div id="header">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="layout">
-					<a class="brand" href="__GROUP__"></a>
+					<a class="brand" href="__GROUP__">
+						<img src="@/assets/images/logo.png" width="24">
+						系统管理
+					</a>
 
 					<div class="nav-collapse collapse">
 						{{block 'navigation'}}
 						<ul class="nav">
-							<li{{Helper::active('food/*')}}><a href="__GROUP__/food">餐品管理</a></li>
+							<!-- <li{{Helper::active('index/*')}}><a href="__GROUP__/index">主页</a></li> -->
+							<li{{Helper::active('user/*')}}><a href="__GROUP__/user">用户管理</a></li>
 							<li{{Helper::active('shop/*')}}><a href="__GROUP__/shop">商店管理</a></li>
-							<li{{Helper::active('sitemap/*')}}><a href="__GROUP__/sitemap">分类管理</a></li>
-
-							<!-- <li class="divider-vertical"></li>
-							<li{{Helper::active('image/*')}}><a href="__GROUP__/image">图片夹</a></li> -->
+							<li{{Helper::active('report/*')}}><a href="__GROUP__/report">统计数据</a></li>
 						</ul>
 
 						<ul class="nav pull-right">
-							<li><a href="__GROUP__/account/logout" title="logout"><i class="icon-off icon-white"></i></a></li>
+							{{Helper::widget('systemPanel')}}
+							<li><a href="__APP__/"><i class="icon-home icon-white"></i></a></li>
+							<li><a href="__APP__/account/logout" title="logout"><i class="icon-off icon-white"></i></a></li>
 						</ul>
 						{{/block}}
 					</div>
@@ -40,7 +44,9 @@
 			</div>
 		</div>
 	</div>
+	{{/block}}
 
+	{{block 'content'}}
 	<div id="content">
 		<div class="sidebar">
 			<div class="inner">
@@ -56,12 +62,15 @@
 			</div>
 		</div>
 	</div>
+	{{/block}}
 
+	{{block 'footer'}}
 	<div id="footer">
 		<div class="inner">
 			2004-2013&copy;Methink of <span title="The Royuan and Great World Group">The RG</span>
 		</div>
 	</div>
+	{{/block}}
 
 	{{Helper::widget('systemTip')}}
 	

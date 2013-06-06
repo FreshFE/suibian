@@ -3,14 +3,18 @@
 {{block 'mainarea'}}
 
 	<ul class="breadcrumb">
-		<li><a href="__URL__/index">餐品管理</a> <span class="divider">/</span></li>
+		<li><a href="__URL__/index">商品管理</a> <span class="divider">/</span></li>
 		<li class="active">列表</li>
 	</ul>
 
 	<div class="section-title">
-		<h1>餐品管理</h1>
+		<h1>商品管理</h1>
 		<div class="bar">
-			<a href="__URL__/add" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
+			<form class="form-search" method="get" style="display: inline-block; margin-right: 20px;">
+				{{C('TOKEN_ON', false)}}
+				<input type="text" name="search" class="input-medium search-query" value="{{$smarty.get.search}}" placeholder="回车搜索商品">
+			</form>
+			<a href="__URL__/add{{if $smarty.get.product_category_id}}?product_category_id={{$smarty.get.product_category_id}}{{/if}}" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
 		</div>
 	</div>
 

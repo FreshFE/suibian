@@ -19,19 +19,35 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="layout">
-					<a class="brand" href="__GROUP__"></a>
+					<a class="brand" href="__GROUP__">
+						<img src="@/assets/images/logo.png" width="24">
+						商店管理
+					</a>
 
 					<div class="nav-collapse collapse">
 						{{block 'navigation'}}
 						<ul class="nav">
-							<li{{Helper::active('index/*')}}><a href="__GROUP__/index">全局</a></li>
+							<!-- <li{{Helper::active('index/*')}}><a href="__GROUP__/index">全局</a></li> -->
 							<li{{Helper::active('shop/*')}}><a href="__GROUP__/shop">基本信息</a></li>
 							<li{{Helper::active('category/*')}}><a href="__GROUP__/category">商品分类</a></li>
 							<li{{Helper::active('product/*')}}><a href="__GROUP__/product">商品管理</a></li>
-							<li{{Helper::active('order/*')}}><a href="__GROUP__/order">订单管理</a></li>
+
+							<li{{Helper::active('order/*', 'dropdown')}}>
+                                <a href="__GROUP__/order" class="dropdown-toggle" data-toggle="dropdown">
+									订单管理
+									{{Helper::widget('systemOrder')}}
+									<b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="__GROUP__/order"><i class="icon-eye-open"></i> 新订单跟踪</a></li>
+                                    <!-- <li><a href="__GROUP__/category"><i class="icon-bullhorn"></i> 订单状态查询</a></li> -->
+                                </ul>
+	                        </li>
 						</ul>
 
 						<ul class="nav pull-right">
+							{{Helper::widget('systemPanel')}}
+							<li><a href="__APP__/"><i class="icon-home icon-white"></i></a></li>
 							<li><a href="__GROUP__/account/logout" title="logout"><i class="icon-off icon-white"></i></a></li>
 						</ul>
 						{{/block}}

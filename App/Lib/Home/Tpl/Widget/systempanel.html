@@ -1,0 +1,13 @@
+{{if $role_admin}}
+<li><a href="__APP__/admin">系统管理</a></li>
+{{/if}}
+
+{{if $role_shop_manager}}
+<li><a href="__APP__/shopmanager">商店管理</a></li>
+{{/if}}
+
+{{if $role}}
+<li><a href="__APP__/account/logout">注销</a></li>
+{{else}}
+<li><a href="__APP__/account/login">登录</a></li>
+{{/if}}

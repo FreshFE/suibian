@@ -67,3 +67,21 @@
             }
         ]
     }
+
+## 随机获得产品详情
+
+### Request
+
+    url: /product/random
+    method: GET
+    params:
+        type | false | string | // 默认为“全部”，"restaurant" => 餐厅，"market" => 超市
+
+### Response
+
+    {
+        "success": 1,
+        "data": {
+            // @link 参考产品 JSON 字段
+        }
+    }

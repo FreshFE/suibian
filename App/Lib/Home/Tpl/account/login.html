@@ -1,26 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>项目</title>
-	<script type="text/javascript" src="@/admin/js/jquery.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
+{{extends file="../Bases/layout.html"}}
 
-			$.post(
-				'/api/account/login',
-				{
-					"email": "minowu@vip.qq.com",
-					"password": "123456"
-				},
-				function(data) {
-					console.log(data);
-				}
-			);
+{{block 'css' append}}
 
-		});
-	</script>
-</head>
-<body>
+<style type="text/css">
+	body {
+		background: #474e54;
+	}
+</style>
 
-</body>
-</html>
+{{/block}}
+
+{{block 'content'}}
+	<div class="loginbox">
+		<form action="__SELF__" method="post" class="form-horizontal">
+
+			<div class="control-group">
+				<label class="control-label">电子邮件 (Email)</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-user"></i></span>
+						<input type="text" name="email" placeholder="输入您的电子邮件">
+					</div>
+				</div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label">密码 (Password)</label>
+				<div class="controls">
+					<div class="input-prepend">
+						<span class="add-on"><i class="icon-lock"></i></span>
+						<input type="password" name="password" placeholder="密码">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">登录</button>
+			</div>
+
+		</form>
+	</div>
+{{/block}}
+
+{{block 'footerwrap'}}
+{{/block}}

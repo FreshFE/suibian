@@ -5,6 +5,8 @@ use Think\Auths\Authentication;
 use Think\Redirect;
 use Think\Url;
 
+exit('暂停使用本类');
+
 class AccountController extends Controller
 {
 	public function get_login()

@@ -7,19 +7,27 @@
 /* line 13, ../sass/sass/admin.scss */
 #header .layout .brand {
   display: block;
-  width: 200px;
-  padding: 0;
-  margin: 0;
-  height: 38px;
+  width: 160px;
+  margin-right: 0;
+  margin-left: 0;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+}
+/* line 22, ../sass/sass/admin.scss */
+#header .layout .brand:hover {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
+  -webkit-transform: rotate(-3deg);
 }
 
-/* line 22, ../sass/sass/admin.scss */
+/* line 30, ../sass/sass/admin.scss */
 #content {
   padding: 0;
   padding-top: 41px;
 }
 
-/* line 29, ../sass/sass/admin.scss */
+/* line 37, ../sass/sass/admin.scss */
 #footer > .inner {
   color: #bbb;
   font-size: 10px;
@@ -28,7 +36,7 @@
   float: right;
 }
 
-/* line 39, ../sass/sass/admin.scss */
+/* line 47, ../sass/sass/admin.scss */
 .mainarea {
   margin-left: 200px;
   min-height: 600px;
@@ -43,25 +51,25 @@
   -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-/* line 49, ../sass/sass/admin.scss */
+/* line 57, ../sass/sass/admin.scss */
 .mainarea > .inner {
   padding: 20px 40px;
 }
 
-/* line 55, ../sass/sass/admin.scss */
+/* line 63, ../sass/sass/admin.scss */
 .sidebar {
   width: 200px;
   padding-top: 20px;
   float: left;
 }
-/* line 60, ../sass/sass/admin.scss */
+/* line 68, ../sass/sass/admin.scss */
 .sidebar > .inner {
   position: fixed;
   width: 180px;
   left: 15px;
 }
 
-/* line 69, ../sass/sass/admin.scss */
+/* line 77, ../sass/sass/admin.scss */
 .nav-sidebar > li > a {
   padding: 6px 15px;
   -webkit-border-radius: 0;
@@ -77,24 +85,24 @@
   overflow: hidden;
   *zoom: 1;
 }
-/* line 74, ../sass/sass/admin.scss */
+/* line 82, ../sass/sass/admin.scss */
 .nav-sidebar > li > a > i {
   float: right;
   opacity: .5;
 }
-/* line 82, ../sass/sass/admin.scss */
+/* line 90, ../sass/sass/admin.scss */
 .nav-sidebar > li.active > a > i {
   opacity: 1;
 }
 
-/* line 90, ../sass/sass/admin.scss */
+/* line 98, ../sass/sass/admin.scss */
 .section-title {
   border-bottom: solid 1px #e5e5e5;
   margin-bottom: 20px;
   overflow: hidden;
   *zoom: 1;
 }
-/* line 95, ../sass/sass/admin.scss */
+/* line 103, ../sass/sass/admin.scss */
 .section-title h1 {
   float: left;
   font-size: 21px;
@@ -103,12 +111,12 @@
   padding: 0;
   font-weight: normal;
 }
-/* line 104, ../sass/sass/admin.scss */
+/* line 112, ../sass/sass/admin.scss */
 .section-title .bar {
   float: right;
 }
 
-/* line 109, ../sass/sass/admin.scss */
+/* line 117, ../sass/sass/admin.scss */
 .system-tip {
   top: 20px;
   left: 20px;
@@ -129,7 +137,7 @@
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 126, ../sass/sass/admin.scss */
+/* line 134, ../sass/sass/admin.scss */
 .system-tip.error {
   background: #bd362f;
   background: rgba(189, 54, 47, 0.7);

@@ -10,7 +10,11 @@
 	<div class="section-title">
 		<h1>商店管理</h1>
 		<div class="bar">
-			<a href="__URL__/add" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
+			<form class="form-search" method="get" style="display: inline-block; margin-right: 10px;">
+				{{C('TOKEN_ON', false)}}
+				<input type="text" name="search" class="input-medium search-query" value="{{$smarty.get.search}}" placeholder="回车搜索">
+			</form>
+			<a href="__URL__/create" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> 新建</a>
 		</div>
 	</div>
 
@@ -22,8 +26,9 @@
 				<tr>
 					<td class="span1">ID</td>
 					<td class="span1">公开？</td>
-					<td>标题</td>
-					<td>更新日期</td>
+					<td>商店名</td>
+					<td>商店类型</td>
+					<td>营业状态</td>
 					<td class="span1"></td>
 				</tr>
 			</thead>
@@ -48,17 +53,30 @@
 							</div>
 						{{/if}}
 					</td>
+
 					<td>
 						{{$data.title}}
 					</td>
 
-					<td>{{date('Y-m-d', $data['updateline'])}}</td>
+					<td>
+						{{if $data.shop_category_id == 1}}
+							餐厅
+						{{else}}
+							超市
+						{{/if}}
+					</td>
+
+					<td>
+						{{if $data.closing}}
+							停止营业
+						{{else}}
+							营业中
+						{{/if}}
+					</td>
 					
 					<td>
 						<div class="btn-group">
-							<a href="__GROUP__/food/index/shop/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-th"></i></a>
-							<a href="__URL__/edit/id/{{$data.id}}" class="btn btn-mini" title="Edit"><i class="icon-edit"></i></a>
-							<a href="__URL__/delete/id/{{$data.id}}" class="btn btn-mini" title="Delete"><i class="icon-trash"></i></a>
+							<a href="__URL__/detail/id/{{$data.id}}" class="btn btn-mini"><i class="icon-shopping-cart"></i> 详情</a>
 						</div>
 					</td>
 
