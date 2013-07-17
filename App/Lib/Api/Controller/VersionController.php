@@ -10,7 +10,8 @@ class VersionController extends Controller
 			"android" => array(
 				"newest" => "2.0.0",
                 "available" => "2.0.0",
-                "link" => "http://42.121.118.13:81/suibian.apk"
+                "link" => "http://dl.yundro.com/suibian.apk",
+                "message" => "[随2]将从内部测试版迁移到公网测试版了，所以及时更新"
 			)
 		);
 
