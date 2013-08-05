@@ -8,10 +8,10 @@ class VersionController extends Controller
 	{
 		$data = array(
 			"android" => array(
-				"newest" => "2.1.0",
-                "available" => "2.1.0",
+				"newest" => "2.2.0",
+                "available" => "2.2.0",
                 "link" => "http://dl.yundro.com/suibian.apk",
-                "message" => "随2将从内部测试版迁移到公网测试版了，所以及时更新"
+                "message" => "随2将从内部测试版迁移到公网测试版了，为保证使用，请及时更新"
 			)
 		);
 
